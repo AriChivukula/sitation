@@ -1,0 +1,11 @@
+node_modules
+source
+.gitignore
+.npmignore
+.travis.yml
+LICENSE
+README.md
+tsconfig.json
+yarn.lock
+test
+.picaresque

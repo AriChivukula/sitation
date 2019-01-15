@@ -1,0 +1,29 @@
+{
+  "name": "sitation",
+  "version": "0.0.0",
+  "description": "Legal Citation Parser",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "repository": "https://github.com/AriChivukula/sitation.git",
+  "author": "Ari Chivukula <ari@chivuku.la>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "7.2.5"
+  },
+  "devDependencies": {
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.5",
+    "@types/node": "10.12.18",
+    "picaresque": "0.0.0",
+    "chai": "4.2.0",
+    "mocha": "5.2.0",
+    "ts-node": "7.0.1",
+    "typescript": "3.2.2"
+  },
+  "include": [
+    "source/*"
+  ],
+  "bin": {
+    "sitation": "build/index.js"
+  }
+}
