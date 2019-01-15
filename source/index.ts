@@ -5,5 +5,6 @@ import {
 } from "fs";
 
 export function noop() {
-  JSON.parse(readFileSync("reporters.json"));
+  const data = readFileSync("reporters.json", "ascii");
+  JSON.parse(data);
 }
