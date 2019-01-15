@@ -6,9 +6,9 @@ install:
 - npm install --global --upgrade yarn
 - yarn install
 - yarn picaresque
-- cp reporters-db/reporters-db/data/reporters.json source/reporters.json
+- cp reporters-db/reporters_db/data/reporters.json source/reporters.json
 - mkdir build
-- cp reporters-db/reporters-db/data/reporters.json build/reporters.json
+- cp reporters-db/reporters_db/data/reporters.json build/reporters.json
 jobs:
   include:
   - stage: Test
