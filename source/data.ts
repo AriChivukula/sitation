@@ -12,8 +12,8 @@ export type Reporter = {
 };
 
 export type Reporters = {
-  [k: string]: [v: Reporter],
-}
+  [k: string]: Reporter[],
+};
 
 let _REPORTERS: Reporters | null = null;
 
@@ -24,7 +24,7 @@ export function reporters(): Reporters {
   return _REPORTERS;
 }
 
-export type Editions = [v: string];
+export type Editions = string[];
 
 const _EDITIONS: Editions | null = null;
 
