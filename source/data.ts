@@ -24,15 +24,15 @@ export function reporters(): Reporters {
   return _REPORTERS as Reporters;
 }
 
-export type Editions = string[];
+export type Editions = { [k: string]: void };
 
-let _EDITIONS: Editions | null = null;
+const _EDITIONS: Editions = {};
 
 export function editions(): Editions {
-  if (_EDITIONS === null) {
-    _EDITIONS = Object.values(reporters()).flat(1).map((r: Reporter) => Object.keys(r.editions)).flat(1);
+  if (Object.keys(_EDITIONS).length === 0) {
+    Object.assign(_EDITIONS, ...Object.values(reporters()).flat(1).map((r: Reporter) => r.editions));
   }
-  return _EDITIONS as Editions;
+  return _EDITIONS;
 }
 
 export type Variations = { [k: string]: string };
@@ -41,7 +41,7 @@ const _VARIATIONS: Variations = {};
 
 export function variations(): Variations {
   if (Object.keys(_VARIATIONS).length === 0) {
-    Object.assign(_VARIATIONS, Object.values(reporters()).flat(1).map((r: Reporter) => Object.keys(r.variations)));
+    Object.assign(_VARIATIONS, ...Object.values(reporters()).flat(1).map((r: Reporter) => r.variations));
   }
   return _VARIATIONS;
 }
