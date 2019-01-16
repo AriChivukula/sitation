@@ -18,7 +18,7 @@ export type Tokenized = [string, Token];
 
 export function tokenize(casebody: string): Tokenized[] {
   const tokens: Tokenized[] = [];
-  console.log(casebody.split(reporterRegExp()));
+  console.log(reporterRegExp().toString());
   for (let reporter_split_token of casebody.split(reporterRegExp())) {
     if (editions().hasOwnProperty(reporter_split_token)) {
       tokens.push([reporter_split_token, Token.REPORTER]);
