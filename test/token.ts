@@ -5,7 +5,7 @@ import * as chai from "chai";
 import {
   tokenize,
   Token,
-} from "../source/index";
+} from "../source/token";
 
 describe("tokenize()", function() {
   [
