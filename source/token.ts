@@ -17,6 +17,6 @@ export enum Token {
 export type Tokenized = [string, Token];
 
 export function tokenize(casebody: string): Tokenized[] {
-  let tokens = [];
-  return tokens as Tokenized[];
+  const tokens: Tokenized[] = [];
+  return tokens;
 }
