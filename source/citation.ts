@@ -5,7 +5,7 @@ import {
 
 export function match(tokens: Tokenized[]): string[] {
   const citations: string[] = [];
-  idx = 0
+  let idx = 0;
   while (idx < tokens.length) {
     const token_a = tokens[idx];
     idx++;
