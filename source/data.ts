@@ -40,7 +40,7 @@ export type Variations = { [k: string]: string };
 const _VARIATIONS: Variations = {};
 
 export function variations(): Variations {
-  if (_VARIATIONS === {}) {
+  if (Object.keys(_VARIATIONS).length === 0) {
     Object.assign(_VARIATIONS, Object.values(reporters()).flat(1).map((r: Reporter) => Object.keys(r.variations)));
   }
   return _VARIATIONS;
