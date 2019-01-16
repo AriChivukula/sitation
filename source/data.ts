@@ -30,7 +30,7 @@ let _EDITIONS: Editions | null = null;
 
 export function editions(): Editions {
   if (_EDITIONS === null) {
-    _EDITIONS = Object.values(reporters()).map((r: Reporter) => Object.keys(r.editions)).flat(1);
+    _EDITIONS = Object.values(reporters()).flat(1).map((r: Reporter) => Object.keys(r.editions)).flat(1);
   }
   return _EDITIONS as Editions;
 }
@@ -41,7 +41,7 @@ const _VARIATIONS: Variations = {};
 
 export function variations(): Variations {
   if (_VARIATIONS === {}) {
-    Object.assign(_VARIATIONS, Object.values(reporters()).map((r: Reporter) => Object.keys(r.variations)));
+    Object.assign(_VARIATIONS, Object.values(reporters()).flat(1).map((r: Reporter) => Object.keys(r.variations)));
   }
   return _VARIATIONS;
 }
