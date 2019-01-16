@@ -6,7 +6,7 @@ import {
   sitation,
 } from "../source/index";
 
-describe("tokenize()", () => {
+describe("sitation()", () => {
   [
     {
       casebody: "",
