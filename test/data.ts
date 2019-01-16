@@ -11,7 +11,7 @@ import {
 it(
   "reporters",
   async (): Promise<void> => {
-    chai.expect(Object.keys(reporters()).length).to.equal(0);
+    chai.expect(Object.keys(reporters()).length).to.equal(457);
   },
 );
 
@@ -19,7 +19,7 @@ it(
 it(
   "editions",
   async (): Promise<void> => {
-    chai.expect(editions().length).to.equal(0);
+    chai.expect(editions().length).to.equal(538);
   },
 );
 
