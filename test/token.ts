@@ -7,7 +7,7 @@ import {
   Token,
 } from "../source/token";
 
-describe("tokenize()", function() {
+describe("tokenize()", () => {
   [
     {
       casebody: "",
