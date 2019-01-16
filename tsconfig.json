@@ -41,6 +41,7 @@
     "target": "ES3"
   },
   "files": [
+    "source/cli.ts",
     "source/index.ts"
   ]
 }
