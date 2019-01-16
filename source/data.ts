@@ -4,7 +4,7 @@ import {
 
 export type Reporter = {
   editions: 
-    [k: string]: {},
+    [k: string]: object,
   },
   variations: {
     [k: string]: string,
