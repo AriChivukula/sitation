@@ -32,7 +32,7 @@ describe("match()", () => {
       expected: ["Id"],
     },
   ].forEach((test) => {
-    it(test.tokens.flatten(1).join(", "), () => {
+    it(test.tokens.flat(1).join(":"), () => {
       // @ts-ignore
       chai.expect(match(test.tokens)).to.deep.equal(test.expected);
     });
