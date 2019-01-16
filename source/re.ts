@@ -3,18 +3,18 @@ import {
   variations,
 } from "./data";
 
-let _REPORTER_RE: string | null = null;
+let _REPORTER_RE: RegExp | null = null;
 
-export function reporterRegExp(): string {
+export function reporterRegExp(): RegExp {
   if (_REPORTER_RE === null) {
     const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
-    const escape = (s: string) => s.replace("/[-\/\\^$*+?.()|[\]{}]/g", "\\$&");
-    _REPORTER_RE = "\s(" + Object.keys(editionsAndVariations).map(escape).join("|") + ")\s";
+    const escape = (s: string) => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+    _REPORTER_RE = /\s(%s)\s/ % Object.keys(editionsAndVariations).map(escape).join("|");
   }
-  return _REPORTER_RE as string;
+  return _REPORTER_RE as RegExp;
 }
 
-export function spacingRegExp(): string {
-  return "[\s,;:.()[\]{}]+";
+export function spacingRegExp(): RegExp {
+  return /[\s,;:.()[\]{}]+/;
 }
