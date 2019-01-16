@@ -33,6 +33,7 @@ describe("match()", () => {
     },
   ].forEach((test) => {
     it(test.tokens.flatten(1).join(", "), () => {
+      // @ts-ignore
       chai.expect(match(test.tokens)).to.deep.equal(test.expected);
     });
   });
