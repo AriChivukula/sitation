@@ -27,7 +27,7 @@ export function tokenize(casebody: string): Tokenized[] {
       for (let spacing_split_token of reporter_split_token.split(spacingRegExp())) {
         if (spacing_split_token == "") {
           continue;
-        } else if (!isNaN(spacing_split_token)) {
+        } else if (!isNaN(Number(spacing_split_token))) {
           tokens.push([spacing_split_token, Token.NUMBER])
         } else if (spacing_split_token.toLowerCase() == "id") {
           tokens.push(["Id", Token.ID]);
