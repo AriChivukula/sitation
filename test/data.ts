@@ -27,6 +27,6 @@ it(
 it(
   "variations",
   async (): Promise<void> => {
-    chai.expect(Object.keys(variations()).length).to.equal(0);
+    chai.expect(Object.keys(variations()).length).to.equal(466);
   },
 );
