@@ -5,7 +5,7 @@ import * as chai from "chai";
 import {
   reporterRegExp,
   spacingRegExp,
-} from "../source/index";
+} from "../source/re";
 
 it(
   "reporterRegExp",
