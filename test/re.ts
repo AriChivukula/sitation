@@ -18,6 +18,6 @@ it(
 it(
   "spacingRegExp",
   async (): Promise<void> => {
-    chai.expect(spacingRegExp().toString().length).to.equal(14);
+    chai.expect(spacingRegExp().toString().length).to.equal(18);
   },
 );
