@@ -18,21 +18,23 @@ export type Reporters = {
 let _REPORTERS: Reporters | null = null;
 
 export function reporters(): Reporters {
-  if (_REPORTERS === null) {
-    _REPORTERS = JSON.parse(readFileSync("reporters.json", "ascii"));
+  let r = _REPORTERS;
+  if (r === null) {
+    r = JSON.parse(readFileSync("reporters.json", "ascii"));
   }
-  return _REPORTERS;
+  return r;
 }
 
 export type Editions = string[];
 
-const _EDITIONS: Editions | null = null;
+let _EDITIONS: Editions | null = null;
 
 export function editions(): Editions {
-  if (_EDITIONS === null) {
-    _EDITIONS = Object.values(reporters()).map((r: Reporter) => Object.keys(r.editions)).flat(1);
+  let e = _EDITIONS;
+  if (e === null) {
+    e = Object.values(reporters()).map((r: Reporter) => Object.keys(r.editions)).flat(1);
   }
-  return _EDITIONS;
+  return e;
 }
 
 export type Variations = { [k: string]: string };
