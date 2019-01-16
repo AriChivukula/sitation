@@ -7,7 +7,7 @@ let _REPORTER_RE: string | null = null;
 
 export function reporterRegExp(): string {
   if (_REPORTER_RE === null) {
-    const editionsAndVariations = Object.assign({}, editions(), variations());
+    const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace("/[-\/\\^$*+?.()|[\]{}]/g", "\\$&");
     _REPORTER_RE = "\s(" + Object.keys(editionsAndVariations).map(escape).join("|") + ")\s";
