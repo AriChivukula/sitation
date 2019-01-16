@@ -15,11 +15,11 @@ describe("tokenize()", function() {
     },
     {
       casebody: "379 U. S. 241",
-      expected: [("379", Token.NUMBER), ("U.S.", Token.REPORTER), ("241", Token.NUMBER)],
+      expected: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
     },
     {
       casebody: "In Evans v. Laurel Links, Inc., id.",
-      expected: [("In", Token.NOOP), ("Evans", Token.NOOP), ("v", Token.NOOP), ("Laurel", Token.NOOP), ("Links", Token.NOOP), ("Inc", Token.NOOP), ("Id", Token.ID)],
+      expected: [["In", Token.NOOP], ["Evans", Token.NOOP], ["v", Token.NOOP], ["Laurel", Token.NOOP], ["Links", Token.NOOP], ["Inc", Token.NOOP], ["Id", Token.ID]],
     },
   ].forEach((test) => {
     it(test.casebody, () => {
