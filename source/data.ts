@@ -3,7 +3,7 @@ import {
 } from "fs";
 
 export type Reporter = {
-  editions: 
+  editions: {
     [k: string]: object,
   },
   variations: {
