@@ -10,7 +10,7 @@ import {
 it(
   "reporterRegExp",
   async (): Promise<void> => {
-    chai.expect(reporterRegExp().length).to.equal(6548);
+    chai.expect(reporterRegExp().toString().length).to.equal(6548);
   },
 );
 
@@ -18,6 +18,6 @@ it(
 it(
   "spacingRegExp",
   async (): Promise<void> => {
-    chai.expect(spacingRegExp().length).to.equal(14);
+    chai.expect(spacingRegExp().toString().length).to.equal(14);
   },
 );
