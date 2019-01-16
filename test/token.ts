@@ -23,7 +23,7 @@ describe("tokenize()", function() {
     },
   ].forEach((test) => {
     it(test.casebody, () => {
-      chai.assert(tokenize(test.casebody)).equals(test.expected);
+      chai.expect(tokenize(test.casebody)).to.equal(test.expected);
     });
   });
 });
