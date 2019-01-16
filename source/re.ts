@@ -10,7 +10,7 @@ export function reporterRegExp(): RegExp {
     const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-    _REPORTER_RE = /\s(%s)\s/ % Object.keys(editionsAndVariations).map(escape).join("|");
+    _REPORTER_RE = RegExp("\s(" + Object.keys(editionsAndVariations).map(escape).join("|") + ")\s");
   }
   return _REPORTER_RE as RegExp;
 }
