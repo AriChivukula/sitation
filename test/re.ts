@@ -10,7 +10,7 @@ import {
 it(
   "reporterRegExp",
   async (): Promise<void> => {
-    chai.expect(reporterRegExp().toString().length).to.equal(6550);
+    chai.expect(reporterRegExp().toString().length).to.equal(19939);
   },
 );
 
