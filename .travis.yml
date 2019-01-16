@@ -15,7 +15,7 @@ jobs:
     - yarn outdated
     - yarn mocha
     - yarn tsc
-    - node build/index.js
+    - node build/cli.js --casebody "TEST"
   - stage: Deploy
     if: tag IS present
     script:
