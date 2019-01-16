@@ -1,10 +1,12 @@
 import "@babel/polyfill";
 
 import {
-  readFileSync,
-} from "fs";
+  match,
+} from "./citation";
+import {
+  tokenize,
+} from "./token";
 
-export function noop() {
-  const data = readFileSync("reporters.json", "ascii");
-  JSON.parse(data);
+export function sitation(casebody: string): string[] {
+  return match(tokenize(casebody));
 }
