@@ -1,5 +1,10 @@
 import "@babel/polyfill";
 
-export * from "./data";
-export * from "./re";
-export * from "./token";
+import {
+  tokenize,
+} from "./token";
+
+export function sitation(casebody: string): string[] {
+  tokenize(casebody);
+  return [];
+}
