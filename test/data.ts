@@ -6,7 +6,7 @@ import {
   reporters,
   editions,
   variations,
-} from "../source/index";
+} from "../source/data";
 
 it(
   "reporters",
