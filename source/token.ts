@@ -13,3 +13,11 @@ export enum Token {
   NUMBER, // [0-9]+
   REPORTER, // Can be found in `REPORTER_SET`
 }
+
+
+export type Tokenized = [string, Token];
+
+export function tokenize(casebody: string): Tokenized[] {
+  let tokens = [];
+  return tokens;
+}
