@@ -4,15 +4,15 @@ import {
 
 export type Reporter = {
   editions: 
-    [k: string]: {};
+    [k: string]: {},
   },
   variations: {
-    [k: string]: string;
+    [k: string]: string,
   },
 };
 
 export type Reporters = {
-  [k: string]: [v: Reporter];
+  [k: string]: [v: Reporter],
 }
 
 let _REPORTERS: Reporters | null = null;
