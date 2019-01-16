@@ -16,8 +16,20 @@ describe("match()", () => {
       expected: [],
     },
     {
-      tokens: [["379", __CasebodyToken.NUMBER], ["U.S.", __CasebodyToken.REPORTER], ["241", __CasebodyToken.NUMBER]],
+      tokens: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
       expected: ["379 U.S. 241"],
+    },
+    {
+      tokens: [["Id", Token.ID], ["0", Token.NUMBER], ["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      expected: ["Id", "379 U.S. 241"],
+    },
+    {
+      tokens: [["379", Token.NUMBER], ["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      expected: [],
+    },
+    {
+      tokens: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["Id", Token.ID]],
+      expected: ["Id"],
     },
   ].forEach((test) => {
     it(test.casebody, () => {
