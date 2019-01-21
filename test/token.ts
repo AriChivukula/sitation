@@ -14,8 +14,8 @@ describe("tokenize()", () => {
       expected: [],
     },
     {
-      casebody: "379 U. S. 241",
-      expected: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      casebody: "379 U. S. 241 u.S.",
+      expected: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER], ["U.S.", Token.REPORTER]],
     },
     {
       casebody: "In Evans v. Laurel Links, Inc., id.",
