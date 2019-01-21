@@ -13,7 +13,7 @@ describe("sitation()", () => {
       expected: [],
     },
     {
-      casebody: "379 U. S. 241",
+      casebody: "379 u. S. 241",
       expected: ["379 U.S. 241"],
     },
     {
