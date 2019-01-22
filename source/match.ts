@@ -94,7 +94,6 @@ export function coalesce(segmented: Segmented): string[] {
   let remaining = segmented;
   while (remaining.segments.length > 0) {
     const consumed = rootConsumer(remaining);
-    console.log(consumed);
     if (consumed.isNOOP()) {
       remaining = remaining.slice(1);
       continue;
