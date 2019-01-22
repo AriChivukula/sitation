@@ -19,7 +19,7 @@ describe("tokenize()", () => {
     },
     {
       casebody: "In Evans v. Laurel Links, Inc., id.",
-      expected: [["In", "In", Token.NOOP], ["Evans", "Evans", Token.NOOP], ["Va.", "v", Token.REPORTER], ["Laurel", "Laurel", Token.NOOP], ["Links", "Links", Token.NOOP], ["Inc", "Inc", Token.NOOP], ["Id", "id", Token.ID]],
+      expected: [["In", "In", Token.NOOP], ["Evans", "Evans", Token.NOOP], ["Va.", "v.", Token.REPORTER], ["Laurel", "Laurel", Token.NOOP], ["Links", "Links", Token.NOOP], ["Inc", "Inc", Token.NOOP], ["Id", "id", Token.ID]],
     },
   ].forEach((test) => {
     it(test.casebody, () => {
