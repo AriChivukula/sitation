@@ -40,7 +40,7 @@
     "outDir": "build",
     "removeComments": true,
     "strict": true,
-    "target": "ES3"
+    "target": "ES5"
   },
   "files": [
     "source/cli.ts",
