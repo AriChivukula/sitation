@@ -3,7 +3,7 @@ import {
   Tokenized,
 } from "./token";
 
-export function match(tokens: Tokenized[]): string[] {
+export function coalesce(tokens: Tokenized[]): string[] {
   const citations: string[] = [];
   let idx = 0;
   while (idx < tokens.length) {
