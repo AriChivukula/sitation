@@ -43,7 +43,7 @@ function fullCite(segmented: Segmented): Consumed {
   if (segmented.segments[2].token !== Token.NUMBER) {
     return noop;
   }
-  return new Consumed(3, segmented.segments[0:3].map((segment) => segment.corrected).join(" "));
+  return new Consumed(3, segmented.segments.slice(0, 3).map((segment) => segment.corrected).join(" "));
 }
 
 const consumers: consumer[] = [
@@ -63,11 +63,11 @@ export function coalesce(segmented: Segmented): string[] {
       }
       wasFound = true;
       citations.push(consumed.citation);
-      remaining = new Segmented(remaining.segments[consumed.count:]);
+      remaining = new Segmented(remaining.segments.slice(consumed.count));
       break;
     }
     if (!wasFound) {
-      remaining = new Segmented(remaining.segments[1:]);
+      remaining = new Segmented(remaining.segments.slice(1));
     }
   }
   return citations;
