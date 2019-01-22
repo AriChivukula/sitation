@@ -11,37 +11,39 @@ class Consumed {
   ) {
   }
 
-  public toString(): string {
-    return this.count + "=" + this.citation;
+  public isNOOP(): boolean {
+    return this.count === 0;
+  }
+  
+  public static noop(): Consumed {
+    return new Consumed(0, "");
   }
 }
-
-const noop = new Consumed(0, "");
 
 type consumer = (segmented: Segmented) => Consumed;
 
 function idCite(segmented: Segmented): Consumed {
   if (segmented.segments.length < 1) {
-    return noop;
+    return Consumed.noop();
   }
   if (segmented.segments[0].token !== Token.ID) {
-    return noop;
+    return Consumed.noop();
   }
   return new Consumed(1, segmented.segments[0].corrected);
 }
 
 function fullCite(segmented: Segmented): Consumed {
   if (segmented.segments.length < 3) {
-    return noop;
+    return Consumed.noop();
   }
   if (segmented.segments[0].token !== Token.NUMBER) {
-    return noop;
+    return Consumed.noop();
   }
   if (segmented.segments[1].token !== Token.REPORTER) {
-    return noop;
+    return Consumed.noop();
   }
   if (segmented.segments[2].token !== Token.NUMBER) {
-    return noop;
+    return Consumed.noop();
   }
   return new Consumed(3, segmented.segments.slice(0, 3).map((segment) => segment.corrected).join(" "));
 }
@@ -50,7 +52,7 @@ function parallelConsumer(consumers: consumer[]): consumer {
   return (segmented: Segmented): Consumed => {
     for (let consumer of consumers) {
       const consumed = consumer(segmented);
-      if (consumed === noop) {
+      if (consumed.isNOOP()) {
         continue;
       }
       return consumed;
@@ -65,7 +67,7 @@ function serialConsumer(consumers: consumer[]): consumer {
     const consumeds: Consumed[] = [];
     for (let consumer of consumers) {
       const consumed = consumer(remaining);
-      if (consumed === noop) {
+      if (consumed.isNOOP()) {
         continue;
       }
       remaining = new Segmented(remaining.segments.slice(consumed.count));
@@ -89,7 +91,7 @@ export function coalesce(segmented: Segmented): string[] {
   while (remaining.segments.length > 0) {
     const consumed = rootConsumer(remaining);
     console.log(consumed);
-    if (consumed === noop) {
+    if (consumed.isNOOP()) {
       remaining = new Segmented(remaining.segments.slice(1));
       continue;
     }
