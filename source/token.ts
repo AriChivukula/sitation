@@ -13,15 +13,32 @@ export enum Token {
 }
 
 export class Segment {
+
   constructor(
-    public corrected: string,
-    public original: string,
-    public token: Token,
+    readonly corrected: string,
+    readonly original: string,
+    readonly token: Token,
   ) {
+  }
+
+  public toString(): string {
+    return this.corrected + ":" + this.original + ":" + this.token;
   }
 }
 
-export function tokenize(casebody: string): Segment[] {
+export class Segmented {
+
+  constructor(
+    readonly segments: Segment[],
+  ) {
+  }
+
+  public toString(): string {
+    return this.segments.map((segment) => segment.toString()).join(",");
+  }
+}
+
+export function tokenize(casebody: string): Segmented {
   const tokens: Segment[] = [];
   for (let reporter_split_token of casebody.split(Expressions.reporter())) {
     const lower_split_token = reporter_split_token.toLowerCase();
@@ -43,5 +60,5 @@ export function tokenize(casebody: string): Segment[] {
       }
     }
   }
-  return tokens;
+  return new Segmented(tokens);
 }
