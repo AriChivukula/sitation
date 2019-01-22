@@ -50,7 +50,7 @@ function parallelConsumer(consumers: consumer[]): consumer {
   return (segmented: Segmented): Consumed => {
     for (let consumer of consumers) {
       const consumed = consumer(segmented);
-      if (consumed == noop) {
+      if (consumed === noop) {
         continue;
       }
       return consumed;
@@ -65,7 +65,7 @@ function serialConsumer(consumers: consumer[]): consumer {
     const consumeds: Consumed[] = [];
     for (let consumer of consumers) {
       const consumed = consumer(remaining);
-      if (consumed == noop) {
+      if (consumed === noop) {
         continue;
       }
       remaining = new Segmented(remaining.segments.slice(consumed.count));
