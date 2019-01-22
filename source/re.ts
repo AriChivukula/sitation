@@ -1,10 +1,15 @@
 import {
+  memoize,
+} from "lodash-decorators";
+
+import {
   editions,
   variations,
 } from "./data";
 
 let _REPORTER_RE: RegExp | null = null;
 
+@memoize
 export function reporterRE(): RegExp {
   if (_REPORTER_RE === null) {
     const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
@@ -17,6 +22,7 @@ export function reporterRE(): RegExp {
 
 let _SPACING_RE: RegExp | null = null;
 
+@memoize
 export function spacingRE(): RegExp {
   if (_SPACING_RE === null) {
     _SPACING_RE = /[\s,;:.()[\]{}]+/;
