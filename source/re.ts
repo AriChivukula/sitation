@@ -1,20 +1,23 @@
 import {
-  editions,
-  variations,
+  MemoizeAll,
+} from "lodash-decorators";
+
+import {
+  ReportersDB,
 } from "./data";
 
-let _REPORTER_RE: RegExp | null = null;
-
-export function reporterRegExp(): RegExp {
-  if (_REPORTER_RE === null) {
-    const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
+export abstract class Expressions {         
+  
+  @MemoizeAll()
+  public static reporter(): RegExp {
+    const editionsAndVariations = Object.keys(Object.assign({}, ReportersDB.editions(), ReportersDB.variations()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, "\\$&");
-    _REPORTER_RE = RegExp("\\s(" + editionsAndVariations.map(escape).join("|") + ")\\s", "i");
+    return RegExp("\\s(" + editionsAndVariations.map(escape).join("|") + ")\\s", "i");
   }
-  return _REPORTER_RE as RegExp;
-}
 
-export function spacingRegExp(): RegExp {
-  return /[\s,;:.()[\]{}]+/;
+  @MemoizeAll
+  public static spacing(): RegExp {
+    return /[\s,;:.()[\]{}]+/;
+  }
 }

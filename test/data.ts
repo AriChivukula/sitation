@@ -3,16 +3,14 @@ import "mocha";
 import * as chai from "chai";
 
 import {
-  reporters,
-  editions,
-  variations,
+  ReportersDB,
 } from "../source/data";
 
 it(
   "reporters",
   async (): Promise<void> => {
-    chai.expect(Object.keys(reporters()).length).to.equal(457);
-    chai.expect(Object.keys(reporters())[0]).to.equal("A.");
+    chai.expect(Object.keys(ReportersDB.reporters()).length).to.equal(457);
+    chai.expect(Object.keys(ReportersDB.reporters())[0]).to.equal("A.");
   },
 );
 
@@ -20,9 +18,9 @@ it(
 it(
   "editions",
   async (): Promise<void> => {
-    chai.expect(Object.keys(editions()).length).to.equal(529);
-    chai.expect(Object.keys(editions())[0]).to.equal("a.");
-    chai.expect(Object.values(editions())[0]).to.equal("A.");
+    chai.expect(Object.keys(ReportersDB.editions()).length).to.equal(529);
+    chai.expect(Object.keys(ReportersDB.editions())[0]).to.equal("a.");
+    chai.expect(Object.values(ReportersDB.editions())[0]).to.equal("A.");
   },
 );
 
@@ -30,8 +28,8 @@ it(
 it(
   "variations",
   async (): Promise<void> => {
-    chai.expect(Object.keys(variations()).length).to.equal(1014);
-    chai.expect(Object.keys(variations())[0]).to.equal("a. 2d");
-    chai.expect(Object.values(variations())[0]).to.equal("A.2d");
+    chai.expect(Object.keys(ReportersDB.variations()).length).to.equal(1014);
+    chai.expect(Object.keys(ReportersDB.variations())[0]).to.equal("a. 2d");
+    chai.expect(Object.values(ReportersDB.variations())[0]).to.equal("A.2d");
   },
 );

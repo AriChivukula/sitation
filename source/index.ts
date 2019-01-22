@@ -1,12 +1,12 @@
 import "@babel/polyfill";
 
 import {
-  match,
-} from "./citation";
+  coalesce,
+} from "./match";
 import {
   tokenize,
 } from "./token";
 
 export function sitation(casebody: string): string[] {
-  return match(tokenize(casebody));
+  return coalesce(tokenize(casebody));
 }
