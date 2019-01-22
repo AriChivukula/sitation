@@ -16,19 +16,19 @@ describe("match()", () => {
       expected: [],
     },
     {
-      tokens: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      tokens: [["379", "379", Token.NUMBER], ["U.S.", "U.S.", Token.REPORTER], ["241", "241", Token.NUMBER]],
       expected: ["379 U.S. 241"],
     },
     {
-      tokens: [["Id", Token.ID], ["0", Token.NUMBER], ["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      tokens: [["Id", "Id", Token.ID], ["0", "0", Token.NUMBER], ["379", "379", Token.NUMBER], ["U.S.", "U.S.", Token.REPORTER], ["241", "241", Token.NUMBER]],
       expected: ["Id", "379 U.S. 241"],
     },
     {
-      tokens: [["379", Token.NUMBER], ["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      tokens: [["379", "379", Token.NUMBER], ["379", "379", Token.NUMBER], ["U.S.", "U.S.", Token.REPORTER], ["U.S.", "U.S.", Token.REPORTER], ["241", "241", Token.NUMBER]],
       expected: [],
     },
     {
-      tokens: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["Id", Token.ID]],
+      tokens: [["379", "379", Token.NUMBER], ["U.S.", "U.S.", Token.REPORTER], ["Id", "Id", Token.ID]],
       expected: ["Id"],
     },
   ].forEach((test) => {
