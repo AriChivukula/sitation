@@ -3,21 +3,20 @@ import "mocha";
 import * as chai from "chai";
 
 import {
-  reporterRE,
-  spacingRE,
+  Expressions,
 } from "../source/re";
 
 it(
-  "reporterRE",
+  "reporter",
   async (): Promise<void> => {
-    chai.expect(reporterRE().toString().length).to.equal(19735);
+    chai.expect(Expressions.reporter().toString().length).to.equal(19735);
   },
 );
 
 
 it(
-  "spacingRE",
+  "spacing",
   async (): Promise<void> => {
-    chai.expect(spacingRE().toString().length).to.equal(18);
+    chai.expect(Expressions.spacing().toString().length).to.equal(18);
   },
 );
