@@ -46,7 +46,7 @@ let _VARIATIONS: Variations | null = null;
 
 export function variations(): Variations {
   if (Object.keys(_VARIATIONS).length === 0) {
-    _VARIATIONS = Object.assign({}, editions());
+    _VARIATIONS = {};
     for (let reporter of reporters()) {
       for (let variation in reporter.variations) {
         _VARIATIONS[variation.toLowerCase()] = reporter.variations[variation];
