@@ -10,7 +10,7 @@ export function coalesce(segmented: Segmented): string[] {
     const segment_a = segmented.segments[idx];
     idx++;
     if (segment_a.token === Token.ID) {
-      citations.push(segment_a[0]);
+      citations.push(segment_a.corrected);
       continue;
     }
     if (segment_a.token !== Token.NUMBER) {
