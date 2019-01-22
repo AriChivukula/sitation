@@ -38,6 +38,7 @@ export function editions(): Editions {
         }
       }
     }
+    console.log(_EDITIONS);
   }
   return _EDITIONS as Editions;
 }
@@ -56,6 +57,7 @@ export function variations(): Variations {
         }
       }
     }
+    console.log(_VARIATIONS);
   }
   return _VARIATIONS as Variations;
 }
