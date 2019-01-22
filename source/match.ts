@@ -70,7 +70,7 @@ function serialConsumer(consumers: consumer[]): consumer {
       if (consumed.isNOOP()) {
         continue;
       }
-      remaining = new Segmented(remaining.segments.slice(consumed.count));
+      remaining = remaining.slice(consumed.count);
       consumeds.push(consumed);
     }
     return new Consumed(
@@ -92,11 +92,11 @@ export function coalesce(segmented: Segmented): string[] {
     const consumed = rootConsumer(remaining);
     console.log(consumed);
     if (consumed.isNOOP()) {
-      remaining = new Segmented(remaining.segments.slice(1));
+      remaining = remaining.slice(1);
       continue;
     }
     citations.push(consumed.citation);
-    remaining = new Segmented(remaining.segments.slice(consumed.count));
+    remaining = remaining.slice(consumed.count);
   }
   return citations;
 }
