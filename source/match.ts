@@ -46,29 +46,54 @@ function fullCite(segmented: Segmented): Consumed {
   return new Consumed(3, segmented.segments.slice(0, 3).map((segment) => segment.corrected).join(" "));
 }
 
-const consumers: consumer[] = [
-  idCite,
-  fullCite,
-];
+function parallelConsumer(consumers: consumer[]): consumer {
+  return (segmented: Segmented) => Consumed {
+    for (let consumer of consumers) {
+      const consumed = consumer(segmented);
+      if (consumed == noop) {
+        continue;
+      }
+      return consumed;
+    }
+    return noop;
+  }
+}
 
-export function coalesce(segmented: Segmented): string[] {
-  const citations: string[] = [];
-  let remaining = segmented;
-  while (remaining.segments.length > 0) {
-    let wasFound = false;
+function serialConsumer(consumers: consumer[]): consumer {
+  return (segmented: Segmented) => Consumed {
+    let remaining = segmented;
+    const consumeds: Consumed[] = [];
     for (let consumer of consumers) {
       const consumed = consumer(remaining);
       if (consumed == noop) {
         continue;
       }
-      wasFound = true;
-      citations.push(consumed.citation);
       remaining = new Segmented(remaining.segments.slice(consumed.count));
-      break;
+      consumeds.append(consumed);
     }
-    if (!wasFound) {
+    return new Consumed(
+      consumeds.reduce((total, consumed) => total + consumed.count, 0),
+      consumeds.map((consumed) => consumed.citation).join(" "),
+    );
+  }
+}
+
+const rootConsumer = parallelConsumer([
+  serialConsumer(idCite),
+  serialConsumer(fullCite),
+]);
+
+export function coalesce(segmented: Segmented): string[] {
+  const citations: string[] = [];
+  let remaining = segmented;
+  while (remaining.segments.length > 0) {
+    const consumed = rootConsumer(remaining);
+    if (consumed == noop) {
       remaining = new Segmented(remaining.segments.slice(1));
+      continue;
     }
+    citations.push(consumed.citation);
+    remaining = new Segmented(remaining.segments.slice(consumed.count));
   }
   return citations;
 }
