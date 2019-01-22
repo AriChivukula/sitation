@@ -57,7 +57,7 @@ function parallelConsumer(consumers: consumer[]): consumer {
       }
       return consumed;
     }
-    return noop;
+    return Consumed.noop();
   }
 }
 
