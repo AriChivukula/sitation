@@ -1,38 +1,38 @@
 import {
+  Segmented,
   Token,
-  Tokenized,
 } from "./token";
 
-export function coalesce(tokens: Tokenized[]): string[] {
+export function coalesce(segmented: Segmented): string[] {
   const citations: string[] = [];
   let idx = 0;
-  while (idx < tokens.length) {
-    const token_a = tokens[idx];
+  while (idx < segmented.segments.length) {
+    const segment_a = segmented.segments[idx];
     idx++;
-    if (token_a[2] === Token.ID) {
-      citations.push(token_a[0]);
+    if (segment_a.token === Token.ID) {
+      citations.push(segment_a.corrected);
       continue;
     }
-    if (token_a[2] !== Token.NUMBER) {
+    if (segment_a.token !== Token.NUMBER) {
       continue;
     }
-    if (idx == tokens.length) {
+    if (idx == segmented.segments.length) {
       break;
     }
-    const token_b = tokens[idx];
-    if (token_b[2] !== Token.REPORTER) {
+    const segment_b = segmented.segments[idx];
+    if (segment_b.token !== Token.REPORTER) {
       continue;
     }
     idx++;
-    if (idx == tokens.length) {
+    if (idx == segmented.segments.length) {
       break;
     }
-    const token_c = tokens[idx];
-    if (token_c[2] !== Token.NUMBER) {
+    const segment_c = segmented.segments[idx];
+    if (segment_c.token !== Token.NUMBER) {
       continue;
     }
     idx++;
-    citations.push([token_a[0], token_b[0], token_c[0]].join(" "))
+    citations.push([segment_a.corrected, segment_b.corrected, segment_c.corrected].join(" "))
   }
   return citations;
 }
