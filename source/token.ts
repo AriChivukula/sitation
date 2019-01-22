@@ -3,8 +3,8 @@ import {
   variations,
 } from "./data";
 import {
-  reporterRegExp,
-  spacingRegExp,
+  reporterRE,
+  spacingRE,
 } from "./re";
 
 export enum Token {
