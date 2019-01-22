@@ -11,7 +11,7 @@ describe("tokenize()", () => {
   [
     {
       casebody: "",
-      expected: [],
+      expected: "",
     },
     {
       casebody: "379 u. S. 241",
