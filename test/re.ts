@@ -8,7 +8,7 @@ import {
 } from "../source/re";
 
 it(
-  "reporterRegExp",
+  "reporterRE",
   async (): Promise<void> => {
     chai.expect(reporterRE().toString().length).to.equal(19735);
   },
@@ -16,7 +16,7 @@ it(
 
 
 it(
-  "spacingRegExp",
+  "spacingRE",
   async (): Promise<void> => {
     chai.expect(spacingRE().toString().length).to.equal(18);
   },
