@@ -10,6 +10,16 @@ class Consumed {
     readonly citation: string,
   ) {
   }
+  
+  public merge(consumed: Consumed): Consumed {
+    if (this.isNoop()) {
+      return consumed;
+    }
+    if (consumed.isNoop()) {
+      return this;
+    }
+    return new Consumed(this.count + consumed.count, this.citation + " " + consumed.citation);
+  }
 
   public isNOOP(): boolean {
     return this.count === 0;
@@ -64,19 +74,13 @@ function parallelConsumer(consumers: consumer[]): consumer {
 function serialConsumer(consumers: consumer[]): consumer {
   return (segmented: Segmented): Consumed => {
     let remaining = segmented;
-    const consumeds: Consumed[] = [];
+    let rollup = Consumed.noop();
     for (let consumer of consumers) {
       const consumed = consumer(remaining);
-      if (consumed.isNOOP()) {
-        continue;
-      }
       remaining = remaining.slice(consumed.count);
-      consumeds.push(consumed);
+      rollup = rollup.merge(consumed);
     }
-    return new Consumed(
-      consumeds.reduce((total, consumed) => total + consumed.count, 0),
-      consumeds.map((consumed) => consumed.citation).join(" "),
-    );
+    return rollup;
   }
 }
 
