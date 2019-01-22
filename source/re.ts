@@ -3,14 +3,13 @@ import {
 } from "lodash-decorators";
 
 import {
-  editions,
-  variations,
+  ReportersDB,
 } from "./data";
 
-export abstract class Data {         
+export abstract class Expressions {         
   
   @MemoizeAll()
-  public static reporterRE(): RegExp {
+  public static reporter(): RegExp {
     const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, "\\$&");
@@ -18,7 +17,7 @@ export abstract class Data {
   }
 
   @MemoizeAll
-  public static spacingRE(): RegExp {
+  public static spacing(): RegExp {
     return /[\s,;:.()[\]{}]+/;
   }
 }
