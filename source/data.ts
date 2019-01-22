@@ -31,8 +31,8 @@ let _EDITIONS: Editions | null = null;
 export function editions(): Editions {
   if (_EDITIONS === null) {
     _EDITIONS = {};
-    for (let reporter of reporters()) {
-      for (let edition in reporter.editions) {
+    for (let reporter in reporters()) {
+      for (let edition in reporters()[reporter].editions) {
         _EDITIONS[edition.toLowerCase()] = edition;
       }
     }
@@ -45,10 +45,10 @@ export type Variations = { [k: string]: string };
 let _VARIATIONS: Variations | null = null;
 
 export function variations(): Variations {
-  if (Object.keys(_VARIATIONS).length === 0) {
+  if (_VARIATIONS === null) {
     _VARIATIONS = {};
-    for (let reporter of reporters()) {
-      for (let variation in reporter.variations) {
+    for (let reporter in reporters()) {
+      for (let variation in reporters()[reporter].variations) {
         _VARIATIONS[variation.toLowerCase()] = reporter.variations[variation];
       }
     }
