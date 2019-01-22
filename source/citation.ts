@@ -9,18 +9,18 @@ export function match(tokens: Tokenized[]): string[] {
   while (idx < tokens.length) {
     const token_a = tokens[idx];
     idx++;
-    if (token_a[1] === Token.ID) {
+    if (token_a[2] === Token.ID) {
       citations.push(token_a[0]);
       continue;
     }
-    if (token_a[1] !== Token.NUMBER) {
+    if (token_a[2] !== Token.NUMBER) {
       continue;
     }
     if (idx == tokens.length) {
       break;
     }
     const token_b = tokens[idx];
-    if (token_b[1] !== Token.REPORTER) {
+    if (token_b[2] !== Token.REPORTER) {
       continue;
     }
     idx++;
@@ -28,7 +28,7 @@ export function match(tokens: Tokenized[]): string[] {
       break;
     }
     const token_c = tokens[idx];
-    if (token_c[1] !== Token.NUMBER) {
+    if (token_c[2] !== Token.NUMBER) {
       continue;
     }
     idx++;

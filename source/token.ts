@@ -14,25 +14,25 @@ export enum Token {
   REPORTER, // Can be found in `REPORTER_SET`
 }
 
-export type Tokenized = [string, Token];
+export type Tokenized = [string, string, Token];
 
 export function tokenize(casebody: string): Tokenized[] {
   const tokens: Tokenized[] = [];
   for (let reporter_split_token of casebody.split(reporterRegExp())) {
-    if (editions().hasOwnProperty(reporter_split_token)) {
-      tokens.push([reporter_split_token, Token.REPORTER]);
-    } else if (variations().hasOwnProperty(reporter_split_token)) {
-      tokens.push([variations()[reporter_split_token], Token.REPORTER]);
+    if (editions().hasOwnProperty(reporter_split_token.toLowerCase())) {
+      tokens.push([editions()[reporter_split_token.toLowerCase()], reporter_split_token, Token.REPORTER]);
+    } else if (variations().hasOwnProperty(reporter_split_token.toLowerCase())) {
+      tokens.push([variations()[reporter_split_token.toLowerCase()], reporter_split_token, Token.REPORTER]);
     } else {
       for (let spacing_split_token of reporter_split_token.split(spacingRegExp())) {
         if (spacing_split_token == "") {
           continue;
         } else if (!isNaN(Number(spacing_split_token))) {
-          tokens.push([spacing_split_token, Token.NUMBER])
+          tokens.push([spacing_split_token, spacing_split_token, Token.NUMBER])
         } else if (spacing_split_token.toLowerCase() == "id") {
-          tokens.push(["Id", Token.ID]);
+          tokens.push(["Id", spacing_split_token, Token.ID]);
         } else {
-          tokens.push([spacing_split_token, Token.NOOP])
+          tokens.push([spacing_split_token, spacing_split_token, Token.NOOP])
         }
       }
     }

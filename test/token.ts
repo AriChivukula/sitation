@@ -14,12 +14,12 @@ describe("tokenize()", () => {
       expected: [],
     },
     {
-      casebody: "379 U. S. 241",
-      expected: [["379", Token.NUMBER], ["U.S.", Token.REPORTER], ["241", Token.NUMBER]],
+      casebody: "379 u. S. 241",
+      expected: [["379", "379", Token.NUMBER], ["U.S.", "u. S.", Token.REPORTER], ["241", "241", Token.NUMBER]],
     },
     {
       casebody: "In Evans v. Laurel Links, Inc., id.",
-      expected: [["In", Token.NOOP], ["Evans", Token.NOOP], ["v", Token.NOOP], ["Laurel", Token.NOOP], ["Links", Token.NOOP], ["Inc", Token.NOOP], ["Id", Token.ID]],
+      expected: [["In", "In", Token.NOOP], ["Evans", "Evans", Token.NOOP], ["Va.", "v.", Token.REPORTER], ["Laurel", "Laurel", Token.NOOP], ["Links", "Links", Token.NOOP], ["Inc", "Inc", Token.NOOP], ["Id", "id", Token.ID]],
     },
   ].forEach((test) => {
     it(test.casebody, () => {

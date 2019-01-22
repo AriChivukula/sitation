@@ -24,24 +24,38 @@ export function reporters(): Reporters {
   return _REPORTERS as Reporters;
 }
 
-export type Editions = { [k: string]: void };
+export type Editions = { [k: string]: string };
 
-const _EDITIONS: Editions = {};
+let _EDITIONS: Editions | null = null;
 
 export function editions(): Editions {
-  if (Object.keys(_EDITIONS).length === 0) {
-    Object.assign(_EDITIONS, ...Object.values(reporters()).flat(1).map((r: Reporter) => r.editions));
+  if (_EDITIONS === null) {
+    _EDITIONS = {};
+    for (let reporterName in reporters()) {
+      for (let reporter of reporters()[reporterName]) {
+        for (let edition in reporter.editions) {
+          _EDITIONS[edition.toLowerCase()] = edition;
+        }
+      }
+    }
   }
-  return _EDITIONS;
+  return _EDITIONS as Editions;
 }
 
 export type Variations = { [k: string]: string };
 
-const _VARIATIONS: Variations = {};
+let _VARIATIONS: Variations | null = null;
 
 export function variations(): Variations {
-  if (Object.keys(_VARIATIONS).length === 0) {
-    Object.assign(_VARIATIONS, ...Object.values(reporters()).flat(1).map((r: Reporter) => r.variations));
+  if (_VARIATIONS === null) {
+    _VARIATIONS = {};
+    for (let reporterName in reporters()) {
+      for (let reporter of reporters()[reporterName]) {
+        for (let variation in reporter.variations) {
+          _VARIATIONS[variation.toLowerCase()] = reporter.variations[variation];
+        }
+      }
+    }
   }
-  return _VARIATIONS;
+  return _VARIATIONS as Variations;
 }
