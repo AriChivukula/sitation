@@ -12,10 +12,10 @@ class Consumed {
   }
   
   public merge(consumed: Consumed): Consumed {
-    if (this.isNoop()) {
+    if (this.isNOOP()) {
       return consumed;
     }
-    if (consumed.isNoop()) {
+    if (consumed.isNOOP()) {
       return this;
     }
     return new Consumed(this.count + consumed.count, this.citation + " " + consumed.citation);
