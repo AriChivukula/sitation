@@ -21,7 +21,8 @@ it(
   "editions",
   async (): Promise<void> => {
     chai.expect(Object.keys(editions()).length).to.equal(529);
-    chai.expect(Object.keys(editions())[0]).to.equal("A.");
+    chai.expect(Object.keys(editions())[0]).to.equal("a.");
+    chai.expect(Object.values(editions())[0]).to.equal("A.");
   },
 );
 
@@ -29,7 +30,9 @@ it(
 it(
   "variations",
   async (): Promise<void> => {
-    chai.expect(Object.keys(variations()).length).to.equal(1023);
-    chai.expect(Object.keys(variations())[0]).to.equal("A. 2d");
+    chai.expect(Object.keys(variations()).length).to.equal(1014);
+    chai.expect(Object.keys(variations())[0]).to.equal("a. 2d");
+    chai.expect(Object.values(variations())[0]).to.equal("A. 2d");
+  },
   },
 );
