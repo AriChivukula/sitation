@@ -34,5 +34,4 @@ it(
     chai.expect(Object.keys(variations())[0]).to.equal("a. 2d");
     chai.expect(Object.values(variations())[0]).to.equal("A. 2d");
   },
-  },
 );
