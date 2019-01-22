@@ -1,7 +1,6 @@
 import {
   Segmented,
   Token,
-  Tokenized,
 } from "./token";
 
 export function coalesce(segmented: Segmented): string[] {
