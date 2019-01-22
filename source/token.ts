@@ -1,9 +1,8 @@
 import {
-  Data,
+  ReportersDB,
 } from "./data";
 import {
-  reporterRE,
-  spacingRE,
+  Expressions,
 } from "./re";
 
 export enum Token {
@@ -17,14 +16,14 @@ export type Tokenized = [string, string, Token];
 
 export function tokenize(casebody: string): Tokenized[] {
   const tokens: Tokenized[] = [];
-  for (let reporter_split_token of casebody.split(Data.reporterRE())) {
+  for (let reporter_split_token of casebody.split(Expressions.reporter())) {
     const lower_split_token = reporter_split_token.toLowerCase();
-    if (editions().hasOwnProperty(lower_split_token)) {
-      tokens.push([editions()[lower_split_token], reporter_split_token, Token.REPORTER]);
-    } else if (variations().hasOwnProperty(lower_split_token)) {
-      tokens.push([variations()[lower_split_token], reporter_split_token, Token.REPORTER]);
+    if (ReportersDB.editions().hasOwnProperty(lower_split_token)) {
+      tokens.push([ReportersDB.editions()[lower_split_token], reporter_split_token, Token.REPORTER]);
+    } else if (ReportersDB.variations().hasOwnProperty(lower_split_token)) {
+      tokens.push([ReportersDB.variations()[lower_split_token], reporter_split_token, Token.REPORTER]);
     } else {
-      for (let spacing_split_token of reporter_split_token.split(Data.spacingRE())) {
+      for (let spacing_split_token of reporter_split_token.split(Expressions.spacing())) {
         if (spacing_split_token == "") {
           continue;
         } else if (!isNaN(Number(spacing_split_token))) {
