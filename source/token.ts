@@ -32,6 +32,10 @@ export class Segmented {
     readonly segments: Segment[],
   ) {
   }
+  
+  public slice(begin: number, end?: number): Segmented {
+    return new Segmented(this.segments.slice(begin, end));
+  }
 
   public toString(): string {
     return this.segments.map((segment) => segment.toString()).join(",");
