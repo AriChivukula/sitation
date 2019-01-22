@@ -79,8 +79,8 @@ function serialConsumer(consumers: consumer[]): consumer {
 }
 
 const rootConsumer = parallelConsumer([
-  serialConsumer(idCite),
-  serialConsumer(fullCite),
+  serialConsumer([idCite]),
+  serialConsumer([fullCite]),
 ]);
 
 export function coalesce(segmented: Segmented): string[] {
