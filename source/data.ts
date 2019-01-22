@@ -54,3 +54,4 @@ export abstract class ReportersDB {
     }
     return result;
   }
+}
