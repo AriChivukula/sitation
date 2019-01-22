@@ -3,8 +3,8 @@ import "mocha";
 import * as chai from "chai";
 
 import {
-  match,
-} from "../source/citation";
+  coalesce,
+} from "../source/match";
 import {
   Token,
 } from "../source/token";
@@ -34,7 +34,7 @@ describe("match()", () => {
   ].forEach((test) => {
     it(test.tokens.flat(1).join(":"), () => {
       // @ts-ignore
-      chai.expect(match(test.tokens)).to.deep.equal(test.expected);
+      chai.expect(coalesce(test.tokens)).to.deep.equal(test.expected);
     });
   });
 });
