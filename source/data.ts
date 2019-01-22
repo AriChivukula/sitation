@@ -24,12 +24,12 @@ export type Variations = { [k: string]: string };
 
 export abstract class ReportersDB {
 
-  @MemoizeAll
+  @MemoizeAll()
   public static reporters(): Reporters {
     return JSON.parse(readFileSync("reporters.json", "ascii"));
   }
 
-  @MemoizeAll
+  @MemoizeAll()
   public static editions(): Editions {
     let result = {};
     for (let reporterName in reporters()) {
@@ -42,7 +42,7 @@ export abstract class ReportersDB {
     return result;
   }
 
-  @MemoizeAll
+  @MemoizeAll()
   public static variations(): Variations {
     let result = {};
     for (let reporterName in reporters()) {
