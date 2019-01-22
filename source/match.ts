@@ -69,7 +69,7 @@ function serialConsumer(consumers: consumer[]): consumer {
         continue;
       }
       remaining = new Segmented(remaining.segments.slice(consumed.count));
-      consumeds.append(consumed);
+      consumeds.push(consumed);
     }
     return new Consumed(
       consumeds.reduce((total, consumed) => total + consumed.count, 0),
