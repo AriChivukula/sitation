@@ -47,7 +47,7 @@ function fullCite(segmented: Segmented): Consumed {
 }
 
 function parallelConsumer(consumers: consumer[]): consumer {
-  return (segmented: Segmented) => Consumed {
+  return (segmented: Segmented): Consumed => {
     for (let consumer of consumers) {
       const consumed = consumer(segmented);
       if (consumed == noop) {
@@ -60,7 +60,7 @@ function parallelConsumer(consumers: consumer[]): consumer {
 }
 
 function serialConsumer(consumers: consumer[]): consumer {
-  return (segmented: Segmented) => Consumed {
+  return (segmented: Segmented): Consumed => {
     let remaining = segmented;
     const consumeds: Consumed[] = [];
     for (let consumer of consumers) {
