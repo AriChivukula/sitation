@@ -19,10 +19,11 @@ export type Tokenized = [string, string, Token];
 export function tokenize(casebody: string): Tokenized[] {
   const tokens: Tokenized[] = [];
   for (let reporter_split_token of casebody.split(reporterRegExp())) {
-    if (editions().hasOwnProperty(reporter_split_token.toLowerCase())) {
-      tokens.push([editions()[reporter_split_token.toLowerCase()], reporter_split_token, Token.REPORTER]);
-    } else if (variations().hasOwnProperty(reporter_split_token.toLowerCase())) {
-      tokens.push([variations()[reporter_split_token.toLowerCase()], reporter_split_token, Token.REPORTER]);
+    const lower_split_token = reporter_split_token.toLowerCase();
+    if (editions().hasOwnProperty(lower_split_token)) {
+      tokens.push([editions()[lower_split_token], reporter_split_token, Token.REPORTER]);
+    } else if (variations().hasOwnProperty(lower_split_token)) {
+      tokens.push([variations()[lower_split_token], reporter_split_token, Token.REPORTER]);
     } else {
       for (let spacing_split_token of reporter_split_token.split(spacingRegExp())) {
         if (spacing_split_token == "") {
