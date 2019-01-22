@@ -31,9 +31,9 @@ export abstract class ReportersDB {
 
   @MemoizeAll()
   public static editions(): Editions {
-    let result = {};
-    for (let reporterName in reporters()) {
-      for (let reporter of reporters()[reporterName]) {
+    let result: Editions = {};
+    for (let reporterName in ReportersDB.reporters()) {
+      for (let reporter of ReportersDB.reporters()[reporterName]) {
         for (let edition in reporter.editions) {
           result[edition.toLowerCase()] = edition;
         }
@@ -44,9 +44,9 @@ export abstract class ReportersDB {
 
   @MemoizeAll()
   public static variations(): Variations {
-    let result = {};
-    for (let reporterName in reporters()) {
-      for (let reporter of reporters()[reporterName]) {
+    let result: Variations = {};
+    for (let reporterName in ReportersDB.reporters()) {
+      for (let reporter of ReportersDB.reporters()[reporterName]) {
         for (let variation in reporter.variations) {
           result[variation.toLowerCase()] = reporter.variations[variation];
         }
