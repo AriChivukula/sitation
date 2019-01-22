@@ -1,5 +1,5 @@
 import {
-  memoize,
+  MemoizeAll,
 } from "lodash-decorators";
 
 import {
@@ -7,25 +7,18 @@ import {
   variations,
 } from "./data";
 
-let _REPORTER_RE: RegExp | null = null;
-
-@memoize
-export function reporterRE(): RegExp {
-  if (_REPORTER_RE === null) {
+export abstract class Data {         
+  
+  @MemoizeAll()
+  public static reporterRE(): RegExp {
     const editionsAndVariations = Object.keys(Object.assign({}, editions(), variations()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, "\\$&");
-    _REPORTER_RE = RegExp("\\s(" + editionsAndVariations.map(escape).join("|") + ")\\s", "i");
+    return RegExp("\\s(" + editionsAndVariations.map(escape).join("|") + ")\\s", "i");
   }
-  return _REPORTER_RE as RegExp;
-}
 
-let _SPACING_RE: RegExp | null = null;
-
-@memoize
-export function spacingRE(): RegExp {
-  if (_SPACING_RE === null) {
-    _SPACING_RE = /[\s,;:.()[\]{}]+/;
+  @MemoizeAll
+  public static spacingRE(): RegExp {
+    return /[\s,;:.()[\]{}]+/;
   }
-  return _SPACING_RE as RegExp;
 }
