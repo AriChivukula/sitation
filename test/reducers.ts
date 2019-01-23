@@ -17,7 +17,7 @@ describe(
     [
       {
         results: [],
-        expected: ":",
+        expected: "0:",
       },
       {
         results: [new MapperResult("Id", "id", MapperType.NUMBER)],
@@ -38,7 +38,7 @@ describe(
     [
       {
         results: [],
-        expected: ":",
+        expected: "0:",
       },
       {
         results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
