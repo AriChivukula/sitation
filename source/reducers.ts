@@ -1,7 +1,7 @@
 import {
   ReducerResult,
   parallelReducers,
-  serialReducers,
+  joinReducer,
 } from "./reducer";
 import {
   MapperResult,
