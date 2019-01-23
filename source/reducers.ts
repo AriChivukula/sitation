@@ -18,7 +18,7 @@ export function idCite(parts: MapperParts): ReducerResult {
   return new ReducerResult(1, parts.parts[0].corrected);
 }
 
-export function fullCite(parts: MapperParts): MapperResult {
+export function fullCite(parts: MapperParts): ReducerResult {
   if (parts.parts.length < 3) {
     return ReducerResult.noop();
   }
@@ -41,7 +41,7 @@ export const rootReducer = parallelReducers([
   serialReducers([
     idCite,
   ]),
-  serialConsumer([
+  serialReducers([
     fullCite,
   ]),
 ]);
