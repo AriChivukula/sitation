@@ -51,19 +51,6 @@ export function consumeFirst(reducers: reducer[]): reducer {
   }
 }
 
-export function consumeEach(reducers: reducer[]): reducer {
-  return (results: MapperResult[]): ReducerResult[] => {
-    let remaining = results;
-    let rollup = ReducerResult.noop();
-    for (let reducerFN of reducers) {
-      const result = reducerFN(remaining);
-      remaining = remaining.slice(result.consumed);
-      rollup = rollup.merge(result);
-    }
-    return [rollup];
-  }
-}
-
 export function consumeLoop(reducerFN: reducer): reducer {
   return (results: MapperResult[]): ReducerResult[] => {
     let remaining = results;
