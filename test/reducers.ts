@@ -26,7 +26,7 @@ describe(
     ].forEach((test) => {
       it(test.results.join(","), () => {
         // @ts-ignore
-        chai.expect(idCite(test.results)).to.equal(test.expected);
+        chai.expect(idCite(test.results).toString()).to.equal(test.expected);
       });
     });
   },
@@ -47,7 +47,7 @@ describe(
     ].forEach((test) => {
       it(test.results.join(","), () => {
         // @ts-ignore
-        chai.expect(fullCite(test.results)).to.equal(test.expected);
+        chai.expect(fullCite(test.results).toString()).to.equal(test.expected);
       });
     });
   },
