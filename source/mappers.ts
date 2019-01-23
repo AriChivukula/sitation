@@ -7,29 +7,54 @@ import {
 import {
   MapperResult,
   MapperType,
+  parallelMappers,
+  splitMapper,
 } from "./mapper";
 
-export function rootMapper(casebody: string): MapperResult[] {
-  const results: MapperResult[] = [];
-  for (let reporter_split_token of casebody.split(Expressions.reporter())) {
-    const lower_split_token = reporter_split_token.toLowerCase();
-    if (ReportersDB.editions().hasOwnProperty(lower_split_token)) {
-      results.push(new MapperResult(ReportersDB.editions()[lower_split_token], reporter_split_token, MapperType.REPORTER));
-    } else if (ReportersDB.variations().hasOwnProperty(lower_split_token)) {
-      results.push(new MapperResult(ReportersDB.variations()[lower_split_token], reporter_split_token, MapperType.REPORTER));
-    } else {
-      for (let spacing_split_token of reporter_split_token.split(Expressions.spacing())) {
-        if (spacing_split_token == "") {
-          continue;
-        } else if (!isNaN(Number(spacing_split_token))) {
-          results.push(new MapperResult(spacing_split_token, spacing_split_token, MapperType.NUMBER))
-        } else if (spacing_split_token.toLowerCase() == "id") {
-          results.push(new MapperResult("Id", spacing_split_token, MapperType.ID));
-        } else {
-          results.push(new MapperResult(spacing_split_token, spacing_split_token, MapperType.NOOP))
-        }
-      }
-    }
+export function editionMatch(token: string): MapperResult[] {
+  if (ReportersDB.editions().hasOwnProperty(token.toLowerCase())) {
+    return [new MapperResult(ReportersDB.editions()[token.toLowerCase()], token, MapperType.REPORTER)];
   }
-  return results;
+  return [];
 }
+
+export function variationMatch(token: string): MapperResult[] {
+  if (ReportersDB.variations().hasOwnProperty(token.toLowerCase())) {
+    return [new MapperResult(ReportersDB.variations()[token.toLowerCase()], token, MapperType.REPORTER)];
+  }
+  return [];
+}
+
+export function numberMatch(token: string): MapperResult[] {
+  if (!isNaN(Number(token))) {
+    return [new MapperResult(token, token, MapperType.NUMBER)];
+  }
+  return [];
+}
+
+export function idMatch(token: string): MapperResult[] {
+  if (token.toLowerCase() == "id") {
+    return [new MapperResult("Id", token, MapperType.ID)];
+  }
+  return [];
+}
+
+export function noopMatch(token: string): MapperResult[] {
+  return [new MapperResult(token, token, MapperType.NOOP)];
+}
+
+export const rootMapper = splitMapper(
+  (token: string) => token.split(Expressions.reporter()),
+  parallelMappers([
+    editionMatch,
+    variationMatch,
+    splitMapper(
+      (token: string) => token.split(Expressions.spacing()),
+      parallelMappers([
+        numberMatch,
+        idMatch,
+        noopMatch,
+      ]),
+    ),
+  ]),
+);
