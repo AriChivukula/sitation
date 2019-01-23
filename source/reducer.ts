@@ -27,14 +27,14 @@ export class ReducerResult {
     return this.consumed === 0;
   }
   
-  public static noop(): Result {
-    return new Result(0, "");
+  public static noop(): ReducerResult {
+    return new ReducerResult(0, "");
   }
 }
 
 export type reducer = (parts: MapperParts) => ReducerResult;
 
-export function parallelReducers(reducers: reducer[]): ReducerResult {
+export function parallelReducers(reducers: reducer[]): reducer {
   return (parts: MapperParts): ReducerResult => {
     for (let reducer of reducers) {
       const result = reducer(parts);
@@ -47,10 +47,10 @@ export function parallelReducers(reducers: reducer[]): ReducerResult {
   }
 }
 
-export function serialReducers(reducers: reducer[]): consumer {
+export function serialReducers(reducers: reducer[]): reducer {
   return (parts: MapperParts): ReducerResult => {
     let remaining = parts;
-    let rollup = Consumed.noop();
+    let rollup = ReducerResult.noop();
     for (let reducer of reducers) {
       const result = reducer(remaining);
       remaining = remaining.slice(result.consumed);
