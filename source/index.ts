@@ -35,7 +35,7 @@ export function tokenize(casebody: string): MapperParts {
       }
     }
   }
-  return new MapperParts(tokens);
+  return new MapperParts(parts);
 }
 
 export function coalesce(parts: MapperParts): string[] {
