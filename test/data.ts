@@ -3,6 +3,7 @@ import "mocha";
 import * as chai from "chai";
 
 import {
+  Expressions,
   ReportersDB,
 } from "../source/data";
 
@@ -30,6 +31,24 @@ describe(
         chai.expect(Object.keys(ReportersDB.variations()).length).to.equal(1014);
         chai.expect(Object.keys(ReportersDB.variations())[0]).to.equal("a. 2d");
         chai.expect(Object.values(ReportersDB.variations())[0]).to.equal("A.2d");
+      },
+    );
+  },
+);
+
+describe(
+  "ReportersDB",
+  async (): Promise<void> => {
+    it(
+      "reporter",
+      async (): Promise<void> => {
+        chai.expect(Expressions.reporter().toString().length).to.equal(19735);
+      },
+    );
+    it(
+      "spacing",
+      async (): Promise<void> => {
+        chai.expect(Expressions.spacing().toString().length).to.equal(18);
       },
     );
   },
