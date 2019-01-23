@@ -43,6 +43,10 @@ export function consumeLoop(reducerFN: reducer): reducer {
     let output: ReducerResult[] = [];
     while (remaining.length > 0) {
       const result = reducerFN(remaining);
+      if (result.length === 0) {
+        remaining = remaining.slice(1);
+        continue;
+      }
       remaining = remaining.slice(result.reduce((total, current) => total + current.consumed, 0));
       output = output.concat(result);
     }
