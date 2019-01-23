@@ -1,47 +1,43 @@
 import {
   ReducerResult,
-  parallelReducers,
-  serialReducers,
+  consumeFirst,
+  consumeLoop,
 } from "./reducer";
 import {
-  MapperParts,
+  MapperResult,
   MapperType,
 } from "./mapper";
 
-export function idCite(parts: MapperParts): ReducerResult {
-  if (parts.parts.length < 1) {
-    return ReducerResult.noop();
+export function idConsume(resuts: MapperResult[]): ReducerResult[] {
+  if (resuts.length < 1) {
+    return [];
   }
-  if (parts.parts[0].token !== MapperType.ID) {
-    return ReducerResult.noop();
+  if (resuts[0].type !== MapperType.ID) {
+    return [];
   }
-  return new ReducerResult(1, parts.parts[0].corrected);
+  return [new ReducerResult(1, resuts[0].corrected)];
 }
 
-export function fullCite(parts: MapperParts): ReducerResult {
-  if (parts.parts.length < 3) {
-    return ReducerResult.noop();
+export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
+  if (resuts.length < 3) {
+    return [];
   }
-  if (parts.parts[0].token !== MapperType.NUMBER) {
-    return ReducerResult.noop();
+  if (resuts[0].type !== MapperType.NUMBER) {
+    return [];
   }
-  if (parts.parts[1].token !== MapperType.REPORTER) {
-    return ReducerResult.noop();
+  if (resuts[1].type !== MapperType.REPORTER) {
+    return [];
   }
-  if (parts.parts[2].token !== MapperType.NUMBER) {
-    return ReducerResult.noop();
+  if (resuts[2].type !== MapperType.NUMBER) {
+    return [];
   }
-  return new ReducerResult(
+  return [new ReducerResult(
     3,
-    parts.parts.slice(0, 3).map((segment) => segment.corrected).join(" "),
-  );
+    resuts.slice(0, 3).map((segment) => segment.corrected).join(" "),
+  )];
 }
 
-export const rootReducer = parallelReducers([
-  serialReducers([
-    idCite,
-  ]),
-  serialReducers([
-    fullCite,
-  ]),
-]);
+export const rootReducer = consumeLoop(consumeFirst([
+  idConsume,
+  fullConsume,
+]));

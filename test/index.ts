@@ -3,72 +3,8 @@ import "mocha";
 import * as chai from "chai";
 
 import {
-  coalesce,
   sitation,
-  tokenize,
 } from "../source/index";
-import {
-  MapperPart,
-  MapperParts,
-  MapperType,
-} from "../source/mapper";
-
-describe(
-  "tokenize()",
-  () => {
-    [
-      {
-        casebody: "",
-        expected: "",
-      },
-      {
-        casebody: "379 u. S. 241",
-        expected: "379:379:" + MapperType.NUMBER + ",U.S.:u. S.:" + MapperType.REPORTER + ",241:241:" + MapperType.NUMBER,
-      },
-      {
-        casebody: "In Evans v. Laurel Links, Inc., id.",
-        expected: "In:In:" + MapperType.NOOP + ",Evans:Evans:" + MapperType.NOOP + ",Va.:v.:" + MapperType.REPORTER + ",Laurel:Laurel:" + MapperType.NOOP + ",Links:Links:" + MapperType.NOOP + ",Inc:Inc:" + MapperType.NOOP + ",Id:id:" + MapperType.ID,
-      },
-    ].forEach((test) => {
-      it(test.casebody, () => {
-        chai.expect(tokenize(test.casebody).toString()).to.equal(test.expected);
-      });
-    });
-  },
-);
-
-describe(
-  "coalesce()",
-  () => {
-    [
-      {
-        parts: new MapperParts([]),
-        expected: [],
-      },
-      {
-        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
-        expected: ["379 U.S. 241"],
-      },
-      {
-        parts: new MapperParts([new MapperPart("Id", "Id", MapperType.ID), new MapperPart("0", "0", MapperType.NUMBER), new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
-        expected: ["Id", "379 U.S. 241"],
-      },
-      {
-        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
-        expected: [],
-      },
-      {
-        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("Id", "Id", MapperType.ID)]),
-        expected: ["Id"],
-      },
-    ].forEach((test) => {
-      it(test.parts.toString(), () => {
-        // @ts-ignore
-        chai.expect(coalesce(test.parts)).to.deep.equal(test.expected);
-      });
-    });
-  },
-);
 
 describe(
   "sitation()",

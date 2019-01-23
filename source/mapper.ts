@@ -10,32 +10,42 @@ export enum MapperType {
   REPORTER, // Can be found in `REPORTER_SET`
 }
 
-export class MapperPart {
+export class MapperResult {
 
   constructor(
     readonly corrected: string,
     readonly original: string,
-    readonly token: MapperType,
+    readonly type: MapperType,
   ) {
   }
 
   public toString(): string {
-    return this.corrected + ":" + this.original + ":" + this.token;
+    return this.corrected + ":" + this.original + ":" + this.type;
   }
 }
 
-export class MapperParts {
+export type mapper = (token: string) => MapperResult[];
 
-  constructor(
-    readonly parts: MapperPart[],
-  ) {
+export function matchFirst(mappers: mapper[]): mapper {
+  return (token: string): MapperResult[] => {
+    for (let mapperFN of mappers) {
+      const result = mapperFN(token);
+      if (result.length !== 0) {
+        return result;
+      }
+    }
+    return [];
   }
-  
-  public slice(begin: number, end?: number): MapperParts {
-    return new MapperParts(this.parts.slice(begin, end));
-  }
+}
 
-  public toString(): string {
-    return this.parts.map((part) => part.toString()).join(",");
+export type splitter = (token: string) => string[];
+
+export function matchSplit(splitterFN: splitter, mapperFN: mapper): mapper {
+  return (token: string): MapperResult[] => {
+    let results: MapperResult[] = [];
+    for (let splitToken of splitterFN(token)) {
+      results = results.concat(mapperFN(splitToken));
+    }
+    return results;
   }
 }

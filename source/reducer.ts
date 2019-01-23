@@ -1,5 +1,5 @@
 import {
-  MapperParts,
+  MapperResult,
 } from "./mapper";
 
 export class ReducerResult {
@@ -11,51 +11,45 @@ export class ReducerResult {
   }
   
   public merge(result: ReducerResult): ReducerResult {
-    if (this.isNOOP()) {
-      return result;
-    }
-    if (result.isNOOP()) {
-      return this;
-    }
     return new ReducerResult(
       this.consumed + result.consumed,
       this.content + " " + result.content,
     );
   }
-
-  public isNOOP(): boolean {
-    return this.consumed === 0;
-  }
   
-  public static noop(): ReducerResult {
-    return new ReducerResult(0, "");
+  public toString(): string {
+    return this.consumed + ":" + this.content;
   }
 }
 
-export type reducer = (parts: MapperParts) => ReducerResult;
+export type reducer = (results: MapperResult[]) => ReducerResult[];
 
-export function parallelReducers(reducers: reducer[]): reducer {
-  return (parts: MapperParts): ReducerResult => {
-    for (let reducer of reducers) {
-      const result = reducer(parts);
-      if (result.isNOOP()) {
+export function consumeFirst(reducers: reducer[]): reducer {
+  return (results: MapperResult[]): ReducerResult[] => {
+    for (let reducerFN of reducers) {
+      const result = reducerFN(results);
+      if (result.length === 0) {
         continue;
       }
       return result;
     }
-    return ReducerResult.noop();
+    return [];
   }
 }
 
-export function serialReducers(reducers: reducer[]): reducer {
-  return (parts: MapperParts): ReducerResult => {
-    let remaining = parts;
-    let rollup = ReducerResult.noop();
-    for (let reducer of reducers) {
-      const result = reducer(remaining);
-      remaining = remaining.slice(result.consumed);
-      rollup = rollup.merge(result);
+export function consumeLoop(reducerFN: reducer): reducer {
+  return (results: MapperResult[]): ReducerResult[] => {
+    let remaining = results;
+    let output: ReducerResult[] = [];
+    while (remaining.length > 0) {
+      const result = reducerFN(remaining);
+      if (result.length === 0) {
+        remaining = remaining.slice(1);
+        continue;
+      }
+      remaining = remaining.slice(result.reduce((total, current) => total + current.consumed, 0));
+      output = output.concat(result);
     }
-    return rollup;
+    return output;
   }
 }
