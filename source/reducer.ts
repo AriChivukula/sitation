@@ -27,6 +27,10 @@ export class ReducerResult {
     return this.consumed === 0;
   }
   
+  public toString(): string {
+    return this.consumed + ":" + this.content;
+  }
+  
   public static noop(): ReducerResult {
     return new ReducerResult(0, "");
   }
