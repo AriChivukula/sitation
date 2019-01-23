@@ -40,7 +40,7 @@ export function matchFirst(mappers: mapper[]): mapper {
 
 export type splitter = (token: string) => string[];
 
-export function matchSplitter(splitterFN: splitter, mapperFN: mapper): mapper {
+export function matchSplit(splitterFN: splitter, mapperFN: mapper): mapper {
   return (token: string): MapperResult[] => {
     let results: MapperResult[] = [];
     for (let splitToken of splitterFN(token)) {
