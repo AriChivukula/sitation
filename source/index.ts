@@ -1,10 +1,6 @@
 import "@babel/polyfill";
 
 import {
-  Expressions,
-  ReportersDB,
-} from "./data";
-import {
   rootReducer,
 } from "./reducers";
 import {
