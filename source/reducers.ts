@@ -1,7 +1,7 @@
 import {
   ReducerResult,
   consumeFirst,
-  consumeAll,
+  consumeLoop,
 } from "./reducer";
 import {
   MapperResult,
@@ -37,7 +37,7 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
   )];
 }
 
-export const rootReducer = consumeAll(consumeFirst([
+export const rootReducer = consumeLoop(consumeFirst([
   idConsume,
   fullConsume,
 ]));
