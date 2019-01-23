@@ -64,7 +64,7 @@ describe(
     [
       {
         results: [],
-        expected: [],
+        expected: "",
       },
       {
         results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
@@ -72,21 +72,23 @@ describe(
       },
       {
         results: [new MapperResult("Id", "Id", MapperType.ID), new MapperResult("0", "0", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: "1:Id,3:379 U.S. 241"],
+        expected: "1:Id,3:379 U.S. 241",
       },
       {
         results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: [],
+        expected: "",
       },
       {
         results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("Id", "Id", MapperType.ID)],
-        expected: ["1:Id"],
+        expected: "1:Id",
       },
     ].forEach((test) => {
-      it(test.results.join(","), () => {
-        // @ts-ignore
-        chai.expect(coalesce(test.results).join(",")).to.equal(test.expected);
-      });
+      it(
+        test.results.join(","),
+        () => {
+          chai.expect(coalesce(test.results).join(",")).to.equal(test.expected);
+        },
+      );
     });
   },
 );
