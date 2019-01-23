@@ -7,10 +7,10 @@ import {
   MapperResult,
   MapperResults,
   MapperType,
-} from "./token";
+} from "./mapper";
 
 export function tokenize(casebody: string): MapperParts {
-  const tokens: Segment[] = [];
+  const tokens: MapperParts[] = [];
   for (let reporter_split_token of casebody.split(Expressions.reporter())) {
     const lower_split_token = reporter_split_token.toLowerCase();
     if (ReportersDB.editions().hasOwnProperty(lower_split_token)) {
@@ -34,10 +34,10 @@ export function tokenize(casebody: string): MapperParts {
   return new MapperParts(tokens);
 }
 
-export function coalesce(segmented: Segmented): string[] {
+export function coalesce(parts: MapperParts): string[] {
   const citations: string[] = [];
-  let remaining = segmented;
-  while (remaining.segments.length > 0) {
+  let remaining = parts;
+  while (remaining.parts.length > 0) {
     const result = rootReducer(remaining);
     if (result.isNOOP()) {
       remaining = remaining.slice(1);
