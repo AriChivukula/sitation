@@ -38,10 +38,10 @@ export class ReducerResult {
 
 export type reducer = (results: MapperResult[]) => ReducerResult;
 
-export function parallelReducers(reducers: reducer[]): reducer {
+export function consumeFirst(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult => {
-    for (let reducer of reducers) {
-      const result = reducer(results);
+    for (let reducerFN of reducers) {
+      const result = reducerFN(results);
       if (result.isNOOP()) {
         continue;
       }
@@ -51,12 +51,25 @@ export function parallelReducers(reducers: reducer[]): reducer {
   }
 }
 
-export function joinReducer(reducers: reducer[]): reducer {
+export function consumeEach(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult => {
     let remaining = results;
     let rollup = ReducerResult.noop();
-    for (let reducer of reducers) {
-      const result = reducer(remaining);
+    for (let reducerFN of reducers) {
+      const result = reducerFN(remaining);
+      remaining = remaining.slice(result.consumed);
+      rollup = rollup.merge(result);
+    }
+    return rollup;
+  }
+}
+
+export function consumeLoop(reducerFN: reducer): reducer {
+  return (results: MapperResult[]): ReducerResult => {
+    let remaining = results;
+    const rollup = ReducerResult.noop();
+    while (remaining.length > 0) {
+      const result = reducerFN(remaining);
       remaining = remaining.slice(result.consumed);
       rollup = rollup.merge(result);
     }
