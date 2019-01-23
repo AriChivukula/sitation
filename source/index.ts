@@ -8,5 +8,5 @@ import {
 } from "./mappers";
 
 export function sitation(casebody: string): string[] {
-  return rootReducer(rootMapper(casebody)).map((result) => result.content);
+  return rootReducer(rootMapper(casebody)).map((result: any) => result.content);
 }
