@@ -7,8 +7,8 @@ import {
 import {
   MapperResult,
   MapperType,
-  parallelMappers,
-  splitMapper,
+  matchFirst,
+  matchSplitter,
 } from "./mapper";
 
 export function editionMatch(token: string): MapperResult[] {
@@ -46,14 +46,14 @@ export function noopMatch(token: string): MapperResult[] {
   return [];
 }
 
-export const rootMapper = splitMapper(
+export const rootMapper = matchSplitter(
   (token: string) => token.split(Expressions.reporter()),
-  parallelMappers([
+  matchFirst([
     editionMatch,
     variationMatch,
-    splitMapper(
+    matchSplitter(
       (token: string) => token.split(Expressions.spacing()),
-      parallelMappers([
+      matchFirst([
         numberMatch,
         idMatch,
         noopMatch,
