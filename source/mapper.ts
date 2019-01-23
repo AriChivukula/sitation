@@ -44,7 +44,7 @@ export function splitMapper(splitterFN: splitter, mapperFN: mapper): mapper {
   return (token: string): MapperResult[] => {
     let results: MapperResult[] = [];
     for (let splitToken of splitterFN(token)) {
-      results += mapperFN(splitToken);
+      results = results.concat(mapperFN(splitToken));
     }
     return results;
   }
