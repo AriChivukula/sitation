@@ -8,8 +8,7 @@ import {
   tokenize,
 } from "../source/index";
 import {
-  MapperPart,
-  MapperParts,
+  MapperResult,
   MapperType,
 } from "../source/mapper";
 
@@ -42,23 +41,23 @@ describe(
   () => {
     [
       {
-        parts: new MapperParts([]),
+        results: [],
         expected: [],
       },
       {
-        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
+        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
         expected: ["379 U.S. 241"],
       },
       {
-        parts: new MapperParts([new MapperPart("Id", "Id", MapperType.ID), new MapperPart("0", "0", MapperType.NUMBER), new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
+        results: [new MapperResult("Id", "Id", MapperType.ID), new MapperResult("0", "0", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
         expected: ["Id", "379 U.S. 241"],
       },
       {
-        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
+        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
         expected: [],
       },
       {
-        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("Id", "Id", MapperType.ID)]),
+        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("Id", "Id", MapperType.ID)],
         expected: ["Id"],
       },
     ].forEach((test) => {
