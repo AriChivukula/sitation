@@ -1,26 +1,26 @@
 import "@babel/polyfill";
 
 import {
-  rootReducer,
-} from "./reducers";
-import {
   ReducerResult,
 } from "./reducer";
 import {
-  MapperParts,
+  rootReducer,
+} from "./reducers";
+import {
+  MapperResult,
 } from "./mapper";
 import {
   rootMapper,
 } from "./mappers";
 
-export function tokenize(casebody: string): MapperParts {
+export function tokenize(casebody: string): MapperResult[] {
   return rootMapper(casebody);
 }
 
-export function coalesce(parts: MapperParts): string[] {
+export function coalesce(results: MapperResult[]): string[] {
   const citations: string[] = [];
-  let remaining = parts;
-  while (remaining.parts.length > 0) {
+  let remaining = results;
+  while (remaining.length > 0) {
     const result = rootReducer(remaining);
     if (result.isNOOP()) {
       remaining = remaining.slice(1);
