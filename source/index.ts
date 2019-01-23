@@ -8,6 +8,9 @@ import {
   rootReducer,
 } from "./reducers";
 import {
+  ReducerResult,
+} from "./reducer";
+import {
   MapperPart,
   MapperParts,
   MapperType,
