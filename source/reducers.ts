@@ -1,7 +1,6 @@
 import {
   ReducerResult,
   consumeFirst,
-  consumeEach,
   consumeAll,
 } from "./reducer";
 import {
