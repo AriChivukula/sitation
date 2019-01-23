@@ -11,28 +11,14 @@ export class ReducerResult {
   }
   
   public merge(result: ReducerResult): ReducerResult {
-    if (this.isNOOP()) {
-      return result;
-    }
-    if (result.isNOOP()) {
-      return this;
-    }
     return new ReducerResult(
       this.consumed + result.consumed,
       this.content + " " + result.content,
     );
   }
-
-  public isNOOP(): boolean {
-    return this.consumed === 0;
-  }
   
   public toString(): string {
     return this.consumed + ":" + this.content;
-  }
-  
-  public static noop(): ReducerResult {
-    return new ReducerResult(0, "");
   }
 }
 
@@ -42,12 +28,12 @@ export function consumeFirst(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult[] => {
     for (let reducerFN of reducers) {
       const result = reducerFN(results);
-      if (result.isNOOP()) {
+      if (result.length === 0) {
         continue;
       }
-      return [result];
+      return result;
     }
-    return [ReducerResult.noop()];
+    return [];
   }
 }
 
@@ -57,7 +43,7 @@ export function consumeLoop(reducerFN: reducer): reducer {
     const output: ReducerResult[] = [];
     while (remaining.length > 0) {
       const result = reducerFN(remaining);
-      remaining = remaining.slice(result.consumed);
+      remaining = remaining.slice(result.reduce((total, current) => total + current.consumed), 0);
       output = output.concat(result);
     }
     return output;
