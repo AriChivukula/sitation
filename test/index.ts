@@ -61,7 +61,7 @@ describe(
         expected: ["Id"],
       },
     ].forEach((test) => {
-      it(test.parts.toString(), () => {
+      it(test.results.join(","), () => {
         // @ts-ignore
         chai.expect(coalesce(test.parts)).to.deep.equal(test.expected);
       });
