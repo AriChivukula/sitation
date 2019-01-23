@@ -40,10 +40,10 @@ export function consumeFirst(reducers: reducer[]): reducer {
 export function consumeLoop(reducerFN: reducer): reducer {
   return (results: MapperResult[]): ReducerResult[] => {
     let remaining = results;
-    const output: ReducerResult[] = [];
+    let output: ReducerResult[] = [];
     while (remaining.length > 0) {
       const result = reducerFN(remaining);
-      remaining = remaining.slice(result.reduce((total, current) => total + current.consumed), 0);
+      remaining = remaining.slice(result.reduce((total, current) => total + current.consumed, 0));
       output = output.concat(result);
     }
     return output;
