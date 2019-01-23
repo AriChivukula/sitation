@@ -26,7 +26,7 @@ export function variationMatch(token: string): MapperResult[] {
 }
 
 export function numberMatch(token: string): MapperResult[] {
-  if (!isNaN(Number(token))) {
+  if (token !== "" && !isNaN(Number(token))) {
     return [new MapperResult(token, token, MapperType.NUMBER)];
   }
   return [];
