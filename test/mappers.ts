@@ -11,6 +11,7 @@ import {
   numberMatch,
   idMatch,
   noopMatch,
+  rootMapper,
 } from "../source/mappers";
 
 describe(
@@ -122,6 +123,33 @@ describe(
         test.token,
         () => {
           chai.expect(noopMatch(test.results).join(",")).to.equal(test.expected);
+        },
+      );
+    });
+  },
+);
+
+describe(
+  "rootMapper()",
+  () => {
+    [
+      {
+        casebody: "",
+        expected: "",
+      },
+      {
+        casebody: "379 u. S. 241",
+        expected: "379:379:" + MapperType.NUMBER + ",U.S.:u. S.:" + MapperType.REPORTER + ",241:241:" + MapperType.NUMBER,
+      },
+      {
+        casebody: "In Evans v. Laurel Links, Inc., id.",
+        expected: "In:In:" + MapperType.NOOP + ",Evans:Evans:" + MapperType.NOOP + ",Va.:v.:" + MapperType.REPORTER + ",Laurel:Laurel:" + MapperType.NOOP + ",Links:Links:" + MapperType.NOOP + ",Inc:Inc:" + MapperType.NOOP + ",Id:id:" + MapperType.ID,
+      },
+    ].forEach((test) => {
+      it(
+        test.casebody,
+        () => {
+          chai.expect(rootMapper(test.casebody).join(",")).to.equal(test.expected);
         },
       );
     });
