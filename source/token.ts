@@ -1,9 +1,7 @@
 import {
   ReportersDB,
-} from "./data";
-import {
   Expressions,
-} from "./re";
+} from "./data";
 
 export enum Token {
   ID, // `Id` style citation
