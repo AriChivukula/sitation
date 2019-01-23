@@ -1,12 +1,12 @@
 import "@babel/polyfill";
 
 import {
-  coalesce,
-} from "./match";
+  rootReducer,
+} from "./reducers";
 import {
-  tokenize,
-} from "./token";
+  rootMapper,
+} from "./mappers";
 
 export function sitation(casebody: string): string[] {
-  return coalesce(tokenize(casebody));
+  return rootReducer(rootMapper(casebody)).map((result: any) => result.content);
 }
