@@ -20,7 +20,7 @@ describe(
         expected: "0:",
       },
       {
-        results: [new MapperResult("Id", "id", MapperType.NUMBER)],
+        results: [new MapperResult("Id", "id", MapperType.ID)],
         expected: "1:Id",
       },
     ].forEach((test) => {
