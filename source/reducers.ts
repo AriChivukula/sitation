@@ -1,14 +1,15 @@
 import {
   ReducerResult,
-  parallelReducers,
-  joinReducer,
+  consumeFirst,
+  consumeEach,
+  consumeAll,
 } from "./reducer";
 import {
   MapperResult,
   MapperType,
 } from "./mapper";
 
-export function idCite(resuts: MapperResult[]): ReducerResult {
+export function idConsume(resuts: MapperResult[]): ReducerResult {
   if (resuts.length < 1) {
     return ReducerResult.noop();
   }
@@ -18,7 +19,7 @@ export function idCite(resuts: MapperResult[]): ReducerResult {
   return new ReducerResult(1, resuts[0].corrected);
 }
 
-export function fullCite(resuts: MapperResult[]): ReducerResult {
+export function fullConsume(resuts: MapperResult[]): ReducerResult {
   if (resuts.length < 3) {
     return ReducerResult.noop();
   }
@@ -37,11 +38,11 @@ export function fullCite(resuts: MapperResult[]): ReducerResult {
   );
 }
 
-export const rootReducer = parallelReducers([
-  joinReducer([
-    idCite,
+export const rootReducer = consumeAll(consumeEach([
+  consumeFirst([
+    idConsume,
   ]),
-  joinReducer([
-    fullCite,
+  consumeFirst([
+    fullConsume,
   ]),
-]);
+]));
