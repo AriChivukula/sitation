@@ -17,11 +17,11 @@ describe(
     [
       {
         results: [],
-        expected: "",
+        expected: ":",
       },
       {
         results: [new MapperResult("Id", "id", MapperType.NUMBER)],
-        expected: "Id:1",
+        expected: "1:Id",
       },
     ].forEach((test) => {
       it(test.results.join(","), () => {
@@ -38,11 +38,11 @@ describe(
     [
       {
         results: [],
-        expected: "",
+        expected: ":",
       },
       {
         results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: "379 U.S. 241:3",
+        expected: "3:379 U.S. 241",
       },
     ].forEach((test) => {
       it(test.results.join(","), () => {
