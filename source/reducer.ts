@@ -1,6 +1,6 @@
 import {
   MapperParts,
-} from "./mappers";
+} from "./mapper";
 
 export class ReducerResult {
 
