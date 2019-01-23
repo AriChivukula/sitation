@@ -8,10 +8,10 @@ import {
   tokenize,
 } from "../source/index";
 import {
-  Token,
-  Segment,
-  Segmented,
-} from "../source/token";
+  MapperPart,
+  MapperParts,
+  MapperType,
+} from "../source/mapper";
 
 describe(
   "tokenize()",
@@ -23,11 +23,11 @@ describe(
       },
       {
         casebody: "379 u. S. 241",
-        expected: "379:379:" + Token.NUMBER + ",U.S.:u. S.:" + Token.REPORTER + ",241:241:" + Token.NUMBER,
+        expected: "379:379:" + MapperType.NUMBER + ",U.S.:u. S.:" + MapperType.REPORTER + ",241:241:" + MapperType.NUMBER,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",
-        expected: "In:In:" + Token.NOOP + ",Evans:Evans:" + Token.NOOP + ",Va.:v.:" + Token.REPORTER + ",Laurel:Laurel:" + Token.NOOP + ",Links:Links:" + Token.NOOP + ",Inc:Inc:" + Token.NOOP + ",Id:id:" + Token.ID,
+        expected: "In:In:" + MapperType.NOOP + ",Evans:Evans:" + MapperType.NOOP + ",Va.:v.:" + MapperType.REPORTER + ",Laurel:Laurel:" + MapperType.NOOP + ",Links:Links:" + MapperType.NOOP + ",Inc:Inc:" + MapperType.NOOP + ",Id:id:" + MapperType.ID,
       },
     ].forEach((test) => {
       it(test.casebody, () => {
@@ -42,29 +42,29 @@ describe(
   () => {
     [
       {
-        tokens: new Segmented([]),
+        parts: new MapperParts([]),
         expected: [],
       },
       {
-        tokens: new Segmented([new Segment("379", "379", Token.NUMBER), new Segment("U.S.", "U.S.", Token.REPORTER), new Segment("241", "241", Token.NUMBER)]),
+        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
         expected: ["379 U.S. 241"],
       },
       {
-        tokens: new Segmented([new Segment("Id", "Id", Token.ID), new Segment("0", "0", Token.NUMBER), new Segment("379", "379", Token.NUMBER), new Segment("U.S.", "U.S.", Token.REPORTER), new Segment("241", "241", Token.NUMBER)]),
+        parts: new MapperParts([new MapperPart("Id", "Id", MapperType.ID), new MapperPart("0", "0", MapperType.NUMBER), new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
         expected: ["Id", "379 U.S. 241"],
       },
       {
-        tokens: new Segmented([new Segment("379", "379", Token.NUMBER), new Segment("379", "379", Token.NUMBER), new Segment("U.S.", "U.S.", Token.REPORTER), new Segment("U.S.", "U.S.", Token.REPORTER), new Segment("241", "241", Token.NUMBER)]),
+        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("241", "241", MapperType.NUMBER)]),
         expected: [],
       },
       {
-        tokens: new Segmented([new Segment("379", "379", Token.NUMBER), new Segment("U.S.", "U.S.", Token.REPORTER), new Segment("Id", "Id", Token.ID)]),
+        parts: new MapperParts([new MapperPart("379", "379", MapperType.NUMBER), new MapperPart("U.S.", "U.S.", MapperType.REPORTER), new MapperPart("Id", "Id", MapperType.ID)]),
         expected: ["Id"],
       },
     ].forEach((test) => {
-      it(test.tokens.toString(), () => {
+      it(test.parts.toString(), () => {
         // @ts-ignore
-        chai.expect(coalesce(test.tokens)).to.deep.equal(test.expected);
+        chai.expect(coalesce(test.parts)).to.deep.equal(test.expected);
       });
     });
   },
