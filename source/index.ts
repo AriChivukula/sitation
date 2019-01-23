@@ -13,10 +13,6 @@ import {
   rootMapper,
 } from "./mappers";
 
-export function tokenize(casebody: string): MapperResult[] {
-  return rootMapper(casebody);
-}
-
 export function coalesce(results: MapperResult[]): string[] {
   const citations: string[] = [];
   let remaining = results;
@@ -33,5 +29,5 @@ export function coalesce(results: MapperResult[]): string[] {
 }
 
 export function sitation(casebody: string): string[] {
-  return coalesce(tokenize(casebody));
+  return coalesce(rootMapper(casebody));
 }
