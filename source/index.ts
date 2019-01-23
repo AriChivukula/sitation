@@ -12,7 +12,7 @@ export function sitation(casebody: string): string[] {
   return coalesce(tokenize(casebody));
 }
 
-function coalesce(segmented: Segmented): string[] {
+export function coalesce(segmented: Segmented): string[] {
   const citations: string[] = [];
   let remaining = segmented;
   while (remaining.segments.length > 0) {
