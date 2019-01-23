@@ -1,7 +1,6 @@
 import {
-  Segmented,
-  Token,
-} from "./token";
+  MapperParts,
+} from "./mappers";
 
 export class ReducerResult {
 
@@ -33,12 +32,12 @@ export class ReducerResult {
   }
 }
 
-export type reducer = (segmented: Segmented) => ReducerResult;
+export type reducer = (parts: MapperParts) => ReducerResult;
 
 export function parallelReducers(reducers: reducer[]): ReducerResult {
-  return (segmented: Segmented): ReducerResult => {
+  return (parts: MapperParts): ReducerResult => {
     for (let reducer of reducers) {
-      const result = reducer(segmented);
+      const result = reducer(parts);
       if (result.isNOOP()) {
         continue;
       }
@@ -49,8 +48,8 @@ export function parallelReducers(reducers: reducer[]): ReducerResult {
 }
 
 export function serialReducers(reducers: reducer[]): consumer {
-  return (segmented: Segmented): ReducerResult => {
-    let remaining = segmented;
+  return (parts: MapperParts): ReducerResult => {
+    let remaining = parts;
     let rollup = Consumed.noop();
     for (let reducer of reducers) {
       const result = reducer(remaining);
