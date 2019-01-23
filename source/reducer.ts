@@ -51,7 +51,7 @@ export function parallelReducers(reducers: reducer[]): reducer {
   }
 }
 
-export function serialReducers(reducers: reducer[]): reducer {
+export function joinReducer(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult => {
     let remaining = results;
     let rollup = ReducerResult.noop();
