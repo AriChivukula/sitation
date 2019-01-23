@@ -1,5 +1,5 @@
 import {
-  MapperParts,
+  MapperResult,
 } from "./mapper";
 
 export class ReducerResult {
@@ -32,12 +32,12 @@ export class ReducerResult {
   }
 }
 
-export type reducer = (parts: MapperParts) => ReducerResult;
+export type reducer = (results: MapperResult[]) => ReducerResult;
 
 export function parallelReducers(reducers: reducer[]): reducer {
-  return (parts: MapperParts): ReducerResult => {
+  return (results: MapperResult[]): ReducerResult => {
     for (let reducer of reducers) {
-      const result = reducer(parts);
+      const result = reducer(results);
       if (result.isNOOP()) {
         continue;
       }
@@ -48,8 +48,8 @@ export function parallelReducers(reducers: reducer[]): reducer {
 }
 
 export function serialReducers(reducers: reducer[]): reducer {
-  return (parts: MapperParts): ReducerResult => {
-    let remaining = parts;
+  return (results: MapperResult[]): ReducerResult => {
+    let remaining = results;
     let rollup = ReducerResult.noop();
     for (let reducer of reducers) {
       const result = reducer(remaining);
