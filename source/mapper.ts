@@ -28,8 +28,8 @@ export type mapper = (token: string) => MapperResult[];
 
 export function matchFirst(mappers: mapper[]): mapper {
   return (token: string): MapperResult[] => {
-    for (let mapper of mappers) {
-      const result = mapper(token);
+    for (let mapperFN of mappers) {
+      const result = mapperFN(token);
       if (result.length !== 0) {
         return result;
       }
