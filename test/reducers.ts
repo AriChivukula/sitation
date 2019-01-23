@@ -24,10 +24,12 @@ describe(
         expected: "1:Id",
       },
     ].forEach((test) => {
-      it(test.results.join(","), () => {
-        // @ts-ignore
-        chai.expect(idCite(test.results).toString()).to.equal(test.expected);
-      });
+      it(
+        test.results.join(","),
+        () => {
+          chai.expect(idCite(test.results).toString()).to.equal(test.expected);
+        },
+      );
     });
   },
 );
@@ -45,10 +47,12 @@ describe(
         expected: "3:379 U.S. 241",
       },
     ].forEach((test) => {
-      it(test.results.join(","), () => {
-        // @ts-ignore
-        chai.expect(fullCite(test.results).toString()).to.equal(test.expected);
-      });
+      it(
+        test.results.join(","),
+        () => {
+          chai.expect(fullCite(test.results).toString()).to.equal(test.expected);
+        },
+      );
     });
   },
 );
