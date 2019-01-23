@@ -14,7 +14,7 @@ import {
 } from "./mapper";
 
 export function tokenize(casebody: string): MapperParts {
-  const parts: MapperParts[] = [];
+  const parts: MapperPart[] = [];
   for (let reporter_split_token of casebody.split(Expressions.reporter())) {
     const lower_split_token = reporter_split_token.toLowerCase();
     if (ReportersDB.editions().hasOwnProperty(lower_split_token)) {
