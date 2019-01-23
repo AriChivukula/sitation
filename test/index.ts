@@ -63,7 +63,7 @@ describe(
     ].forEach((test) => {
       it(test.results.join(","), () => {
         // @ts-ignore
-        chai.expect(coalesce(test.parts)).to.deep.equal(test.expected);
+        chai.expect(coalesce(test.results)).to.deep.equal(test.expected);
       });
     });
   },
