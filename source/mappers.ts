@@ -40,7 +40,10 @@ export function idMatch(token: string): MapperResult[] {
 }
 
 export function noopMatch(token: string): MapperResult[] {
-  return [new MapperResult(token, token, MapperType.NOOP)];
+  if (token !== "") {
+    return [new MapperResult(token, token, MapperType.NOOP)];
+  }
+  return [];
 }
 
 export const rootMapper = splitMapper(
