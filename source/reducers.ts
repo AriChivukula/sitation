@@ -38,11 +38,7 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
   )];
 }
 
-export const rootReducer = consumeAll(consumeEach([
-  consumeFirst([
-    idConsume,
-  ]),
-  consumeFirst([
-    fullConsume,
-  ]),
+export const rootReducer = consumeAll(consumeFirst([
+  idConsume,
+  fullConsume,
 ]));
