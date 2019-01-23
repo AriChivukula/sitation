@@ -30,7 +30,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(editionMatch(test.results).join(",")).to.equal(test.expected);
+          chai.expect(editionMatch(test.token).join(",")).to.equal(test.expected);
         },
       );
     });
@@ -53,7 +53,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(variationMatch(test.results).join(",")).to.equal(test.expected);
+          chai.expect(variationMatch(test.token).join(",")).to.equal(test.expected);
         },
       );
     });
@@ -76,7 +76,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(numberMatch(test.results).join(",")).to.equal(test.expected);
+          chai.expect(numberMatch(test.token).join(",")).to.equal(test.expected);
         },
       );
     });
@@ -99,7 +99,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(idMatch(test.results).join(",")).to.equal(test.expected);
+          chai.expect(idMatch(test.token).join(",")).to.equal(test.expected);
         },
       );
     });
@@ -122,7 +122,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(noopMatch(test.results).join(",")).to.equal(test.expected);
+          chai.expect(noopMatch(test.token).join(",")).to.equal(test.expected);
         },
       );
     });
