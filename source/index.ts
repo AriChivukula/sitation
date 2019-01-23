@@ -14,7 +14,7 @@ import {
 } from "./mappers";
 
 export function tokenize(casebody: string): MapperParts {
-  return rootMapper(parts);
+  return rootMapper(casebody);
 }
 
 export function coalesce(parts: MapperParts): string[] {
