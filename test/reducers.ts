@@ -86,7 +86,7 @@ describe(
       it(
         test.results.join(","),
         () => {
-          chai.expect(coalesce(test.results).join(",")).to.equal(test.expected);
+          chai.expect(rootReducer(test.results).join(",")).to.equal(test.expected);
         },
       );
     });
