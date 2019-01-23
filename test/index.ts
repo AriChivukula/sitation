@@ -3,46 +3,8 @@ import "mocha";
 import * as chai from "chai";
 
 import {
-  coalesce,
   sitation,
 } from "../source/index";
-import {
-  MapperResult,
-  MapperType,
-} from "../source/mapper";
-
-describe(
-  "coalesce()",
-  () => {
-    [
-      {
-        results: [],
-        expected: [],
-      },
-      {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: ["379 U.S. 241"],
-      },
-      {
-        results: [new MapperResult("Id", "Id", MapperType.ID), new MapperResult("0", "0", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: ["Id", "379 U.S. 241"],
-      },
-      {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: [],
-      },
-      {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("Id", "Id", MapperType.ID)],
-        expected: ["Id"],
-      },
-    ].forEach((test) => {
-      it(test.results.join(","), () => {
-        // @ts-ignore
-        chai.expect(coalesce(test.results)).to.deep.equal(test.expected);
-      });
-    });
-  },
-);
 
 describe(
   "sitation()",
