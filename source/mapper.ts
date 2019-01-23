@@ -26,7 +26,7 @@ export class MapperResult {
 
 export type mapper = (token: string) => MapperResult[];
 
-export function parallelMappers(mappers: mapper[]): mapper {
+export function matchFirst(mappers: mapper[]): mapper {
   return (token: string): MapperResult[] => {
     for (let mapper of mappers) {
       const result = mapper(token);
@@ -40,7 +40,7 @@ export function parallelMappers(mappers: mapper[]): mapper {
 
 export type splitter = (token: string) => string[];
 
-export function splitMapper(splitterFN: splitter, mapperFN: mapper): mapper {
+export function matchSplitter(splitterFN: splitter, mapperFN: mapper): mapper {
   return (token: string): MapperResult[] => {
     let results: MapperResult[] = [];
     for (let splitToken of splitterFN(token)) {
