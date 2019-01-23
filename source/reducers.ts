@@ -38,10 +38,10 @@ export function fullCite(resuts: MapperResult[]): ReducerResult {
 }
 
 export const rootReducer = parallelReducers([
-  serialReducers([
+  joinReducer([
     idCite,
   ]),
-  serialReducers([
+  joinReducer([
     fullCite,
   ]),
 ]);
