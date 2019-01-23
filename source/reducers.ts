@@ -4,36 +4,36 @@ import {
   serialReducers,
 } from "./reducer";
 import {
-  Segmented,
-  Token,
-} from "./token";
+  MapperParts,
+  MapperType,
+} from "./mapper";
 
-export function idCite(segmented: Segmented): ReducerResult {
-  if (segmented.segments.length < 1) {
+export function idCite(parts: MapperParts): ReducerResult {
+  if (parts.parts.length < 1) {
     return ReducerResult.noop();
   }
-  if (segmented.segments[0].token !== Token.ID) {
+  if (parts.parts[0].token !== MapperType.ID) {
     return ReducerResult.noop();
   }
-  return new ReducerResult(1, segmented.segments[0].corrected);
+  return new ReducerResult(1, parts.parts[0].corrected);
 }
 
-export function fullCite(segmented: Segmented): MapperResult {
-  if (segmented.segments.length < 3) {
+export function fullCite(parts: MapperParts): MapperResult {
+  if (parts.parts.length < 3) {
     return ReducerResult.noop();
   }
-  if (segmented.segments[0].token !== Token.NUMBER) {
+  if (parts.parts[0].token !== MapperType.NUMBER) {
     return ReducerResult.noop();
   }
-  if (segmented.segments[1].token !== Token.REPORTER) {
+  if (parts.parts[1].token !== MapperType.REPORTER) {
     return ReducerResult.noop();
   }
-  if (segmented.segments[2].token !== Token.NUMBER) {
+  if (parts.parts[2].token !== MapperType.NUMBER) {
     return ReducerResult.noop();
   }
   return new ReducerResult(
     3,
-    segmented.segments.slice(0, 3).map((segment) => segment.corrected).join(" "),
+    parts.parts.slice(0, 3).map((segment) => segment.corrected).join(" "),
   );
 }
 
