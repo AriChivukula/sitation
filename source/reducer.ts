@@ -86,12 +86,14 @@ export function consumeMerge(reducers: reducer[]): reducer {
     let rollup = ReducerResult.noop();
     for (let reducerFN of reducers) {
       const result = reducerFN(results);
+      console.log("MERGE: " + result.join("\n"))
       if (result.length === 0) {
         return [];
       }
       for (let r of result) {
         rollup = rollup.merge(r);
       }
+      console.log("INTO: " + rollup)
     }
     return [rollup];
   }
