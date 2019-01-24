@@ -19,6 +19,13 @@ export function reporterMatch(token: string): MapperResult[] {
   return [];
 }
 
+export function signalMatch(token: string): MapperResult[] {
+  if (DB.signals().hasOwnProperty(token.toLowerCase())) {
+    return [MapperResult.signal(token, DB.signals()[token.toLowerCase()])];
+  }
+  return [];
+}
+
 export function numberMatch(token: string): MapperResult[] {
   if (token !== "" && !isNaN(Number(token))) {
     return [MapperResult.number(token)];
@@ -45,11 +52,17 @@ export const rootMapper = matchSplit(
   matchFirst([
     reporterMatch,
     matchSplit(
-      (token: string) => token.split(Expressions.spacing()),
+      (token: string) => token.split(Expressions.signals()),
       matchFirst([
-        numberMatch,
-        idMatch,
-        noopMatch,
+        signalMatch,
+        matchSplit(
+          (token: string) => token.split(Expressions.spacing()),
+          matchFirst([
+            numberMatch,
+            idMatch,
+            noopMatch,
+          ]),
+        ),
       ]),
     ),
   ]),
