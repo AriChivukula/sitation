@@ -4,7 +4,6 @@ import * as chai from "chai";
 
 import {
   MapperResult,
-  MapperType,
 } from "../source/mapper";
 import {
   idConsume,
@@ -21,7 +20,7 @@ describe(
         expected: "",
       },
       {
-        results: [new MapperResult("Id", "id", MapperType.ID)],
+        results: [MapperResult.id("id")],
         expected: "1:Id",
       },
     ].forEach((test) => {
@@ -44,7 +43,7 @@ describe(
         expected: "",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "3:379 U.S. 241",
       },
     ].forEach((test) => {
@@ -67,19 +66,19 @@ describe(
         expected: "",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "3:379 U.S. 241",
       },
       {
-        results: [new MapperResult("Id", "Id", MapperType.ID), new MapperResult("0", "0", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
+        results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "1:Id,3:379 U.S. 241",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
+        results: [MapperResult.number("379"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("Id", "Id", MapperType.ID)],
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id")],
         expected: "1:Id",
       },
     ].forEach((test) => {
