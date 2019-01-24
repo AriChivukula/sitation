@@ -141,7 +141,7 @@ describe(
         expected: "4,See also,379,U.S.,241,," + ReducerType.FULL,
       },
       {
-        results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
+        results: [MapperResult.id("id"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "1,,0,,0,," + ReducerType.ID + "\n3,,379,U.S.,241,," + ReducerType.FULL,
       },
       {
@@ -150,7 +150,7 @@ describe(
       },
       {
         results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id"), MapperResult.range("419-20")],
-        expected: "1,,0,,0,419-20," + ReducerType.ID,
+        expected: "2,,0,,0,419-20," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
