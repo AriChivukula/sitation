@@ -32,7 +32,7 @@ export class ReducerResult {
     return new ReducerResult(3, "", volume, reporter, page, ReducerType.FULL);
   }
   
-  public static full(signal: string) {
+  public static signal(signal: string) {
     return new ReducerResult(1, signal, 0, "", 0, ReducerType.SIGNAL);
   }
 }
