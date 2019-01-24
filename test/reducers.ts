@@ -11,6 +11,8 @@ import {
 import {
   idConsume,
   fullConsume,
+  noopConsume,
+  signalConsume,
   rootReducer,
 } from "../source/reducers";
 
@@ -72,7 +74,7 @@ describe(
       it(
         test.results.join(","),
         () => {
-          chai.expect(fullConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(noopConsume(test.results).join(",")).to.equal(test.expected);
         },
       );
     });
@@ -95,7 +97,7 @@ describe(
       it(
         test.results.join(","),
         () => {
-          chai.expect(fullConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(signalConsume(test.results).join(",")).to.equal(test.expected);
         },
       );
     });
