@@ -34,7 +34,7 @@ export class ReducerResult {
       this.volume === 0 ? input.volume : this.volume,
       this.reporter === "" ? input.reporter : this.reporter,
       this.page === 0 ? input.page : this.page,
-      this.pinpoints.concat(input.pinpoints)
+      this.pinpoints.concat(input.pinpoints),
       ReducerResult.resolveType(this.type, input.type),
     );
   }
@@ -47,6 +47,9 @@ export class ReducerResult {
       return a;
     }
     if (a === ReducerType.SIGNAL && b === ReducerType.FULL) {
+      return ReducerType.FULL;
+    }
+    if (a === ReducerType.FULL && b === ReducerType.PINPOINT) {
       return ReducerType.FULL;
     }
     throw new Error("Unreachable");
