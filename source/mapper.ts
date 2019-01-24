@@ -36,7 +36,7 @@ export class MapperResult {
   }
 
   public static reporter(original: string, corrected: string) {
-    return new MapperResult(original, corrected, MapperType.NUMBER);
+    return new MapperResult(original, corrected, MapperType.REPORTER);
   }
 }
 
