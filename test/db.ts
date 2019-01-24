@@ -13,16 +13,16 @@ describe(
       "reporters",
       async (): Promise<void> => {
         chai.expect(Object.keys(DB.reporters()).length).to.equal(1515);
-        chai.expect(Object.keys(DB.reporters())[0]).to.equal("a. 2d");
+        chai.expect(Object.keys(DB.reporters())[0]).to.equal("a.");
         chai.expect(Object.values(DB.reporters())[0]).to.equal("A.2d");
       },
     );
     it(
       "signals",
       async (): Promise<void> => {
-        chai.expect(Object.keys(DB.signals()).length).to.equal(0);
-        chai.expect(Object.keys(DB.signals())[0]).to.equal("a.");
-        chai.expect(Object.values(DB.signals())[0]).to.equal("A.");
+        chai.expect(Object.keys(DB.signals()).length).to.equal(11);
+        chai.expect(Object.keys(DB.signals())[0]).to.equal("and");
+        chai.expect(Object.values(DB.signals())[0]).to.equal("and");
       },
     );
   },
