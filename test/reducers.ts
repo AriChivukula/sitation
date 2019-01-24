@@ -118,7 +118,7 @@ describe(
       },
       {
         results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "1,,0,,0," + ReducerType.ID + "\n3,379,U.S.,241," + ReducerType.FULL,
+        expected: "1,,0,,0," + ReducerType.ID + "\n3,,379,U.S.,241," + ReducerType.FULL,
       },
       {
         results: [MapperResult.number("379"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
