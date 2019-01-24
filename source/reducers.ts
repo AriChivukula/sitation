@@ -63,7 +63,7 @@ export function pinpointConsume(results: MapperResult[]): ReducerResult[] {
     if (results[i].type === MapperType.RANGE) {
       rollup.push(ReducerResult.pinpoint(results[i].corrected));
     } else if (results[i].type === MapperType.NUMBER) {
-      if (i + 1 < results.length) {
+      if (i + 1 >= results.length) {
         rollup.push(ReducerResult.pinpoint(results[i].corrected));
       } else if (results[i + 1].type !== MapperType.REPORTER) {
         rollup.push(ReducerResult.pinpoint(results[i].corrected));
