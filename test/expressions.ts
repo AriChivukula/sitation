@@ -4,7 +4,7 @@ import * as chai from "chai";
 
 import {
   Expressions,
-} from "../source/data";
+} from "../source/expressions";
 
 describe(
   "Expressions",
