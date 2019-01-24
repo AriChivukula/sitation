@@ -2,7 +2,7 @@ import "@babel/polyfill";
 
 import {
   Expressions,
-  ReportersDB,
+  DB,
 } from "./data";
 import {
   MapperResult,
@@ -11,15 +11,15 @@ import {
 } from "./mapper";
 
 export function editionMatch(token: string): MapperResult[] {
-  if (ReportersDB.editions().hasOwnProperty(token.toLowerCase())) {
-    return [MapperResult.reporter(token, ReportersDB.editions()[token.toLowerCase()])];
+  if (DB.editions().hasOwnProperty(token.toLowerCase())) {
+    return [MapperResult.reporter(token, DB.editions()[token.toLowerCase()])];
   }
   return [];
 }
 
 export function variationMatch(token: string): MapperResult[] {
-  if (ReportersDB.variations().hasOwnProperty(token.toLowerCase())) {
-    return [MapperResult.reporter(token, ReportersDB.variations()[token.toLowerCase()])];
+  if (DB.variations().hasOwnProperty(token.toLowerCase())) {
+    return [MapperResult.reporter(token, DB.variations()[token.toLowerCase()])];
   }
   return [];
 }
