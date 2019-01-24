@@ -80,7 +80,7 @@ export abstract class Expressions {
   }
 
   @MemoizeAll
-  public static range(): RegExp {
+  public static pinpoint(): RegExp {
     return /[0-9\-]+/;
   }
 }
