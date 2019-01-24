@@ -18,9 +18,11 @@ export type Reporters = {
   [k: string]: Reporter[],
 };
 
-export type Editions = { [k: string]: string };
+export type Editions = { [k: string]: reporter };
 
-export type Variations = { [k: string]: string };
+export type Variations = { [k: string]: reporter };
+
+export type reporter = string;
 
 export abstract class ReportersDB {
 
@@ -35,7 +37,7 @@ export abstract class ReportersDB {
     for (let reporterName in ReportersDB.reporters()) {
       for (let reporter of ReportersDB.reporters()[reporterName]) {
         for (let edition in reporter.editions) {
-          result[edition.toLowerCase()] = edition;
+          result[edition.toLowerCase()] = edition as reporter;
         }
       }
     }
@@ -48,7 +50,7 @@ export abstract class ReportersDB {
     for (let reporterName in ReportersDB.reporters()) {
       for (let reporter of ReportersDB.reporters()[reporterName]) {
         for (let variation in reporter.variations) {
-          result[variation.toLowerCase()] = reporter.variations[variation];
+          result[variation.toLowerCase()] = reporter.variations[variation] as reporter;
         }
       }
     }
