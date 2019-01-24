@@ -92,7 +92,7 @@ describe(
       },
       {
         results: [MapperResult.range("419-20"), MapperResult.number("0")],
-        expected: "2,,0,,0,419-20;0," + ReducerType.PINPOINT,
+        expected: "1,,0,,0,419-20," + ReducerType.PINPOINT + "\n1,,0,,0,0," + ReducerType.PINPOINT,
       },
     ].forEach((test) => {
       it(
