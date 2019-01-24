@@ -20,9 +20,7 @@ export function reporterMatch(token: string): MapperResult[] {
 }
 
 export function signalMatch(token: string): MapperResult[] {
-  console.log("Possible Token: " + token);
   if (DB.signals().hasOwnProperty(token.toLowerCase())) {
-    console.log("Actual Token: " + token);
     return [MapperResult.signal(token, DB.signals()[token.toLowerCase()])];
   }
   return [];
