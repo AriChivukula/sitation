@@ -78,7 +78,7 @@ describe(
         expected: "",
       },
       {
-        results: [MapperResult.number("379"), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), MapperResult.id("id")],
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id")],
         expected: "1:Id",
       },
     ].forEach((test) => {
