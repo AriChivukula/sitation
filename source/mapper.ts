@@ -12,15 +12,31 @@ export enum MapperType {
 
 export class MapperResult {
 
-  constructor(
-    readonly corrected: string,
+  private constructor(
     readonly original: string,
+    readonly corrected: string,
     readonly type: MapperType,
   ) {
   }
 
   public toString(): string {
-    return this.corrected + ":" + this.original + ":" + this.type;
+    return this.original + ":" + this.corrected + ":" + this.type;
+  }
+
+  public static id(original: string) {
+    return new MapperResult(original, "Id", MapperType.ID);
+  }
+  
+  public static noop(original: string) {
+    return new MapperResult(original, original, MapperType.NOOP);
+  }
+  
+  public static number(original: string) {
+    return new MapperResult(original, original, MapperType.NUMBER);
+  }
+
+  public static reporter(original: string, corrected: string) {
+    return new MapperResult(original, corrected, MapperType.NUMBER);
   }
 }
 
