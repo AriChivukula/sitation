@@ -2,23 +2,32 @@ import {
   MapperResult,
 } from "./mapper";
 
+export enum ReducerType {
+  ID, // Id
+  FULL, // Volume Reporter Page
+}
+
 export class ReducerResult {
 
-  constructor(
+  private constructor(
     readonly consumed: number,
-    readonly content: string,
+    readonly volume: number,
+    readonly reporter: string,
+    readonly page: number,
+    readonly type: ReducerType,
   ) {
   }
-  
-  public merge(result: ReducerResult): ReducerResult {
-    return new ReducerResult(
-      this.consumed + result.consumed,
-      this.content + " " + result.content,
-    );
+
+  public toString(): string {
+    return this.consumed + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
+  }
+
+  public static id() {
+    return new ReducerResult(1, 0, "", 0, ReducerType.ID);
   }
   
-  public toString(): string {
-    return this.consumed + ":" + this.content;
+  public static full(volume: number, reporter: string, page: number) {
+    return new ReducerResult(3, volume, reporter, page, ReducerType.FULL);
   }
 }
 
