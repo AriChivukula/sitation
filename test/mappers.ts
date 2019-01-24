@@ -47,7 +47,7 @@ describe(
       },
       {
         token: "U. s.",
-        expected: "U.S.:U. s.:" + MapperType.REPORTER,
+        expected: "U. s.:U.S.:" + MapperType.REPORTER,
       },
     ].forEach((test) => {
       it(
@@ -93,7 +93,7 @@ describe(
       },
       {
         token: "id",
-        expected: "Id:id:" + MapperType.ID,
+        expected: "id:Id:" + MapperType.ID,
       },
     ].forEach((test) => {
       it(
@@ -139,11 +139,11 @@ describe(
       },
       {
         casebody: "379 u. S. 241",
-        expected: "379:379:" + MapperType.NUMBER + ",U.S.:u. S.:" + MapperType.REPORTER + ",241:241:" + MapperType.NUMBER,
+        expected: "379:379:" + MapperType.NUMBER + ",u .S.:U.S.:" + MapperType.REPORTER + ",241:241:" + MapperType.NUMBER,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",
-        expected: "In:In:" + MapperType.NOOP + ",Evans:Evans:" + MapperType.NOOP + ",Va.:v.:" + MapperType.REPORTER + ",Laurel:Laurel:" + MapperType.NOOP + ",Links:Links:" + MapperType.NOOP + ",Inc:Inc:" + MapperType.NOOP + ",Id:id:" + MapperType.ID,
+        expected: "In:In:" + MapperType.NOOP + ",Evans:Evans:" + MapperType.NOOP + ",v.:Va.:" + MapperType.REPORTER + ",Laurel:Laurel:" + MapperType.NOOP + ",Links:Links:" + MapperType.NOOP + ",Inc:Inc:" + MapperType.NOOP + ",id:Id:" + MapperType.ID,
       },
     ].forEach((test) => {
       it(
