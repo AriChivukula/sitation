@@ -44,7 +44,7 @@ export class MapperResult {
   public static reporter(original: string, corrected: string) {
     return new MapperResult(original, corrected, MapperType.REPORTER);
   }
-  
+
   public static signal(original: string, corrected: string) {
     return new MapperResult(original, corrected, MapperType.SIGNAL);
   }
