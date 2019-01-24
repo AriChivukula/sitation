@@ -5,6 +5,7 @@ import {
 export enum ReducerType {
   ID, // Id
   FULL, // Volume Reporter Page
+  NOOP, // `empty`
   SIGNAL, // See also
 }
 
@@ -30,6 +31,10 @@ export class ReducerResult {
   
   public static full(volume: number, reporter: string, page: number) {
     return new ReducerResult(3, "", volume, reporter, page, ReducerType.FULL);
+  }
+
+  public static noop() {
+    return new ReducerResult(0, "", 0, "", 0, ReducerType.NOOP);
   }
   
   public static signal(signal: string) {
