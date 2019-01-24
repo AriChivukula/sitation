@@ -57,16 +57,16 @@ export function signalConsume(results: MapperResult[]): ReducerResult[] {
 export function noopConsume(resuts: MapperResult[]): ReducerResult[] {
   return [ReducerResult.noop(0)];
 }
-export function pinpointConsume(resuts: MapperResult[]): ReducerResult[] {
+export function pinpointConsume(results: MapperResult[]): ReducerResult[] {
   const rollup: ReducerResult[] = [];
   for (let i = 0; i < results.length; i++) {
     if (results[i].type === MapperType.RANGE) {
-      rollup.push(ReducerResult.range(results[i].corrected));
+      rollup.push(ReducerResult.pinpoint(results[i].corrected));
     } else if (results[i].type === MapperType.NUMBER) {
       if (i + 1 < results.length) {
-        rollup.push(ReducerResult.range(results[i].corrected));
+        rollup.push(ReducerResult.pinpoint(results[i].corrected));
       } else if (results[i + 1].type !== MapperType.REPORTER) {
-        rollup.push(ReducerResult.range(results[i].corrected));
+        rollup.push(ReducerResult.pinpoint(results[i].corrected));
       } else {
         break;
       }
