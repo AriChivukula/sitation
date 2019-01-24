@@ -9,10 +9,34 @@ import {
   idMatch,
   noopMatch,
   numberMatch,
+  rangeMatch,
   reporterMatch,
   rootMapper,
   signalMatch,
 } from "../source/mappers";
+
+describe(
+  "rangeMatch()",
+  () => {
+    [
+      {
+        token: "",
+        expected: "",
+      },
+      {
+        token: "419-21,",
+        expected: "419-21\,,419-21\,," + MapperType.RANGE,
+      },
+    ].forEach((test) => {
+      it(
+        test.token,
+        () => {
+          chai.expect(rangeMatch(test.token).join("\n")).to.equal(test.expected);
+        },
+      );
+    });
+  },
+);
 
 describe(
   "reporterMatch()",
