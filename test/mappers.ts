@@ -6,11 +6,12 @@ import {
   MapperType,
 } from "../source/mapper";
 import {
-  reporterMatch,
-  numberMatch,
   idMatch,
   noopMatch,
+  numberMatch,
+  reporterMatch,
   rootMapper,
+  signalMatch,
 } from "../source/mappers";
 
 describe(
