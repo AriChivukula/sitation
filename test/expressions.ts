@@ -24,7 +24,7 @@ describe(
     it(
       "signal",
       async (): Promise<void> => {
-        chai.expect(Expressions.signal().toString().length).to.equal(84);
+        chai.expect(Expressions.signal().toString().length).to.equal(98);
       },
     );
     it(
