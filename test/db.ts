@@ -20,7 +20,7 @@ describe(
     it(
       "signals",
       async (): Promise<void> => {
-        chai.expect(Object.keys(DB.signals()).length).to.equal(12);
+        chai.expect(Object.keys(DB.signals()).length).to.equal(18);
         chai.expect(Object.keys(DB.signals())[0]).to.equal("and");
         chai.expect(Object.values(DB.signals())[0]).to.equal("and");
       },
