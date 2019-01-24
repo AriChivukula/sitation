@@ -56,7 +56,7 @@ export abstract class DB {
       "e.g.": "E.g.",
       "see": "See",
       "see also": "See also",
-      "see, e.g.,": "See, e.g.,",
+      "see, e.g.,": "See\, e.g.\,",
       "with": "with",
     };
   }
