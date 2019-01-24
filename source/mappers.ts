@@ -52,7 +52,7 @@ export const rootMapper = matchSplit(
   matchFirst([
     reporterMatch,
     matchSplit(
-      (token: string) => token.split(Expressions.signals()),
+      (token: string) => token.split(Expressions.signal()),
       matchFirst([
         signalMatch,
         matchSplit(
