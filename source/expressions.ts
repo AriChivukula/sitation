@@ -13,6 +13,11 @@ export abstract class Expressions {
     return /[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g;
   }
 
+  @MemoizeAll
+  public static range(): RegExp {
+    return /^[0-9\-,]$/;
+  }
+
   @MemoizeAll()
   public static reporter(): RegExp {
     const editionsAndVariations = Object.keys(DB.reporters());
