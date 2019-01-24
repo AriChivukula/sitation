@@ -26,7 +26,7 @@ export abstract class Expressions {
     const signals = Object.keys(DB.signals());
     signals.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace(Expressions.escape(), "\\$&");
-    return RegExp("\\s(" + signals.map(escape).join("|") + ")\\s", "i");
+    return RegExp("(" + signals.map(escape).join("|") + ")\\s", "i");
   }
 
   @MemoizeAll
