@@ -7,21 +7,42 @@ export enum MapperType {
   ID, // `Id` style citation
   NOOP, // Token used only to break up patterns
   NUMBER, // [0-9]+
-  REPORTER, // Can be found in `REPORTER_SET`
   RANGE, // e.g. 419-20
+  REPORTER, // e.g. U.S.
+  SIGNAL, // e.g. see also
 }
 
 export class MapperResult {
 
-  constructor(
-    readonly corrected: string,
+  private constructor(
     readonly original: string,
+    readonly corrected: string,
     readonly type: MapperType,
   ) {
   }
 
   public toString(): string {
-    return this.corrected + ":" + this.original + ":" + this.type;
+    return this.original + "," + this.corrected + "," + this.type;
+  }
+
+  public static id(original: string) {
+    return new MapperResult(original, "Id", MapperType.ID);
+  }
+  
+  public static noop(original: string) {
+    return new MapperResult(original, original, MapperType.NOOP);
+  }
+  
+  public static number(original: string) {
+    return new MapperResult(original, original, MapperType.NUMBER);
+  }
+
+  public static reporter(original: string, corrected: string) {
+    return new MapperResult(original, corrected, MapperType.REPORTER);
+  }
+  
+  public static signal(original: string, corrected: string) {
+    return new MapperResult(original, corrected, MapperType.SIGNAL);
   }
 }
 

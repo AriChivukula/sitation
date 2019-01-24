@@ -24,13 +24,13 @@ describe(
       },
       {
         token: "U.S.",
-        expected: "U.S.:U.S.:" + MapperType.REPORTER,
+        expected: "U.S.,U.S.," + MapperType.REPORTER,
       },
     ].forEach((test) => {
       it(
         test.token,
         () => {
-          chai.expect(editionMatch(test.token).join(",")).to.equal(test.expected);
+          chai.expect(editionMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -47,13 +47,13 @@ describe(
       },
       {
         token: "U. s.",
-        expected: "U.S.:U. s.:" + MapperType.REPORTER,
+        expected: "U. s.,U.S.," + MapperType.REPORTER,
       },
     ].forEach((test) => {
       it(
         test.token,
         () => {
-          chai.expect(variationMatch(test.token).join(",")).to.equal(test.expected);
+          chai.expect(variationMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -70,13 +70,13 @@ describe(
       },
       {
         token: "0",
-        expected: "0:0:" + MapperType.NUMBER,
+        expected: "0,0," + MapperType.NUMBER,
       },
     ].forEach((test) => {
       it(
         test.token,
         () => {
-          chai.expect(numberMatch(test.token).join(",")).to.equal(test.expected);
+          chai.expect(numberMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -93,13 +93,13 @@ describe(
       },
       {
         token: "id",
-        expected: "Id:id:" + MapperType.ID,
+        expected: "id,Id," + MapperType.ID,
       },
     ].forEach((test) => {
       it(
         test.token,
         () => {
-          chai.expect(idMatch(test.token).join(",")).to.equal(test.expected);
+          chai.expect(idMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -116,13 +116,13 @@ describe(
       },
       {
         token: "r",
-        expected: "r:r:" + MapperType.NOOP,
+        expected: "r,r," + MapperType.NOOP,
       },
     ].forEach((test) => {
       it(
         test.token,
         () => {
-          chai.expect(noopMatch(test.token).join(",")).to.equal(test.expected);
+          chai.expect(noopMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -139,17 +139,17 @@ describe(
       },
       {
         casebody: "379 u. S. 241",
-        expected: "379:379:" + MapperType.NUMBER + ",U.S.:u. S.:" + MapperType.REPORTER + ",241:241:" + MapperType.NUMBER,
+        expected: "379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",
-        expected: "In:In:" + MapperType.NOOP + ",Evans:Evans:" + MapperType.NOOP + ",Va.:v.:" + MapperType.REPORTER + ",Laurel:Laurel:" + MapperType.NOOP + ",Links:Links:" + MapperType.NOOP + ",Inc:Inc:" + MapperType.NOOP + ",Id:id:" + MapperType.ID,
+        expected: "In,In," + MapperType.NOOP + "\nEvans,Evans," + MapperType.NOOP + "\nv.,Va.," + MapperType.REPORTER + "\nLaurel,Laurel," + MapperType.NOOP + "\nLinks,Links," + MapperType.NOOP + "\nInc,Inc," + MapperType.NOOP + "\nid,Id," + MapperType.ID,
       },
     ].forEach((test) => {
       it(
         test.casebody,
         () => {
-          chai.expect(rootMapper(test.casebody).join(",")).to.equal(test.expected);
+          chai.expect(rootMapper(test.casebody).join("\n")).to.equal(test.expected);
         },
       );
     });

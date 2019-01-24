@@ -4,8 +4,10 @@ import * as chai from "chai";
 
 import {
   MapperResult,
-  MapperType,
 } from "../source/mapper";
+import {
+  ReducerType,
+} from "../source/reducer";
 import {
   idConsume,
   fullConsume,
@@ -21,8 +23,8 @@ describe(
         expected: "",
       },
       {
-        results: [new MapperResult("Id", "id", MapperType.ID)],
-        expected: "1:Id",
+        results: [MapperResult.id("id")],
+        expected: "1,0,,0," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
@@ -44,8 +46,8 @@ describe(
         expected: "",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: "3:379 U.S. 241",
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
+        expected: "3,379,U.S.,241," + ReducerType.FULL,
       },
     ].forEach((test) => {
       it(
@@ -67,26 +69,26 @@ describe(
         expected: "",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: "3:379 U.S. 241",
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
+        expected: "3,379,U.S.,241," + ReducerType.FULL,
       },
       {
-        results: [new MapperResult("Id", "Id", MapperType.ID), new MapperResult("0", "0", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
-        expected: "1:Id,3:379 U.S. 241",
+        results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
+        expected: "1,0,,0," + ReducerType.ID + "\n3,379,U.S.,241," + ReducerType.FULL,
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("241", "241", MapperType.NUMBER)],
+        results: [MapperResult.number("379"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "",
       },
       {
-        results: [new MapperResult("379", "379", MapperType.NUMBER), new MapperResult("U.S.", "U.S.", MapperType.REPORTER), new MapperResult("Id", "Id", MapperType.ID)],
-        expected: "1:Id",
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id")],
+        expected: "1,0,,0," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
-        test.results.join(","),
+        test.results.join("\n"),
         () => {
-          chai.expect(rootReducer(test.results).join(",")).to.equal(test.expected);
+          chai.expect(rootReducer(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
