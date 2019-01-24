@@ -33,7 +33,7 @@ describe(
       it(
         test.results.join("\n"),
         () => {
-          chai.expect(idConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(idConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -56,7 +56,7 @@ describe(
       it(
         test.results.join("\n"),
         () => {
-          chai.expect(fullConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(fullConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -75,7 +75,7 @@ describe(
       it(
         test.results.join("\n"),
         () => {
-          chai.expect(noopConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(noopConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -98,7 +98,7 @@ describe(
       it(
         test.results.join("\n"),
         () => {
-          chai.expect(pinpointConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(pinpointConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -121,7 +121,7 @@ describe(
       it(
         test.results.join("\n"),
         () => {
-          chai.expect(signalConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(signalConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
