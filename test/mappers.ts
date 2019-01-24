@@ -163,7 +163,7 @@ describe(
       },
       {
         casebody: "see also 379 u. S. 241 419-21,",
-        expected: "see also,See also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER + "\n419-21\,,419-21\,," + MapperType.RANGE,,
+        expected: "see also,See also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER + "\n419-21\,,419-21\,," + MapperType.RANGE,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",
