@@ -7,6 +7,8 @@ export enum ReducerType {
   FULL, // Volume Reporter Page
 }
 
+export type pinpoint = [number, number];
+
 export class ReducerResult {
 
   private constructor(
@@ -14,20 +16,21 @@ export class ReducerResult {
     readonly volume: number,
     readonly reporter: string,
     readonly page: number,
+    readonly pinpoints: pinpoint[],
     readonly type: ReducerType,
   ) {
   }
 
   public toString(): string {
-    return this.consumed + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
+    return this.consumed + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.pinpoints.map((pin) => pin[0] + "." + pin[1]).join("/") + "," + this.type;
   }
 
   public static id() {
-    return new ReducerResult(1, 0, "", 0, ReducerType.ID);
+    return new ReducerResult(1, 0, "", 0, [], ReducerType.ID);
   }
   
-  public static full(volume: number, reporter: string, page: number) {
-    return new ReducerResult(3, volume, reporter, page, ReducerType.FULL);
+  public static full(volume: number, reporter: string, page: number, pinpoints: pinpoint[]) {
+    return new ReducerResult(3, volume, reporter, page, pinpoints, ReducerType.FULL);
   }
 }
 
