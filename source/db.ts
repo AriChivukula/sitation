@@ -63,12 +63,6 @@ export abstract class DB {
       "see, eg,": "See, e.g.,",
       "see, e.g.,": "See, e.g.,",
       "see, e. g.,": "See, e.g.,",
-      "see eg,": "See, e.g.,",
-      "see e.g.,": "See, e.g.,",
-      "see e. g.,": "See, e.g.,",
-      "see eg": "See, e.g.,",
-      "see e.g.": "See, e.g.,",
-      "see e. g.": "See, e.g.,",
       "with": "with",
     };
   }
