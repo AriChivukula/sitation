@@ -15,7 +15,7 @@ export function idConsume(resuts: MapperResult[]): ReducerResult[] {
   if (resuts[0].type !== MapperType.ID) {
     return [];
   }
-  return [new ReducerResult(1, resuts[0].corrected)];
+  return [ReducerResult.id()];
 }
 
 export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
@@ -31,10 +31,7 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
   if (resuts[2].type !== MapperType.NUMBER) {
     return [];
   }
-  return [new ReducerResult(
-    3,
-    resuts.slice(0, 3).map((segment) => segment.corrected).join(" "),
-  )];
+  return [ReducerResult.full(Number(resuts[0].corrected), resuts[1].corrected, Number(resuts[2].corrected)))];
 }
 
 export const rootReducer = consumeLoop(consumeFirst([
