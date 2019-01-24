@@ -22,6 +22,8 @@ export type Editions = { [k: string]: string };
 
 export type Variations = { [k: string]: string };
 
+export type Signals = { [k: string]: string };
+
 export abstract class ReportersDB {
 
   @MemoizeAll()
@@ -52,6 +54,12 @@ export abstract class ReportersDB {
         }
       }
     }
+    return result;
+  }
+  
+  @MemoizeAll()
+  public static signals(): Signals {
+    let result: Signals = {};
     return result;
   }
 }

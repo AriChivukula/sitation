@@ -13,6 +13,7 @@ export class ReducerResult {
 
   private constructor(
     readonly consumed: number,
+    readonly signal: string,
     readonly volume: number,
     readonly reporter: string,
     readonly page: number,
@@ -26,11 +27,11 @@ export class ReducerResult {
   }
 
   public static id() {
-    return new ReducerResult(1, 0, "", 0, [], ReducerType.ID);
+    return new ReducerResult(1, "", 0, "", 0, [], ReducerType.ID);
   }
-  
-  public static full(volume: number, reporter: string, page: number, pinpoints: pinpoint[]) {
-    return new ReducerResult(3, volume, reporter, page, pinpoints, ReducerType.FULL);
+
+  public static full(signal: string, volume: number, reporter: string, page: number, pinpoints: pinpoint[]) {
+    return new ReducerResult(3, signal, volume, reporter, page, pinpoints, ReducerType.FULL);
   }
 }
 
