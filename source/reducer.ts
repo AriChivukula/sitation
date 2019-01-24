@@ -84,16 +84,16 @@ export function consumeFirst(reducers: reducer[]): reducer {
 export function consumeMerge(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult[] => {
     let rollup = ReducerResult.noop();
+    let remaining = results;
     for (let reducerFN of reducers) {
-      const result = reducerFN(results);
-      console.log("MERGE: " + result.join("\n"))
+      const result = reducerFN(remaining);
       if (result.length === 0) {
         return [];
       }
       for (let r of result) {
         rollup = rollup.merge(r);
       }
-      console.log("INTO: " + rollup)
+      remaining = results.slice(rollup.consumed);
     }
     return [rollup];
   }
