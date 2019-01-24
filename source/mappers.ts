@@ -40,7 +40,7 @@ export function idMatch(token: string): MapperResult[] {
 
 export function noopMatch(token: string): MapperResult[] {
   if (token !== "") {
-    return [new MapperResult(token, token, MapperType.NOOP)];
+    return [MapperResult.noop(token)];
   }
   return [];
 }
