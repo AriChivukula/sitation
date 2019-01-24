@@ -46,7 +46,7 @@ export function signalConsume(resuts: MapperResult[]): ReducerResult[] {
 }
 
 export function noopConsume(resuts: MapperResult[]): ReducerResult[] {
-  return [ReducerResult.noop()];
+  return [ReducerResult.noop(0)];
 }
 
 export const rootReducer = consumeLoop(consumeFirst([
