@@ -83,7 +83,7 @@ export function consumeFirst(reducers: reducer[]): reducer {
 
 export function consumeMerge(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult[] => {
-    let rollup = ReducerResult.noop();
+    let rollup = ReducerResult.noop(0);
     let remaining = results;
     for (let reducerFN of reducers) {
       const result = reducerFN(remaining);
