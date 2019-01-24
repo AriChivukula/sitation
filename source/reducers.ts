@@ -36,13 +36,22 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
 }
 
 export function signalConsume(resuts: MapperResult[]): ReducerResult[] {
+  const results: ReducerResult[] = [];
   if (resuts.length < 1) {
-    return [];
+    return results;
   }
   if (resuts[0].type !== MapperType.SIGNAL) {
-    return [];
+    return results;
   }
-  return [ReducerResult.signal(resuts[0].corrected)];
+  results.push(ReducerResult.signal(resuts[0].corrected));
+  for (let i = 1; i < results.length; i++) {
+    if (resuts[i].type === MapperType.NOOP) {
+      results.push(ReducerResult.noop(1));
+    } else {
+      break;
+    }
+  }
+  return results;
 }
 
 export function noopConsume(resuts: MapperResult[]): ReducerResult[] {
