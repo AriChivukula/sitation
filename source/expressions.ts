@@ -15,7 +15,7 @@ export abstract class Expressions {
 
   @MemoizeAll
   public static range(): RegExp {
-    return /^[0-9\-,]$/;
+    return /^[0-9\-,]*$/;
   }
 
   @MemoizeAll()
