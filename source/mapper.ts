@@ -8,6 +8,7 @@ export enum MapperType {
   NOOP, // Token used only to break up patterns
   NUMBER, // [0-9]+
   REPORTER, // Can be found in `REPORTER_SET`
+  RANGE, // e.g. 419-20
 }
 
 export class MapperResult {
