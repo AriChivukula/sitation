@@ -37,6 +37,29 @@ describe(
 );
 
 describe(
+  "signalMatch()",
+  () => {
+    [
+      {
+        token: "",
+        expected: "",
+      },
+      {
+        token: "see also",
+        expected: "see also,See also," + MapperType.SIGNAL,
+      },
+    ].forEach((test) => {
+      it(
+        test.token,
+        () => {
+          chai.expect(signalMatch(test.token).join("\n")).to.equal(test.expected);
+        },
+      );
+    });
+  },
+);
+
+describe(
   "numberMatch()",
   () => {
     [
