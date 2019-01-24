@@ -114,8 +114,8 @@ describe(
         expected: "",
       },
       {
-        results: [MapperResult.signal("see also", "See also"), MapperResult.noop("v")],
-        expected: "2,See also,0,,0,," + ReducerType.SIGNAL,
+        results: [MapperResult.signal("see also", "See also")],
+        expected: "1,See also,0,,0,," + ReducerType.SIGNAL,
       },
     ].forEach((test) => {
       it(
