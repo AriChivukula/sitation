@@ -19,7 +19,7 @@ export class ReducerResult {
   }
 
   public toString(): string {
-    return this.consumed + ":" + this.volume + ":" + this.reporter + ":" + this.page + ":" + this.type;
+    return this.consumed + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
   }
 
   public static id() {
