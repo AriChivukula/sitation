@@ -24,7 +24,7 @@ export type Variations = { [k: string]: string };
 
 export type Signals = { [k: string]: string };
 
-export abstract class ReportersDB {
+export abstract class DB {
 
   @MemoizeAll()
   public static reporters(): Reporters {
@@ -68,10 +68,23 @@ export abstract class Expressions {
   
   @MemoizeAll()
   public static reporter(): RegExp {
-    const editionsAndVariations = Object.keys(Object.assign({}, ReportersDB.editions(), ReportersDB.variations()));
+    const editionsAndVariations = Object.keys(Object.assign({}, DB.editions(), DB.signals()));
     editionsAndVariations.sort((a, b) => b.length - a.length);
-    const escape = (s: string) => s.replace(/[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g, "\\$&");
+    const escape = (s: string) => s.replace(Expressions.escape(), "\\$&");
     return RegExp("\\s(" + editionsAndVariations.map(escape).join("|") + ")\\s", "i");
+  }
+  
+  @MemoizeAll()
+  public static signal(): RegExp {
+    const signals = Object.keys(DB.signals());
+    signals.sort((a, b) => b.length - a.length);
+    const escape = (s: string) => s.replace(Expressions.escape(), "\\$&");
+    return RegExp("\\s(" + signals.map(escape).join("|") + ")\\s", "i");
+  }
+
+  @MemoizeAll
+  public static escape(): RegExp {
+    return /[-[\]{}()*+!<=:?.\/\\^$|#\s,]/g;
   }
 
   @MemoizeAll
