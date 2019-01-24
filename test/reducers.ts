@@ -68,7 +68,7 @@ describe(
     [
       {
         results: [],
-        expected: "0,,,,," + ReducerType.NOOP,
+        expected: "0,,0,,0," + ReducerType.NOOP,
       },
     ].forEach((test) => {
       it(
@@ -91,7 +91,7 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also")],
-        expected: "0,See also,,,," + ReducerType.SIGNAL,
+        expected: "0,See also,0,,0," + ReducerType.SIGNAL,
       },
     ].forEach((test) => {
       it(
