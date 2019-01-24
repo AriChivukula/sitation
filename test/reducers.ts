@@ -91,7 +91,7 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also")],
-        expected: "0,See also,0,,0," + ReducerType.SIGNAL,
+        expected: "1,See also,0,,0," + ReducerType.SIGNAL,
       },
     ].forEach((test) => {
       it(
@@ -114,7 +114,7 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "3,See also,379,U.S.,241," + ReducerType.FULL,
+        expected: "4,See also,379,U.S.,241," + ReducerType.FULL,
       },
       {
         results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
