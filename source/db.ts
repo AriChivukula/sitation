@@ -45,7 +45,18 @@ export abstract class DB {
   
   @MemoizeAll()
   public static signals(): Variations {
-    let result: Variations = {};
-    return result;
+    return {
+      "and": "and",
+      "accord": "Accord",
+      "but cf.": "But cf.",
+      "but see": "But see",
+      "cf.": "Cf.",
+      "compare": "Compare",
+      "contra": "Contra",
+      "e.g.": "E.g.",
+      "see": "See",
+      "see also": "See Also",
+      "with": "with",
+    };
   }
 }
