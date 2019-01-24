@@ -4,7 +4,7 @@ import * as chai from "chai";
 
 import {
   DB,
-} from "../source/data";
+} from "../source/db";
 
 describe(
   "DB",
