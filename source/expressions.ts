@@ -15,7 +15,7 @@ export abstract class Expressions {
 
   @MemoizeAll()
   public static reporter(): RegExp {
-    const editionsAndVariations = Object.keys(Object.assign({}, DB.editions(), DB.signals()));
+    const editionsAndVariations = Object.keys(DB.reporters());
     editionsAndVariations.sort((a, b) => b.length - a.length);
     const escape = (s: string) => s.replace(Expressions.escape(), "\\$&");
     return RegExp("\\s(" + editionsAndVariations.map(escape).join("|") + ")\\s", "i");
