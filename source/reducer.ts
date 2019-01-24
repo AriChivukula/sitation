@@ -28,10 +28,10 @@ export class ReducerResult {
   public merge(input: ReducerResult) {
     return new ReducerResult(
       this.consumed + input.consumed,
-      this.signal || input.signal,
-      this.volume || input.volume,
-      this.reporter || input.reporter,
-      this.page || input.page,
+      this.signal === "" ? input.signal : this.signal,
+      this.volume === 0 ? input.volume : this.volume,
+      this.reporter === "" ? input.reporter : this.reporter,
+      this.page === 0 ? input.page : this.page,
       ReducerResult.resolveType(this.type, input.type),
     );
   }
