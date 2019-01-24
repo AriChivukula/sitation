@@ -1,4 +1,7 @@
 import {
+  reporter,
+} from "./data";
+import {
   MapperResult,
 } from "./mapper";
 
@@ -12,7 +15,7 @@ export class ReducerResult {
   private constructor(
     readonly consumed: number,
     readonly volume: number,
-    readonly reporter: string,
+    readonly reporter: reporter,
     readonly page: number,
     readonly type: ReducerType,
   ) {
@@ -23,11 +26,11 @@ export class ReducerResult {
   }
 
   public static id() {
-    return new ReducerResult(1, 0, "", 0, ReducerType.ID);
+    return new ReducerResult(1, 0, "" as reporter, 0, ReducerType.ID);
   }
   
-  public static full(volume: number, reporter: string, page: number) {
-    return new ReducerResult(3, volume, reporter, page, ReducerType.FULL);
+  public static full(volume: number, rep: reporter, page: number) {
+    return new ReducerResult(3, volume, rep, page, ReducerType.FULL);
   }
 }
 
