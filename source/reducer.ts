@@ -49,8 +49,20 @@ export class ReducerResult {
     if (a === ReducerType.SIGNAL && b === ReducerType.FULL) {
       return ReducerType.FULL;
     }
+    if (a === ReducerType.SIGNAL && b === ReducerType.ID) {
+      return ReducerType.ID;
+    }
     if (a === ReducerType.FULL && b === ReducerType.PINPOINT) {
       return ReducerType.FULL;
+    }
+    if (a === ReducerType.FULL && b === ReducerType.NUMBER) {
+      return ReducerType.FULL;
+    }
+    if (a === ReducerType.ID && b === ReducerType.PINPOINT) {
+      return ReducerType.ID;
+    }
+    if (a === ReducerType.ID && b === ReducerType.NUMBER) {
+      return ReducerType.ID;
     }
     throw new Error("Unreachable");
   }
