@@ -24,7 +24,7 @@ export class ReducerResult {
   }
 
   public toString(): string {
-    return this.consumed + "," + this.signal + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.pinpoints.join(";") +  "," + this.type;
+    return this.consumed + "," + this.signal.replace(",", "\,") + "," + this.volume + "," + this.reporter.replace(",", "\,") + "," + this.page + "," + this.pinpoints.join(";").replace(",", "\,") +  "," + this.type;
   }
 
   public merge(input: ReducerResult) {
