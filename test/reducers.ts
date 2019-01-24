@@ -13,6 +13,7 @@ import {
   fullConsume,
   noopConsume,
   signalConsume,
+  pinpointConsume,
   rootReducer,
 } from "../source/reducers";
 
@@ -82,6 +83,29 @@ describe(
 );
 
 describe(
+  "pinpointConsume()",
+  () => {
+    [
+      {
+        results: [],
+        expected: "",
+      },
+      {
+        results: [MapperResult.range("419-20"), MapperResult.number("0")],
+        expected: "2,,0,,0,419-20;0," + ReducerType.PINPOINT,
+      },
+    ].forEach((test) => {
+      it(
+        test.results.join(","),
+        () => {
+          chai.expect(pinpointConsume(test.results).join(",")).to.equal(test.expected);
+        },
+      );
+    });
+  },
+);
+
+describe(
   "signalConsume()",
   () => {
     [
@@ -90,8 +114,8 @@ describe(
         expected: "",
       },
       {
-        results: [MapperResult.signal("see also", "See also")],
-        expected: "1,See also,0,,0,," + ReducerType.SIGNAL,
+        results: [MapperResult.signal("see also", "See also"), MapperResult.noop(1)],
+        expected: "2,See also,0,,0,," + ReducerType.SIGNAL,
       },
     ].forEach((test) => {
       it(
@@ -125,8 +149,8 @@ describe(
         expected: "",
       },
       {
-        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id")],
-        expected: "1,,0,,0,," + ReducerType.ID,
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id"), MapperResult.range("419-20")],
+        expected: "1,,0,,0,419-20," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
