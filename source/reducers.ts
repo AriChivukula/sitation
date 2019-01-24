@@ -57,14 +57,21 @@ export function signalConsume(results: MapperResult[]): ReducerResult[] {
 export function noopConsume(resuts: MapperResult[]): ReducerResult[] {
   return [ReducerResult.noop(0)];
 }
+export function pinpointConsume(resuts: MapperResult[]): ReducerResult[] {
+  return [];
+}
 
-export const rootReducer = consumeLoop(consumeFirst([
-  idConsume,
-  consumeMerge([
-    consumeFirst([
-      signalConsume,
-      noopConsume,
-    ]),
+export const rootReducer = consumeLoop(consumeMerge([
+  consumeFirst([
+    signalConsume,
+    noopConsume,
+  ]),
+  consumeFirst([
     fullConsume,
+    idConsume,
+  ]),
+  consumeFirst([
+    pinpointConsume,
+    noopConsume,
   ]),
 ]));
