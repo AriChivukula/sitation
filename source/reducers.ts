@@ -58,7 +58,23 @@ export function noopConsume(resuts: MapperResult[]): ReducerResult[] {
   return [ReducerResult.noop(0)];
 }
 export function pinpointConsume(resuts: MapperResult[]): ReducerResult[] {
-  return [];
+  const rollup: ReducerResult[] = [];
+  for (let i = 0; i < results.length; i++) {
+    if (results[i].type === MapperType.RANGE) {
+      rollup.push(ReducerResult.range(results[i].corrected));
+    } else if (results[i].type === MapperType.NUMBER) {
+      if (i + 1 < results.length) {
+        rollup.push(ReducerResult.range(results[i].corrected));
+      } else if (results[i + 1].type !== MapperType.REPORTER) {
+        rollup.push(ReducerResult.range(results[i].corrected));
+      } else {
+        break;
+      }
+    } else {
+      break;
+    }
+  }
+  return rollup;
 }
 
 export const rootReducer = consumeLoop(consumeMerge([
