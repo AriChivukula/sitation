@@ -16,6 +16,12 @@ describe(
       },
     );
     it(
+      "range",
+      async (): Promise<void> => {
+        chai.expect(Expressions.range().toString().length).to.equal(12);
+      },
+    );
+    it(
       "reporter",
       async (): Promise<void> => {
         chai.expect(Expressions.reporter().toString().length).to.equal(19735);

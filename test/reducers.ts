@@ -13,6 +13,7 @@ import {
   fullConsume,
   noopConsume,
   signalConsume,
+  pinpointConsume,
   rootReducer,
 } from "../source/reducers";
 
@@ -26,13 +27,13 @@ describe(
       },
       {
         results: [MapperResult.id("id")],
-        expected: "1,,0,,0," + ReducerType.ID,
+        expected: "1,,0,,0,," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
-        test.results.join(","),
+        test.results.join("\n"),
         () => {
-          chai.expect(idConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(idConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -49,13 +50,13 @@ describe(
       },
       {
         results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "3,,379,U.S.,241," + ReducerType.FULL,
+        expected: "3,,379,U.S.,241,," + ReducerType.FULL,
       },
     ].forEach((test) => {
       it(
-        test.results.join(","),
+        test.results.join("\n"),
         () => {
-          chai.expect(fullConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(fullConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -68,13 +69,36 @@ describe(
     [
       {
         results: [],
-        expected: "0,,0,,0," + ReducerType.NOOP,
+        expected: "0,,0,,0,," + ReducerType.NOOP,
       },
     ].forEach((test) => {
       it(
-        test.results.join(","),
+        test.results.join("\n"),
         () => {
-          chai.expect(noopConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(noopConsume(test.results).join("\n")).to.equal(test.expected);
+        },
+      );
+    });
+  },
+);
+
+describe(
+  "pinpointConsume()",
+  () => {
+    [
+      {
+        results: [],
+        expected: "",
+      },
+      {
+        results: [MapperResult.range("419-20"), MapperResult.number("0")],
+        expected: "1,,0,,0,419-20," + ReducerType.PINPOINT + "\n1,,0,,0,0," + ReducerType.PINPOINT,
+      },
+    ].forEach((test) => {
+      it(
+        test.results.join("\n"),
+        () => {
+          chai.expect(pinpointConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -91,13 +115,13 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also")],
-        expected: "1,See also,0,,0," + ReducerType.SIGNAL,
+        expected: "1,See also,0,,0,," + ReducerType.SIGNAL,
       },
     ].forEach((test) => {
       it(
-        test.results.join(","),
+        test.results.join("\n"),
         () => {
-          chai.expect(signalConsume(test.results).join(",")).to.equal(test.expected);
+          chai.expect(signalConsume(test.results).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -114,19 +138,19 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "4,See also,379,U.S.,241," + ReducerType.FULL,
+        expected: "4,See also,379,U.S.,241,," + ReducerType.FULL,
       },
       {
-        results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "1,,0,,0," + ReducerType.ID + "\n3,,379,U.S.,241," + ReducerType.FULL,
+        results: [MapperResult.id("id"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
+        expected: "1,,0,,0,," + ReducerType.ID + "\n3,,379,U.S.,241,," + ReducerType.FULL,
       },
       {
         results: [MapperResult.number("379"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
         expected: "",
       },
       {
-        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id")],
-        expected: "1,,0,,0," + ReducerType.ID,
+        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id"), MapperResult.range("419-20")],
+        expected: "2,,0,,0,419-20," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(

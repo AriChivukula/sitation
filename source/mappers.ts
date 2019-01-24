@@ -33,6 +33,14 @@ export function numberMatch(token: string): MapperResult[] {
   return [];
 }
 
+
+export function rangeMatch(token: string): MapperResult[] {
+  if (token.match(Expressions.range())) {
+    return [MapperResult.range(token)];
+  }
+  return [];
+}
+
 export function idMatch(token: string): MapperResult[] {
   if (token.toLowerCase() == "id") {
     return [MapperResult.id(token)];
@@ -59,6 +67,7 @@ export const rootMapper = matchSplit(
           (token: string) => token.split(Expressions.spacing()),
           matchFirst([
             numberMatch,
+            rangeMatch,
             idMatch,
             noopMatch,
           ]),
