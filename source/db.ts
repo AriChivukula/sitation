@@ -30,8 +30,8 @@ export abstract class DB {
   @MemoizeAll()
   public static reporters(): Variations {
     let result: Variations = {};
-    for (let reporterName in ReportersDB.reporters()) {
-      for (let reporter of ReportersDB.reporters()[reporterName]) {
+    for (let reporterName in DB.reporters()) {
+      for (let reporter of DB.reporters()[reporterName]) {
         for (let edition in reporter.editions) {
           result[edition.toLowerCase()] = edition;
         }
