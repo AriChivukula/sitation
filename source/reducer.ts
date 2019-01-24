@@ -6,9 +6,9 @@ export enum ReducerType {
   ID, // Id
   FULL, // Volume Reporter Page
   NOOP, // `empty`
+  PINPOINT, // 419-21
   SIGNAL, // See also
 }
-
 
 export class ReducerResult {
 
@@ -57,15 +57,19 @@ export class ReducerResult {
   }
   
   public static full(volume: number, reporter: string, page: number) {
-    return new ReducerResult(3, "", volume, reporter, page, ReducerType.FULL);
+    return new ReducerResult(3, "", volume, reporter, page, [], ReducerType.FULL);
   }
 
   public static noop(consumed: number) {
-    return new ReducerResult(consumed, "", 0, "", 0, ReducerType.NOOP);
+    return new ReducerResult(consumed, "", 0, "", 0, [], ReducerType.NOOP);
+  }
+  
+  public static pinpoint(pinpoint: string) {
+    return new ReducerResult(1, "", 0, "", 0, [pinpoint], ReducerType.PINPOINT);
   }
   
   public static signal(signal: string) {
-    return new ReducerResult(1, signal, 0, "", 0, ReducerType.SIGNAL);
+    return new ReducerResult(1, signal, 0, "", 0, [], ReducerType.SIGNAL);
   }
 }
 
