@@ -1,25 +1,20 @@
 import "@babel/polyfill";
 
 import {
-  Expressions,
   DB,
-} from "./data";
+} from "./db";
+import {
+  Expressions,
+} from "./expressions";
 import {
   MapperResult,
   matchFirst,
   matchSplit,
 } from "./mapper";
 
-export function editionMatch(token: string): MapperResult[] {
-  if (DB.editions().hasOwnProperty(token.toLowerCase())) {
-    return [MapperResult.reporter(token, DB.editions()[token.toLowerCase()])];
-  }
-  return [];
-}
-
-export function variationMatch(token: string): MapperResult[] {
-  if (DB.variations().hasOwnProperty(token.toLowerCase())) {
-    return [MapperResult.reporter(token, DB.variations()[token.toLowerCase()])];
+export function reporterMatch(token: string): MapperResult[] {
+  if (DB.reporters().hasOwnProperty(token.toLowerCase())) {
+    return [MapperResult.reporter(token, DB.reporters()[token.toLowerCase()])];
   }
   return [];
 }
@@ -48,8 +43,7 @@ export function noopMatch(token: string): MapperResult[] {
 export const rootMapper = matchSplit(
   (token: string) => token.split(Expressions.reporter()),
   matchFirst([
-    editionMatch,
-    variationMatch,
+    reporterMatch,
     matchSplit(
       (token: string) => token.split(Expressions.spacing()),
       matchFirst([
