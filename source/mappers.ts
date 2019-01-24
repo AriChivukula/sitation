@@ -35,7 +35,7 @@ export function numberMatch(token: string): MapperResult[] {
 
 
 export function rangeMatch(token: string): MapperResult[] {
-  if (Expressions.range().match(token)) {
+  if (token.match(Expressions.range())) {
     return [MapperResult.range(token)];
   }
   return [];
