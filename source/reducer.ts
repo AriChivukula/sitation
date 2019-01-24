@@ -57,8 +57,8 @@ export class ReducerResult {
     return new ReducerResult(3, "", volume, reporter, page, ReducerType.FULL);
   }
 
-  public static noop() {
-    return new ReducerResult(0, "", 0, "", 0, ReducerType.NOOP);
+  public static noop(consumed: number) {
+    return new ReducerResult(consumed, "", 0, "", 0, ReducerType.NOOP);
   }
   
   public static signal(signal: string) {
