@@ -4,11 +4,11 @@ import * as chai from "chai";
 
 import {
   Expressions,
-  ReportersDB,
+  DB,
 } from "../source/data";
 
 describe(
-  "ReportersDB",
+  "DB",
   async (): Promise<void> => {
     it(
       "reporters",
@@ -37,12 +37,24 @@ describe(
 );
 
 describe(
-  "ReportersDB",
+  "Expressions",
   async (): Promise<void> => {
+    it(
+      "escape",
+      async (): Promise<void> => {
+        chai.expect(Expressions.escape().toString().length).to.equal(18);
+      },
+    );
     it(
       "reporter",
       async (): Promise<void> => {
         chai.expect(Expressions.reporter().toString().length).to.equal(19735);
+      },
+    );
+    it(
+      "signal",
+      async (): Promise<void> => {
+        chai.expect(Expressions.signal().toString().length).to.equal(18);
       },
     );
     it(
