@@ -91,9 +91,4 @@ export abstract class Expressions {
   public static spacing(): RegExp {
     return /[\s,;:.()[\]{}]+/;
   }
-
-  @MemoizeAll
-  public static pinpoint(): RegExp {
-    return /[0-9\-]+/;
-  }
 }
