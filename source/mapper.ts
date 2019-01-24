@@ -36,6 +36,10 @@ export class MapperResult {
   public static number(original: string) {
     return new MapperResult(original, original, MapperType.NUMBER);
   }
+  
+  public static range(original: string) {
+    return new MapperResult(original, original, MapperType.RANGE);
+  }
 
   public static reporter(original: string, corrected: string) {
     return new MapperResult(original, corrected, MapperType.REPORTER);
