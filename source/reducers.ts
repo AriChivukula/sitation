@@ -31,7 +31,7 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
   if (resuts[2].type !== MapperType.NUMBER) {
     return [];
   }
-  return [ReducerResult.full(Number(resuts[0].corrected), resuts[1].corrected, Number(resuts[2].corrected)))];
+  return [ReducerResult.full(Number(resuts[0].corrected), resuts[1].corrected, Number(resuts[2].corrected))];
 }
 
 export const rootReducer = consumeLoop(consumeFirst([
