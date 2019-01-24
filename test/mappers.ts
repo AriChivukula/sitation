@@ -24,7 +24,7 @@ describe(
         expected: "",
       },
       {
-        token: "419-21,",
+        token: "419-21",
         expected: "419-21,419-21," + MapperType.RANGE,
       },
     ].forEach((test) => {
