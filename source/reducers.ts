@@ -35,17 +35,17 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
   return [ReducerResult.full(Number(resuts[0].corrected), resuts[1].corrected, Number(resuts[2].corrected))];
 }
 
-export function signalConsume(resuts: MapperResult[]): ReducerResult[] {
+export function signalConsume(results: MapperResult[]): ReducerResult[] {
   const rollup: ReducerResult[] = [];
-  if (resuts.length < 1) {
+  if (results.length < 1) {
     return rollup;
   }
-  if (resuts[0].type !== MapperType.SIGNAL) {
+  if (results[0].type !== MapperType.SIGNAL) {
     return rollup;
   }
   rollup.push(ReducerResult.signal(resuts[0].corrected));
   for (let i = 1; i < results.length; i++) {
-    if (resuts[i].type === MapperType.NOOP) {
+    if (results[i].type === MapperType.NOOP) {
       rollup.push(ReducerResult.noop(1));
     } else {
       break;
