@@ -51,5 +51,11 @@ describe(
         chai.expect(Expressions.spacing().toString().length).to.equal(18);
       },
     );
+    it(
+      "pinpoint",
+      async (): Promise<void> => {
+        chai.expect(Expressions.pinpoint().toString().length).to.equal(18);
+      },
+    );
   },
 );
