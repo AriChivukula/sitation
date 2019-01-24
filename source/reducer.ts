@@ -21,7 +21,7 @@ export class ReducerResult {
   }
 
   public toString(): string {
-    return this.consumed + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
+    return this.consumed + "," + this.signal + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
   }
 
   public static id() {
@@ -49,6 +49,22 @@ export function consumeFirst(reducers: reducer[]): reducer {
       return result;
     }
     return [];
+  }
+}
+
+export function consumeMerge(reducers: reducer[]): reducer {
+  return (results: MapperResult[]): ReducerResult[] => {
+    let rollup = ReducerResult.noop();
+    for (let reducerFN of reducers) {
+      const result = reducerFN(results);
+      if (result.length === 0) {
+        return [];
+      }
+      for (let r of result) {
+        rollup = rollup.merge(r);
+      }
+    }
+    return [rollup];
   }
 }
 
