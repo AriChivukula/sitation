@@ -25,6 +25,24 @@ export class ReducerResult {
     return this.consumed + "," + this.signal + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
   }
 
+  public merge(input: ReducerResult) {
+    return new ReducerResult(
+      this.consumed + input.consumed,
+      this.signal || input.signal,
+      this.volume || input.volume,
+      this.reporter || input.reporter,
+      this.page || input.page,
+      ReducerResult.resolveType(this.type, input.type),
+    );
+  }
+
+  private static resolveType(a: ReducerType, b: ReducerType): ReducerType {
+    if (a === ReducerType.SIGNAL && b === ReducerType.FULL) {
+      return ReducerType.FULL;
+    }
+    throw new Error("Unreachable");
+  }
+
   public static id() {
     return new ReducerResult(1, "", 0, "", 0, ReducerType.ID);
   }
