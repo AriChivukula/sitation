@@ -20,7 +20,7 @@ export class MapperResult {
   }
 
   public toString(): string {
-    return this.original + ":" + this.corrected + ":" + this.type;
+    return this.original + "," + this.corrected + "," + this.type;
   }
 
   public static id(original: string) {
