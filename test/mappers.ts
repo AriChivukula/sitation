@@ -6,8 +6,7 @@ import {
   MapperType,
 } from "../source/mapper";
 import {
-  editionMatch,
-  variationMatch,
+  reporterMatch,
   numberMatch,
   idMatch,
   noopMatch,
@@ -15,7 +14,7 @@ import {
 } from "../source/mappers";
 
 describe(
-  "editionMatch()",
+  "reporterMatch()",
   () => {
     [
       {
@@ -30,30 +29,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(editionMatch(test.token).join("\n")).to.equal(test.expected);
-        },
-      );
-    });
-  },
-);
-
-describe(
-  "variationMatch()",
-  () => {
-    [
-      {
-        token: "",
-        expected: "",
-      },
-      {
-        token: "U. s.",
-        expected: "U. s.,U.S.," + MapperType.REPORTER,
-      },
-    ].forEach((test) => {
-      it(
-        test.token,
-        () => {
-          chai.expect(variationMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(reporterMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
