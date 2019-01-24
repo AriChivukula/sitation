@@ -5,12 +5,15 @@ import {
 export enum ReducerType {
   ID, // Id
   FULL, // Volume Reporter Page
+  NOOP, // `empty`
+  SIGNAL, // See also
 }
 
 export class ReducerResult {
 
   private constructor(
     readonly consumed: number,
+    readonly signal: string,
     readonly volume: number,
     readonly reporter: string,
     readonly page: number,
@@ -19,15 +22,47 @@ export class ReducerResult {
   }
 
   public toString(): string {
-    return this.consumed + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
+    return this.consumed + "," + this.signal + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
+  }
+
+  public merge(input: ReducerResult) {
+    return new ReducerResult(
+      this.consumed + input.consumed,
+      this.signal === "" ? input.signal : this.signal,
+      this.volume === 0 ? input.volume : this.volume,
+      this.reporter === "" ? input.reporter : this.reporter,
+      this.page === 0 ? input.page : this.page,
+      ReducerResult.resolveType(this.type, input.type),
+    );
+  }
+
+  private static resolveType(a: ReducerType, b: ReducerType): ReducerType {
+    if (a === ReducerType.NOOP) {
+      return b;
+    }
+    if (b === ReducerType.NOOP) {
+      return a;
+    }
+    if (a === ReducerType.SIGNAL && b === ReducerType.FULL) {
+      return ReducerType.FULL;
+    }
+    throw new Error("Unreachable");
   }
 
   public static id() {
-    return new ReducerResult(1, 0, "", 0, ReducerType.ID);
+    return new ReducerResult(1, "", 0, "", 0, ReducerType.ID);
   }
   
   public static full(volume: number, reporter: string, page: number) {
-    return new ReducerResult(3, volume, reporter, page, ReducerType.FULL);
+    return new ReducerResult(3, "", volume, reporter, page, ReducerType.FULL);
+  }
+
+  public static noop(consumed: number) {
+    return new ReducerResult(consumed, "", 0, "", 0, ReducerType.NOOP);
+  }
+  
+  public static signal(signal: string) {
+    return new ReducerResult(1, signal, 0, "", 0, ReducerType.SIGNAL);
   }
 }
 
@@ -43,6 +78,24 @@ export function consumeFirst(reducers: reducer[]): reducer {
       return result;
     }
     return [];
+  }
+}
+
+export function consumeMerge(reducers: reducer[]): reducer {
+  return (results: MapperResult[]): ReducerResult[] => {
+    let rollup = ReducerResult.noop(0);
+    let remaining = results;
+    for (let reducerFN of reducers) {
+      const result = reducerFN(remaining);
+      if (result.length === 0) {
+        return [];
+      }
+      for (let r of result) {
+        rollup = rollup.merge(r);
+      }
+      remaining = results.slice(rollup.consumed);
+    }
+    return [rollup];
   }
 }
 

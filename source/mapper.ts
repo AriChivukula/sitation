@@ -1,13 +1,9 @@
-import {
-  Expressions,
-  ReportersDB,
-} from "./data";
-
 export enum MapperType {
   ID, // `Id` style citation
   NOOP, // Token used only to break up patterns
   NUMBER, // [0-9]+
   REPORTER, // e.g. U.S.
+  SIGNAL, // e.g. see also
 }
 
 export class MapperResult {
@@ -37,6 +33,10 @@ export class MapperResult {
 
   public static reporter(original: string, corrected: string) {
     return new MapperResult(original, corrected, MapperType.REPORTER);
+  }
+
+  public static signal(original: string, corrected: string) {
+    return new MapperResult(original, corrected, MapperType.SIGNAL);
   }
 }
 

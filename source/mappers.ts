@@ -1,25 +1,27 @@
 import "@babel/polyfill";
 
 import {
+  DB,
+} from "./db";
+import {
   Expressions,
-  ReportersDB,
-} from "./data";
+} from "./expressions";
 import {
   MapperResult,
   matchFirst,
   matchSplit,
 } from "./mapper";
 
-export function editionMatch(token: string): MapperResult[] {
-  if (ReportersDB.editions().hasOwnProperty(token.toLowerCase())) {
-    return [MapperResult.reporter(token, ReportersDB.editions()[token.toLowerCase()])];
+export function reporterMatch(token: string): MapperResult[] {
+  if (DB.reporters().hasOwnProperty(token.toLowerCase())) {
+    return [MapperResult.reporter(token, DB.reporters()[token.toLowerCase()])];
   }
   return [];
 }
 
-export function variationMatch(token: string): MapperResult[] {
-  if (ReportersDB.variations().hasOwnProperty(token.toLowerCase())) {
-    return [MapperResult.reporter(token, ReportersDB.variations()[token.toLowerCase()])];
+export function signalMatch(token: string): MapperResult[] {
+  if (DB.signals().hasOwnProperty(token.toLowerCase())) {
+    return [MapperResult.signal(token, DB.signals()[token.toLowerCase()])];
   }
   return [];
 }
@@ -48,14 +50,19 @@ export function noopMatch(token: string): MapperResult[] {
 export const rootMapper = matchSplit(
   (token: string) => token.split(Expressions.reporter()),
   matchFirst([
-    editionMatch,
-    variationMatch,
+    reporterMatch,
     matchSplit(
-      (token: string) => token.split(Expressions.spacing()),
+      (token: string) => token.split(Expressions.signal()),
       matchFirst([
-        numberMatch,
-        idMatch,
-        noopMatch,
+        signalMatch,
+        matchSplit(
+          (token: string) => token.split(Expressions.spacing()),
+          matchFirst([
+            numberMatch,
+            idMatch,
+            noopMatch,
+          ]),
+        ),
       ]),
     ),
   ]),
