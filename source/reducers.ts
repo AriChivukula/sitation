@@ -43,9 +43,9 @@ export function signalConsume(results: MapperResult[]): ReducerResult[] {
   if (results[0].type !== MapperType.SIGNAL) {
     return rollup;
   }
-  rollup.push(ReducerResult.signal(resuts[0].corrected));
+  rollup.push(ReducerResult.signal(results[0].corrected));
   for (let i = 1; i < results.length; i++) {
-    if (results[i].type === MapperType.NOOP) {
+    if (results[i].type === MapperType.NOOP || results[i].type === MapperType.REPORTER) {
       rollup.push(ReducerResult.noop(1));
     } else {
       break;
