@@ -37,6 +37,12 @@ export class ReducerResult {
   }
 
   private static resolveType(a: ReducerType, b: ReducerType): ReducerType {
+    if (a === ReducerType.NOOP) {
+      return b;
+    }
+    if (b === ReducerType.NOOP) {
+      return a;
+    }
     if (a === ReducerType.SIGNAL && b === ReducerType.FULL) {
       return ReducerType.FULL;
     }
