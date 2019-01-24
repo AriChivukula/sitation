@@ -55,7 +55,7 @@ export abstract class DB {
       "contra": "Contra",
       "e.g.": "E.g.",
       "see": "See",
-      "see also": "See Also",
+      "see also": "See also",
       "with": "with",
     };
   }
