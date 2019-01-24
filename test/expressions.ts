@@ -12,7 +12,7 @@ describe(
     it(
       "escape",
       async (): Promise<void> => {
-        chai.expect(Expressions.escape().toString().length).to.equal(18);
+        chai.expect(Expressions.escape().toString().length).to.equal(32);
       },
     );
     it(
@@ -24,7 +24,7 @@ describe(
     it(
       "signal",
       async (): Promise<void> => {
-        chai.expect(Expressions.signal().toString().length).to.equal(18);
+        chai.expect(Expressions.signal().toString().length).to.equal(9);
       },
     );
     it(
