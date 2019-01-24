@@ -2,6 +2,7 @@ import {
   ReducerResult,
   consumeFirst,
   consumeLoop,
+  consumeMerge,
 } from "./reducer";
 import {
   MapperResult,
@@ -34,7 +35,36 @@ export function fullConsume(resuts: MapperResult[]): ReducerResult[] {
   return [ReducerResult.full(Number(resuts[0].corrected), resuts[1].corrected, Number(resuts[2].corrected))];
 }
 
+export function signalConsume(results: MapperResult[]): ReducerResult[] {
+  const rollup: ReducerResult[] = [];
+  if (results.length < 1) {
+    return rollup;
+  }
+  if (results[0].type !== MapperType.SIGNAL) {
+    return rollup;
+  }
+  rollup.push(ReducerResult.signal(results[0].corrected));
+  for (let i = 1; i < results.length; i++) {
+    if (results[i].type === MapperType.NOOP || results[i].type === MapperType.REPORTER) {
+      rollup.push(ReducerResult.noop(1));
+    } else {
+      break;
+    }
+  }
+  return rollup;
+}
+
+export function noopConsume(resuts: MapperResult[]): ReducerResult[] {
+  return [ReducerResult.noop(0)];
+}
+
 export const rootReducer = consumeLoop(consumeFirst([
   idConsume,
-  fullConsume,
+  consumeMerge([
+    consumeFirst([
+      signalConsume,
+      noopConsume,
+    ]),
+    fullConsume,
+  ]),
 ]));

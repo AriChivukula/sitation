@@ -6,16 +6,16 @@ import {
   MapperType,
 } from "../source/mapper";
 import {
-  editionMatch,
-  variationMatch,
-  numberMatch,
   idMatch,
   noopMatch,
+  numberMatch,
+  reporterMatch,
   rootMapper,
+  signalMatch,
 } from "../source/mappers";
 
 describe(
-  "editionMatch()",
+  "reporterMatch()",
   () => {
     [
       {
@@ -30,7 +30,7 @@ describe(
       it(
         test.token,
         () => {
-          chai.expect(editionMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(reporterMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -38,7 +38,7 @@ describe(
 );
 
 describe(
-  "variationMatch()",
+  "signalMatch()",
   () => {
     [
       {
@@ -46,14 +46,14 @@ describe(
         expected: "",
       },
       {
-        token: "U. s.",
-        expected: "U. s.,U.S.," + MapperType.REPORTER,
+        token: "see also",
+        expected: "see also,See also," + MapperType.SIGNAL,
       },
     ].forEach((test) => {
       it(
         test.token,
         () => {
-          chai.expect(variationMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(signalMatch(test.token).join("\n")).to.equal(test.expected);
         },
       );
     });
@@ -138,8 +138,8 @@ describe(
         expected: "",
       },
       {
-        casebody: "379 u. S. 241",
-        expected: "379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER,
+        casebody: "see also 379 u. S. 241",
+        expected: "see also,See also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",

@@ -1,8 +1,3 @@
-import {
-  Expressions,
-  ReportersDB,
-} from "./data";
-
 export enum MapperType {
   ID, // `Id` style citation
   NOOP, // Token used only to break up patterns
