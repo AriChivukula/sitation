@@ -138,8 +138,8 @@ describe(
         expected: "",
       },
       {
-        casebody: "379 u. S. 241",
-        expected: "379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER,
+        casebody: "see also 379 u. S. 241",
+        expected: "see also,See Also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",
