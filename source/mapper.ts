@@ -17,7 +17,7 @@ export class MapperResult {
   }
 
   public toString(): string {
-    return this.original + "," + this.corrected + "," + this.type;
+    return this.original.replace(",", "\,") + "," + this.corrected.replace(",", "\,") + "," + this.type;
   }
 
   public static id(original: string) {
