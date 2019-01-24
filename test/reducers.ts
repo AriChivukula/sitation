@@ -26,7 +26,7 @@ describe(
       },
       {
         results: [MapperResult.id("id")],
-        expected: "1,,0,,0," + ReducerType.ID,
+        expected: "1,,0,,0,," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
@@ -49,7 +49,7 @@ describe(
       },
       {
         results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "3,,379,U.S.,241," + ReducerType.FULL,
+        expected: "3,,379,U.S.,241,," + ReducerType.FULL,
       },
     ].forEach((test) => {
       it(
@@ -68,7 +68,7 @@ describe(
     [
       {
         results: [],
-        expected: "0,,0,,0," + ReducerType.NOOP,
+        expected: "0,,0,,0,," + ReducerType.NOOP,
       },
     ].forEach((test) => {
       it(
@@ -91,7 +91,7 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also")],
-        expected: "1,See also,0,,0," + ReducerType.SIGNAL,
+        expected: "1,See also,0,,0,," + ReducerType.SIGNAL,
       },
     ].forEach((test) => {
       it(
@@ -114,11 +114,11 @@ describe(
       },
       {
         results: [MapperResult.signal("see also", "See also"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "4,See also,379,U.S.,241," + ReducerType.FULL,
+        expected: "4,See also,379,U.S.,241,," + ReducerType.FULL,
       },
       {
         results: [MapperResult.id("id"), MapperResult.number("0"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "1,,0,,0," + ReducerType.ID + "\n3,,379,U.S.,241," + ReducerType.FULL,
+        expected: "1,,0,,0,," + ReducerType.ID + "\n3,,379,U.S.,241,," + ReducerType.FULL,
       },
       {
         results: [MapperResult.number("379"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
@@ -126,7 +126,7 @@ describe(
       },
       {
         results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id")],
-        expected: "1,,0,,0," + ReducerType.ID,
+        expected: "1,,0,,0,," + ReducerType.ID,
       },
     ].forEach((test) => {
       it(
