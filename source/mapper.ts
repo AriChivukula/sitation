@@ -2,7 +2,7 @@ export enum MapperType {
   ID, // `Id` style citation
   NOOP, // Token used only to break up patterns
   NUMBER, // [0-9]+
-  PINPOINT, // e.g. 419-20
+  RANGE, // e.g. 419-20
   REPORTER, // e.g. U.S.
   SIGNAL, // e.g. see also
 }
@@ -32,7 +32,7 @@ export class MapperResult {
     return new MapperResult(original, original, MapperType.NUMBER);
   }
   
-  public static pinpoint(original: string) {
+  public static range(original: string) {
     return new MapperResult(original, original, MapperType.RANGE);
   }
 
