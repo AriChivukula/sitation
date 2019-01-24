@@ -18,7 +18,7 @@ describe(
     it(
       "range",
       async (): Promise<void> => {
-        chai.expect(Expressions.range().toString().length).to.equal(32);
+        chai.expect(Expressions.range().toString().length).to.equal(12);
       },
     );
     it(
