@@ -9,10 +9,34 @@ import {
   idMatch,
   noopMatch,
   numberMatch,
+  rangeMatch,
   reporterMatch,
   rootMapper,
   signalMatch,
 } from "../source/mappers";
+
+describe(
+  "rangeMatch()",
+  () => {
+    [
+      {
+        token: "",
+        expected: "",
+      },
+      {
+        token: "419-21",
+        expected: "419-21,419-21," + MapperType.RANGE,
+      },
+    ].forEach((test) => {
+      it(
+        test.token,
+        () => {
+          chai.expect(rangeMatch(test.token).join("\n")).to.equal(test.expected);
+        },
+      );
+    });
+  },
+);
 
 describe(
   "reporterMatch()",
@@ -138,8 +162,8 @@ describe(
         expected: "",
       },
       {
-        casebody: "see also 379 u. S. 241",
-        expected: "see also,See also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER,
+        casebody: "see also 379 u. S. 241 419-21,",
+        expected: "see also,See also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER + "\n419-21,419-21," + MapperType.RANGE,
       },
       {
         casebody: "In Evans v. Laurel Links, Inc., id.",

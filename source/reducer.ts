@@ -6,6 +6,7 @@ export enum ReducerType {
   ID, // Id
   FULL, // Volume Reporter Page
   NOOP, // `empty`
+  PINPOINT, // 419-21
   SIGNAL, // See also
 }
 
@@ -17,12 +18,13 @@ export class ReducerResult {
     readonly volume: number,
     readonly reporter: string,
     readonly page: number,
+    readonly pinpoints: string[],
     readonly type: ReducerType,
   ) {
   }
 
   public toString(): string {
-    return this.consumed + "," + this.signal + "," + this.volume + "," + this.reporter + "," + this.page + "," + this.type;
+    return this.consumed + "," + this.signal.replace(",", "\,") + "," + this.volume + "," + this.reporter.replace(",", "\,") + "," + this.page + "," + this.pinpoints.join(";").replace(",", "\,") +  "," + this.type;
   }
 
   public merge(input: ReducerResult) {
@@ -32,6 +34,7 @@ export class ReducerResult {
       this.volume === 0 ? input.volume : this.volume,
       this.reporter === "" ? input.reporter : this.reporter,
       this.page === 0 ? input.page : this.page,
+      this.pinpoints.concat(input.pinpoints),
       ReducerResult.resolveType(this.type, input.type),
     );
   }
@@ -46,23 +49,36 @@ export class ReducerResult {
     if (a === ReducerType.SIGNAL && b === ReducerType.FULL) {
       return ReducerType.FULL;
     }
+    if (a === ReducerType.SIGNAL && b === ReducerType.ID) {
+      return ReducerType.ID;
+    }
+    if (a === ReducerType.FULL && b === ReducerType.PINPOINT) {
+      return ReducerType.FULL;
+    }
+    if (a === ReducerType.ID && b === ReducerType.PINPOINT) {
+      return ReducerType.ID;
+    }
     throw new Error("Unreachable");
   }
 
   public static id() {
-    return new ReducerResult(1, "", 0, "", 0, ReducerType.ID);
+    return new ReducerResult(1, "", 0, "", 0, [], ReducerType.ID);
   }
   
   public static full(volume: number, reporter: string, page: number) {
-    return new ReducerResult(3, "", volume, reporter, page, ReducerType.FULL);
+    return new ReducerResult(3, "", volume, reporter, page, [], ReducerType.FULL);
   }
 
   public static noop(consumed: number) {
-    return new ReducerResult(consumed, "", 0, "", 0, ReducerType.NOOP);
+    return new ReducerResult(consumed, "", 0, "", 0, [], ReducerType.NOOP);
+  }
+  
+  public static pinpoint(pinpoint: string) {
+    return new ReducerResult(1, "", 0, "", 0, [pinpoint], ReducerType.PINPOINT);
   }
   
   public static signal(signal: string) {
-    return new ReducerResult(1, signal, 0, "", 0, ReducerType.SIGNAL);
+    return new ReducerResult(1, signal, 0, "", 0, [], ReducerType.SIGNAL);
   }
 }
 

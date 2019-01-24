@@ -2,6 +2,7 @@ export enum MapperType {
   ID, // `Id` style citation
   NOOP, // Token used only to break up patterns
   NUMBER, // [0-9]+
+  RANGE, // e.g. 419-20
   REPORTER, // e.g. U.S.
   SIGNAL, // e.g. see also
 }
@@ -16,7 +17,7 @@ export class MapperResult {
   }
 
   public toString(): string {
-    return this.original + "," + this.corrected + "," + this.type;
+    return this.original.replace(",", "\,") + "," + this.corrected.replace(",", "\,") + "," + this.type;
   }
 
   public static id(original: string) {
@@ -29,6 +30,10 @@ export class MapperResult {
   
   public static number(original: string) {
     return new MapperResult(original, original, MapperType.NUMBER);
+  }
+  
+  public static range(original: string) {
+    return new MapperResult(original, original, MapperType.RANGE);
   }
 
   public static reporter(original: string, corrected: string) {
