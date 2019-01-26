@@ -25,7 +25,7 @@ describe(
     it(
       "reporter()",
       async (): Promise<void> => {
-        chai.expect(" U.S. ".split(Expressions.reporter())).to.deep.equal([" ", "U.S.", " "]);
+        chai.expect(" U.S. ".split(Expressions.reporter())).to.deep.equal(["", "U.S.", ""]);
         chai.expect(" U.P.S. ".split(Expressions.reporter())).to.deep.equal([" U.P.S. "]);
       },
     );
