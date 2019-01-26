@@ -5,7 +5,6 @@ import * as chai from "chai";
 import {
   matchFirst,
   matchSplit,
-  MapperType,
 } from "../source/mapper";
 
 // TODO: https://github.com/AriChivukula/sitation/pull/21
