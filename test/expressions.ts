@@ -12,20 +12,20 @@ describe(
     it(
       "escape()",
       async (): Promise<void> => {
-        chai.expect("{a".split(Expressions.escape())).to.deep.equal(["{"]);
+        chai.expect("{a".split(Expressions.escape())).to.deep.equal(["", "a"]);
       },
     );
     it(
       "range()",
       async (): Promise<void> => {
         chai.expect("419-21".split(Expressions.range())).to.deep.equal(["419-21"]);
-        chai.expect("419!21".split(Expressions.range())).to.deep.equal(["419", "!", "21"]);
+        chai.expect("419!21".split(Expressions.range())).to.deep.equal(["", "!", "21"]);
       },
     );
     it(
       "reporter()",
       async (): Promise<void> => {
-        chai.expect(" U.S. ".split(Expressions.reporter())).to.deep.equal(["U.S."]);
+        chai.expect(" U.S. ".split(Expressions.reporter())).to.deep.equal([" ", "U.S.", " "]);
         chai.expect(" U.P.S. ".split(Expressions.reporter())).to.deep.equal([" U.P.S. "]);
       },
     );
@@ -39,7 +39,7 @@ describe(
     it(
       "spacing()",
       async (): Promise<void> => {
-        chai.expect("a b".split(Expressions.spacing())).to.deep.equal(["a", " ", "b"]);
+        chai.expect("a b".split(Expressions.spacing())).to.deep.equal(["a", "b"]);
         chai.expect("ab".split(Expressions.spacing())).to.deep.equal(["ab"]);
       },
     );
