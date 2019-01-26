@@ -19,7 +19,7 @@ describe(
       "range()",
       async (): Promise<void> => {
         chai.expect("419-21".split(Expressions.range())).to.deep.equal(["", "419-21", ""]);
-        chai.expect("419!21".split(Expressions.range())).to.deep.equal(["", "!", "21"]);
+        chai.expect("419!21".split(Expressions.range())).to.deep.equal(["419!21"]);
       },
     );
     it(
@@ -32,7 +32,7 @@ describe(
     it(
       "signal()",
       async (): Promise<void> => {
-        chai.expect("See also FOO".split(Expressions.signal())).to.deep.equal(["See also", "FOO"]);
+        chai.expect("See also FOO".split(Expressions.signal())).to.deep.equal(["", "See also", "FOO"]);
         chai.expect("Not also BAR".split(Expressions.signal())).to.deep.equal(["Not also BAR"]);
       },
     );
