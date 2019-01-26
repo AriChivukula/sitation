@@ -10,6 +10,7 @@ describe(
   "sitation()",
   () => {
     [
+      // TODO: https://github.com/AriChivukula/sitation/pull/21
       {
         casebody: "",
         expected: "",
