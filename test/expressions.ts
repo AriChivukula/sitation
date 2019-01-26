@@ -25,15 +25,15 @@ describe(
     it(
       "reporter()",
       async (): Promise<void> => {
-        chai.expect("U.S.".match(Expressions.reporter())).to.deep.equal(["U.S."]);
-        chai.expect("U.P.S.".match(Expressions.reporter())).to.be.null;
+        chai.expect(" U.S. ".match(Expressions.reporter())).to.deep.equal(["U.S."]);
+        chai.expect(" U.P.S. ".match(Expressions.reporter())).to.be.null;
       },
     );
     it(
       "signal()",
       async (): Promise<void> => {
-        chai.expect("See also".match(Expressions.signal())).to.deep.equal(["See also"]);
-        chai.expect("Not also".match(Expressions.signal())).to.be.null;
+        chai.expect("See".match(Expressions.signal())).to.deep.equal(["See"]);
+        chai.expect("Not".match(Expressions.signal())).to.be.null;
       },
     );
     it(
