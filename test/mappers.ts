@@ -15,6 +15,7 @@ import {
   signalMatch,
 } from "../source/mappers";
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "rangeMatch()",
   () => {
@@ -38,6 +39,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "reporterMatch()",
   () => {
@@ -61,6 +63,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "signalMatch()",
   () => {
@@ -84,6 +87,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "numberMatch()",
   () => {
@@ -107,6 +111,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "idMatch()",
   () => {
@@ -130,6 +135,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "noopMatch()",
   () => {
@@ -153,6 +159,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "rootMapper()",
   () => {
