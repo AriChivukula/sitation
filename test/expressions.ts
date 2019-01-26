@@ -18,7 +18,7 @@ describe(
     it(
       "range()",
       async (): Promise<void> => {
-        chai.expect("419-21".split(Expressions.range())).to.deep.equal(["419-21"]);
+        chai.expect("419-21".split(Expressions.range())).to.deep.equal(["", "419-21", ""]);
         chai.expect("419!21".split(Expressions.range())).to.deep.equal(["", "!", "21"]);
       },
     );
