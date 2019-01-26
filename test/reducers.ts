@@ -17,6 +17,7 @@ import {
   rootReducer,
 } from "../source/reducers";
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "idConsume()",
   () => {
@@ -40,6 +41,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "fullConsume()",
   () => {
@@ -63,6 +65,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "noopConsume()",
   () => {
@@ -82,6 +85,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "pinpointConsume()",
   () => {
@@ -105,6 +109,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "signalConsume()",
   () => {
@@ -128,6 +133,7 @@ describe(
   },
 );
 
+// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "rootReducer()",
   () => {
