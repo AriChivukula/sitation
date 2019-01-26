@@ -10,33 +10,37 @@ describe(
   "Expressions",
   async (): Promise<void> => {
     it(
-      "escape",
+      "escape()",
       async (): Promise<void> => {
-        chai.expect(Expressions.escape().toString().length).to.equal(32);
+        chai.expect("{}.".replace(Expressions.escape(), "\\$&")).to.equal("");
       },
     );
     it(
-      "range",
+      "range()",
       async (): Promise<void> => {
-        chai.expect(Expressions.range().toString().length).to.equal(12);
+        chai.expect("419-21".match(Expressions.escape())).to.be.true;
+        chai.expect("419!21".match(Expressions.escape())).to.be.false;
       },
     );
     it(
-      "reporter",
+      "reporter()",
       async (): Promise<void> => {
-        chai.expect(Expressions.reporter().toString().length).to.equal(19735);
+        chai.expect("U.S.".match(Expressions.reporter())).to.be.true;
+        chai.expect("U.P.S.".match(Expressions.reporter())).to.be.false;
       },
     );
     it(
-      "signal",
+      "signal()",
       async (): Promise<void> => {
-        chai.expect(Expressions.signal().toString().length).to.equal(151);
+        chai.expect("See also".match(Expressions.signal())).to.be.true;
+        chai.expect("Not also".match(Expressions.signal())).to.be.false;
       },
     );
     it(
-      "spacing",
+      "spacing()",
       async (): Promise<void> => {
-        chai.expect(Expressions.spacing().toString().length).to.equal(18);
+        chai.expect(" ".match(Expressions.spacing())).to.be.true;
+        chai.expect("a".match(Expressions.spacing())).to.be.false;
       },
     );
   },
