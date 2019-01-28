@@ -6,7 +6,7 @@ import {
   MapperResult,
 } from "../source/mapper";
 import {
-  ReducerType,
+  ReducerResult,
 } from "../source/reducer";
 import {
   idConsume,
@@ -17,152 +17,120 @@ import {
   rootReducer,
 } from "../source/reducers";
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "idConsume()",
   () => {
     [
       {
+        description: "Empty",
         results: [],
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         results: [MapperResult.id("id")],
-        expected: "1,,0,,0,," + ReducerType.ID,
+        expected: [ReducerResult.id()],
       },
     ].forEach((test) => {
       it(
-        test.results.join("\n"),
+        test.description,
         () => {
-          chai.expect(idConsume(test.results).join("\n")).to.equal(test.expected);
+          chai.expect(idConsume(test.results).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "fullConsume()",
   () => {
     [
       {
+        description: "Empty",
         results: [],
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "3,,379,U.S.,241,," + ReducerType.FULL,
+        expected: [ReducerResult.full(379, "U.S.", 241)],
       },
     ].forEach((test) => {
       it(
-        test.results.join("\n"),
+        test.description,
         () => {
-          chai.expect(fullConsume(test.results).join("\n")).to.equal(test.expected);
+          chai.expect(fullConsume(test.results).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "noopConsume()",
   () => {
     [
       {
+        description: "Empty",
         results: [],
-        expected: "0,,0,,0,," + ReducerType.NOOP,
+        expected: [ReducerResult.noop(0)],
       },
     ].forEach((test) => {
       it(
-        test.results.join("\n"),
+        test.description,
         () => {
-          chai.expect(noopConsume(test.results).join("\n")).to.equal(test.expected);
+          chai.expect(noopConsume(test.results).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "pinpointConsume()",
   () => {
     [
       {
+        description: "Empty",
         results: [],
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         results: [MapperResult.range("419-20"), MapperResult.number("0")],
-        expected: "1,,0,,0,419-20," + ReducerType.PINPOINT + "\n1,,0,,0,0," + ReducerType.PINPOINT,
+        expected: [ReducerResult.pinpoint("419-20"), ReducerResult.pinpoint("0")],
       },
     ].forEach((test) => {
       it(
-        test.results.join("\n"),
+        test.description,
         () => {
-          chai.expect(pinpointConsume(test.results).join("\n")).to.equal(test.expected);
+          chai.expect(pinpointConsume(test.results).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "signalConsume()",
   () => {
     [
       {
+        description: "Empty",
         results: [],
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         results: [MapperResult.signal("see also", "See also")],
-        expected: "1,See also,0,,0,," + ReducerType.SIGNAL,
+        expected: [ReducerResult.signal("See also")],
       },
     ].forEach((test) => {
       it(
-        test.results.join("\n"),
+        test.description,
         () => {
-          chai.expect(signalConsume(test.results).join("\n")).to.equal(test.expected);
-        },
-      );
-    });
-  },
-);
-
-// TODO: https://github.com/AriChivukula/sitation/pull/21
-describe(
-  "rootReducer()",
-  () => {
-    [
-      {
-        results: [],
-        expected: "",
-      },
-      {
-        results: [MapperResult.signal("see also", "See also"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "4,See also,379,U.S.,241,," + ReducerType.FULL,
-      },
-      {
-        results: [MapperResult.id("id"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "1,,0,,0,," + ReducerType.ID + "\n3,,379,U.S.,241,," + ReducerType.FULL,
-      },
-      {
-        results: [MapperResult.number("379"), MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.reporter("U.S.", "U.S."), MapperResult.number("241")],
-        expected: "",
-      },
-      {
-        results: [MapperResult.number("379"), MapperResult.reporter("U.S.", "U.S."), MapperResult.id("id"), MapperResult.range("419-20")],
-        expected: "2,,0,,0,419-20," + ReducerType.ID,
-      },
-    ].forEach((test) => {
-      it(
-        test.results.join("\n"),
-        () => {
-          chai.expect(rootReducer(test.results).join("\n")).to.equal(test.expected);
+          chai.expect(signalConsume(test.results).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
