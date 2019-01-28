@@ -10,33 +10,37 @@ describe(
   "Expressions",
   async (): Promise<void> => {
     it(
-      "escape",
+      "escape()",
       async (): Promise<void> => {
-        chai.expect(Expressions.escape().toString().length).to.equal(32);
+        chai.expect("{a".split(Expressions.escape())).to.deep.equal(["", "a"]);
       },
     );
     it(
-      "range",
+      "range()",
       async (): Promise<void> => {
-        chai.expect(Expressions.range().toString().length).to.equal(12);
+        chai.expect("419-21".split(Expressions.range())).to.deep.equal(["", "419-21", ""]);
+        chai.expect("419!21".split(Expressions.range())).to.deep.equal(["419!21"]);
       },
     );
     it(
-      "reporter",
+      "reporter()",
       async (): Promise<void> => {
-        chai.expect(Expressions.reporter().toString().length).to.equal(19735);
+        chai.expect(" U.S. ".split(Expressions.reporter())).to.deep.equal(["", "U.S.", ""]);
+        chai.expect(" U.P.S. ".split(Expressions.reporter())).to.deep.equal([" U.P.S. "]);
       },
     );
     it(
-      "signal",
+      "signal()",
       async (): Promise<void> => {
-        chai.expect(Expressions.signal().toString().length).to.equal(151);
+        chai.expect("See also FOO".split(Expressions.signal())).to.deep.equal(["", "See also", "FOO"]);
+        chai.expect("Not also BAR".split(Expressions.signal())).to.deep.equal(["Not also BAR"]);
       },
     );
     it(
-      "spacing",
+      "spacing()",
       async (): Promise<void> => {
-        chai.expect(Expressions.spacing().toString().length).to.equal(18);
+        chai.expect("a b".split(Expressions.spacing())).to.deep.equal(["a", "b"]);
+        chai.expect("ab".split(Expressions.spacing())).to.deep.equal(["ab"]);
       },
     );
   },

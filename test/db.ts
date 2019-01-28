@@ -10,7 +10,7 @@ describe(
   "DB",
   async (): Promise<void> => {
     it(
-      "reporters",
+      "reporters()",
       async (): Promise<void> => {
         chai.expect(Object.keys(DB.reporters()).length).to.equal(1515);
         chai.expect(Object.keys(DB.reporters())[0]).to.equal("a.");
@@ -18,7 +18,7 @@ describe(
       },
     );
     it(
-      "signals",
+      "signals()",
       async (): Promise<void> => {
         chai.expect(Object.keys(DB.signals()).length).to.equal(18);
         chai.expect(Object.keys(DB.signals())[0]).to.equal("and");
