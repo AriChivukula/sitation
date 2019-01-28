@@ -5,6 +5,7 @@ import * as chai from "chai";
 import {
   matchFirst,
   matchSplit,
+  MapperResult,
 } from "../source/mapper";
 
 describe(
