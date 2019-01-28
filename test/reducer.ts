@@ -26,10 +26,10 @@ describe(
         description: "Basic",
         reducers: [
           () => [],
-          () => [ReducerResult.pinpoint(1776)],
+          () => [ReducerResult.pinpoint("1776")],
         ],
         mapperResults: [MapperResult.number("1776")],
-        expected: [ReducerResult.pinpoint(1776)],
+        expected: [ReducerResult.pinpoint("1776")],
       },
     ].forEach((test) => {
       it(
@@ -55,11 +55,11 @@ describe(
       {
         description: "Basic",
         reducers: [
-          () => [ReducerResult.pinpoint(1776)],
-          () => [ReducerResult.pinpoint(1812)],
+          () => [ReducerResult.pinpoint("1776")],
+          () => [ReducerResult.pinpoint("1812")],
         ],
         mapperResults: [MapperResult.number("1776"), MapperResult.number("1812")],
-        expected: [ReducerResult.pinpoint(1776), ReducerResult.pinpoint(1812)],
+        expected: [ReducerResult.pinpoint("1776"), ReducerResult.pinpoint("1812")],
       },
     ].forEach((test) => {
       it(
@@ -82,6 +82,12 @@ describe(
         reducerFN: () => [],
         mapperResults: [],
         expected: [],
+      },
+      {
+        description: "Basic",
+        reducerFN: () => [ReducerResult.pinpoint("1776")],
+        mapperResults: [MapperResult.number("1776")],
+        expected: [ReducerResult.pinpoint("1776")],
       },
     ].forEach((test) => {
       it(
