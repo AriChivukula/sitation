@@ -6,6 +6,7 @@ import {
   consumeFirst,
   consumeLoop,
   consumeMerge,
+  ReducerResult,
 } from "../source/reducer";
 
 // TODO: https://github.com/AriChivukula/sitation/pull/21
@@ -14,34 +15,16 @@ describe(
   () => {
     [
       {
-        token: "",
-        expected: "",
+        description: "Empty",
+        reducers: [],
+        mapperResults: [],
+        expected: [],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(test.token).to.equal(test.expected);
-        },
-      );
-    });
-  },
-);
-
-// TODO: https://github.com/AriChivukula/sitation/pull/21
-describe(
-  "consumeLoop()",
-  () => {
-    [
-      {
-        token: "",
-        expected: "",
-      },
-    ].forEach((test) => {
-      it(
-        test.token,
-        () => {
-          chai.expect(test.token).to.equal(test.expected);
+          chai.expect(consumeFirst(test.reducers)(test.mapperResults).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
@@ -54,14 +37,38 @@ describe(
   () => {
     [
       {
-        token: "",
-        expected: "",
+        description: "Empty",
+        reducers: [],
+        mapperResults: [],
+        expected: [],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(test.token).to.equal(test.expected);
+          chai.expect(consumeMerge(test.reducers)(test.mapperResults).join("\n")).to.equal(test.expected.join("\n"));
+        },
+      );
+    });
+  },
+);
+
+// TODO: https://github.com/AriChivukula/sitation/pull/21
+describe(
+  "consumeLoop()",
+  () => {
+    [
+      {
+        description: "Empty",
+        reducerFN: () => [],
+        mapperResults: [],
+        expected: [],
+      },
+    ].forEach((test) => {
+      it(
+        test.description,
+        () => {
+          chai.expect(consumeLoop(test.reducerFN)(test.mapperResults).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
