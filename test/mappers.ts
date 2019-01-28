@@ -3,7 +3,7 @@ import "mocha";
 import * as chai from "chai";
 
 import {
-  MapperType,
+  MapperResult,
 } from "../source/mapper";
 import {
   idMatch,
@@ -15,172 +15,150 @@ import {
   signalMatch,
 } from "../source/mappers";
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "rangeMatch()",
   () => {
     [
       {
+        description: "Empty",
         token: "",
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         token: "419-21",
-        expected: "419-21,419-21," + MapperType.RANGE,
+        expected: [MapperResult.range("419-21")],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(rangeMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(rangeMatch(test.token).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "reporterMatch()",
   () => {
     [
       {
+        description: "Empty",
         token: "",
-        expected: "",
+        expected: [],
       },
       {
-        token: "U.S.",
-        expected: "U.S.,U.S.," + MapperType.REPORTER,
+        description: "Basic",
+        token: "u.s.",
+        expected: [MapperResult.reporter("u.s.", "U.S.")],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(reporterMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(reporterMatch(test.token).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "signalMatch()",
   () => {
     [
       {
+        description: "Empty",
         token: "",
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         token: "see also",
-        expected: "see also,See also," + MapperType.SIGNAL,
+        expected: [MapperResult.signal("see also", "See also")],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(signalMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(signalMatch(test.token).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "numberMatch()",
   () => {
     [
       {
+        description: "Empty",
         token: "",
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         token: "0",
-        expected: "0,0," + MapperType.NUMBER,
+        expected: [MapperResult.number("0")],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(numberMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(numberMatch(test.token).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "idMatch()",
   () => {
     [
       {
+        description: "Empty",
         token: "",
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         token: "id",
-        expected: "id,Id," + MapperType.ID,
+        expected: [MapperResult.id("id")],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(idMatch(test.token).join("\n")).to.equal(test.expected);
+          chai.expect(idMatch(test.token).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "noopMatch()",
   () => {
     [
       {
+        description: "Empty",
         token: "",
-        expected: "",
+        expected: [],
       },
       {
+        description: "Basic",
         token: "r",
-        expected: "r,r," + MapperType.NOOP,
+        expected: [MapperResult.noop("r")],
       },
     ].forEach((test) => {
       it(
-        test.token,
+        test.description,
         () => {
-          chai.expect(noopMatch(test.token).join("\n")).to.equal(test.expected);
-        },
-      );
-    });
-  },
-);
-
-// TODO: https://github.com/AriChivukula/sitation/pull/21
-describe(
-  "rootMapper()",
-  () => {
-    [
-      {
-        casebody: "",
-        expected: "",
-      },
-      {
-        casebody: "see also 379 u. S. 241 419-21,",
-        expected: "see also,See also," + MapperType.SIGNAL + "\n379,379," + MapperType.NUMBER + "\nu. S.,U.S.," + MapperType.REPORTER + "\n241,241," + MapperType.NUMBER + "\n419-21,419-21," + MapperType.RANGE,
-      },
-      {
-        casebody: "In Evans v. Laurel Links, Inc., id.",
-        expected: "In,In," + MapperType.NOOP + "\nEvans,Evans," + MapperType.NOOP + "\nv.,Va.," + MapperType.REPORTER + "\nLaurel,Laurel," + MapperType.NOOP + "\nLinks,Links," + MapperType.NOOP + "\nInc,Inc," + MapperType.NOOP + "\nid,Id," + MapperType.ID,
-      },
-    ].forEach((test) => {
-      it(
-        test.casebody,
-        () => {
-          chai.expect(rootMapper(test.casebody).join("\n")).to.equal(test.expected);
+          chai.expect(noopMatch(test.token).join("\n")).to.equal(test.expected.join("\n"));
         },
       );
     });
