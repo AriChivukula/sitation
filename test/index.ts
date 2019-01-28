@@ -6,7 +6,6 @@ import {
   sitation,
 } from "../source/index";
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "sitation()",
   () => {
