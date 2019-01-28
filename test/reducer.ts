@@ -55,11 +55,11 @@ describe(
       {
         description: "Basic",
         reducers: [
-          () => [ReducerResult.pinpoint("1776")],
+          () => [ReducerResult.full(0, "ARI", 1)],
           () => [ReducerResult.pinpoint("1812")],
         ],
         mapperResults: [MapperResult.number("1776"), MapperResult.number("1812")],
-        expected: [ReducerResult.pinpoint("1776"), ReducerResult.pinpoint("1812")],
+        expected: [ReducerResult.full(0, "ARI", 1).merge(ReducerResult.pinpoint("1812"))],
       },
     ].forEach((test) => {
       it(
