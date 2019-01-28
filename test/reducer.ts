@@ -72,7 +72,6 @@ describe(
   },
 );
 
-// TODO: https://github.com/AriChivukula/sitation/pull/21
 describe(
   "consumeLoop()",
   () => {
