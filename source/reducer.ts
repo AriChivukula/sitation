@@ -99,6 +99,9 @@ export function consumeFirst(reducers: reducer[]): reducer {
 
 export function consumeMerge(reducers: reducer[]): reducer {
   return (results: MapperResult[]): ReducerResult[] => {
+    if (reducers.length === 0) {
+      return [];
+    }
     let rollup = ReducerResult.noop(0);
     let remaining = results;
     for (let reducerFN of reducers) {
