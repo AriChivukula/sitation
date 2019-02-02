@@ -12,7 +12,7 @@ do
   export DIFF="$(diff <(echo ${EXPECTED_OUT}) <(echo ${ACTUAL_OUT}))"
   if [ -n "$DIFF" ]; then
     echo "FAILURE"
-    echo "${DIFF}"
+    echo $DIFF
     exit 1
   else
     echo "PASS"
