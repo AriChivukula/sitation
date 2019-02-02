@@ -10,10 +10,10 @@ do
   export ACTUAL_OUT="$(node build/cli.js --casebody "${CASEBODY}")"
   export DIFF="$(diff <(echo ${EXPECTED_OUT}) <(echo ${ACTUAL_OUT}))"
   if [ -n "$DIFF" ]; then
-    echo "FAILURE"
+    echo "FAILURE ${TEST_OUT}"
     echo $DIFF
     exit 1
   else
-    echo "PASS"
+    echo "PASS ${TEST_OUT}"
   fi
 done
