@@ -15,4 +15,11 @@ do
   echo "ACTUAL_OUT ${ACTUAL_OUT}"
   export DIFF="$(diff <(echo ${EXPECTED_OUT}) <(echo ${ACTUAL_OUT}))"
   echo "DIFF ${DIFF}"
+  if (("${DIFF}" == "")); then
+    echo "PASS"
+  else
+    echo "FAILURE"
+    echo "${DIFF}"
+    exit 1
+  fi
 done
