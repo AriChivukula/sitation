@@ -17,7 +17,6 @@ yargs
         },
       ),
     (argv: yargs.Arguments<any>): void => {
-      console.log(argv.casebody);
       console.log(sitation(argv.casebody));
     },
   )
