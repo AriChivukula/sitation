@@ -11,16 +11,16 @@
     "@babel/polyfill": "7.2.5",
     "lodash": "4.17.11",
     "lodash-decorators": "6.0.1",
-    "yargs": "12.0.5"
+    "yargs": "13.2.1"
   },
   "devDependencies": {
     "@types/chai": "4.1.7",
-    "@types/mocha": "5.2.5",
+    "@types/mocha": "5.2.6",
     "@types/node": "11.9.4",
-    "@types/yargs": "12.0.8",
+    "@types/yargs": "12.0.9",
     "picaresque": "0.0.0",
     "chai": "4.2.0",
-    "mocha": "5.2.0",
+    "mocha": "6.0.0",
     "ts-node": "8.0.2",
     "typescript": "3.3.3"
   },
