@@ -14,7 +14,7 @@
     "spec": ["test/*.ts"]
   },
   "dependencies": {
-    "@babel/polyfill": "7.4.3",
+    "@babel/polyfill": "7.4.4",
     "lodash": "4.17.11",
     "lodash-decorators": "6.0.1",
     "yargs": "13.2.2"
@@ -26,9 +26,9 @@
     "@types/yargs": "13.0.0",
     "picaresque": "0.0.0",
     "chai": "4.2.0",
-    "mocha": "6.1.2",
-    "ts-node": "8.0.3",
-    "typescript": "3.4.3"
+    "mocha": "6.1.4",
+    "ts-node": "8.1.0",
+    "typescript": "3.4.5"
   },
   "include": [
     "source/*"
