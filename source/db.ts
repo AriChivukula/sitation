@@ -24,7 +24,7 @@ export abstract class DB {
 
   @MemoizeAll()
   private static reporterdb(): ReporterTable {
-    return JSON.parse(readFileSync("reporters.json", "ascii"));
+    return EMBED_REPORTERS_DB;
   }
 
   @MemoizeAll()
