@@ -41,9 +41,5 @@
     "removeComments": true,
     "strict": true,
     "target": "ES5"
-  },
-  "files": [
-    "source/cli.ts",
-    "source/index.ts"
-  ]
+  }
 }
