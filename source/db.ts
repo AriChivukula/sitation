@@ -24,7 +24,9 @@ export abstract class DB {
 
   @MemoizeAll()
   private static reporterdb(): ReporterTable {
-    return JSON.parse(readFileSync("reporters.json", "ascii"));
+    const db: unknown = EMBED_REPORTERS_DB;
+    // @ts-ignore
+    return db;
   }
 
   @MemoizeAll()

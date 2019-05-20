@@ -5,8 +5,8 @@ source
 .travis.yml
 LICENSE
 README.md
+gulpfile.js
 tsconfig.json
 yarn.lock
 test
-.picaresque
 reporters-db

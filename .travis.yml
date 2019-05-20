@@ -5,20 +5,20 @@ cache: yarn
 install:
 - npm install --global --upgrade yarn
 - yarn install
-- yarn picaresque
-- cp reporters-db/reporters_db/data/reporters.json .
 jobs:
   include:
   - stage: Test
     if: type = push
     script:
     - yarn outdated
-    - yarn mocha
+    - yarn gulp build
     - yarn tsc
+    - yarn mocha
     - bash test/auto.sh
   - stage: Deploy
     if: tag IS present
     script:
+    - yarn gulp build
     - yarn tsc
     - if [[ "$TRAVIS_TAG =~ ^v[0-9]+\\.[0-9]+\\.[0-9]+-UNSTABLE$" ]] ; then export NPM_TAG="next" ; fi
     - if [[ "$TRAVIS_TAG =~ ^v[0-9]+\\.[0-9]+\\.[0-9]+-STABLE$" ]] ; then export NPM_TAG="latest" ; fi
