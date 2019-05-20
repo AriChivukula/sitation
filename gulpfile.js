@@ -1,6 +1,5 @@
 var fs = require("fs");
 var gulp = require("gulp");
-var babel = require("gulp-babel");
 var replace = require("gulp-string-replace");
 var ts = require("gulp-typescript");
 
