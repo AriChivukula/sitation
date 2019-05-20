@@ -8,7 +8,11 @@ var project = ts.createProject("tsconfig.json");
 gulp.task(
   "build:1",
   () => gulp.src("source/db.ts")
-    .pipe(replace("EMBED_REPORTERS_DB", fs.readFileSync("reporters-db/reporters_db/data/reporters.json", "ascii")))
+    .pipe(replace(
+      "EMBED_REPORTERS_DB",
+      fs.readFileSync("reporters-db/reporters_db/data/reporters.json", "ascii"),
+      { logs: { enabled: false }, },
+    ))
     .pipe(gulp.dest("source/")),
 );
 
