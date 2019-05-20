@@ -11,8 +11,8 @@ jobs:
     if: type = push
     script:
     - yarn outdated
-    - yarn mocha
     - yarn gulp build
+    - yarn mocha
     - bash test/auto.sh
   - stage: Deploy
     if: tag IS present
