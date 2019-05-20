@@ -37,7 +37,6 @@
     ],
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "outDir": "build",
     "removeComments": true,
     "strict": true,
     "target": "ES5"
