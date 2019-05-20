@@ -24,7 +24,7 @@ export abstract class DB {
 
   @MemoizeAll()
   private static reporterdb(): ReporterTable {
-    const db: any = EMBED_REPORTERS_DB;
+    const db: unknown = EMBED_REPORTERS_DB;
     // @ts-ignore
     return db;
   }
