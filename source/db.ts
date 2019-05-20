@@ -24,6 +24,7 @@ export abstract class DB {
 
   @MemoizeAll()
   private static reporterdb(): ReporterTable {
+    // @ts-ignore
     return EMBED_REPORTERS_DB;
   }
 
