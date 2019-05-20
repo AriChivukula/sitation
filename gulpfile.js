@@ -20,7 +20,6 @@ gulp.task(
   "build:2",
   () => gulp.src("source/cli.ts", "source/index.ts")
     .pipe(project())
-    .js
     .pipe(gulp.dest("build/")),
 );
 
