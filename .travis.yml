@@ -10,7 +10,6 @@ jobs:
   - stage: Test
     if: type = push
     script:
-    - yarn outdated
     - yarn gulp build
     - yarn tsc
     - yarn mocha
