@@ -11,4 +11,4 @@ jobs:
         yarn install
         yarn mocha
         yarn tsc
-        bash test/e2e.sh
+        bash test/auto.sh
