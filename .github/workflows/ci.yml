@@ -9,6 +9,7 @@ jobs:
       run: |
         npm install --global --upgrade yarn
         yarn install
+        yarn gulp build
         yarn mocha
         yarn tsc
         bash test/auto.sh
