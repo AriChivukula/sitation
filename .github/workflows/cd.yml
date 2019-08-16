@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+    - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+    - uses: actions/setup-node@master
+    - name: Setup and Publish
+      run: |
+        npm install --global --upgrade yarn
+        yarn install
+        yarn gulp build
+        yarn tsc
+        echo "registry=https://registry.npmjs.com/" >> .npmrc
+        echo "_auth=$NPM_TOKEN" >> .npmrc
+        echo "email=$NPM_EMAIL" >> .npmrc
+        echo "always-auth=true" >> .npmrc
+        npm publish .
+      env:
+        NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
