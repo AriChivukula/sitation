@@ -12,6 +12,7 @@ jobs:
       run: |
         npm install --global --upgrade yarn
         yarn install
+        yarn gulp build
         yarn tsc
         echo "registry=https://registry.npmjs.com/" >> .npmrc
         echo "_auth=$NPM_TOKEN" >> .npmrc
