@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/chai": "4.2.1",
     "@types/mocha": "5.2.7",
-    "@types/node": "12.7.3",
+    "@types/node": "12.7.4",
     "@types/yargs": "13.0.2",
     "gulp": "4.0.2",
     "gulp-string-replace": "1.1.2",
