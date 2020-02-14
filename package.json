@@ -20,7 +20,7 @@
     "yargs": "15.1.0"
   },
   "devDependencies": {
-    "@types/chai": "4.2.8",
+    "@types/chai": "4.2.9",
     "@types/mocha": "7.0.1",
     "@types/node": "13.7.0",
     "@types/yargs": "15.0.3",
