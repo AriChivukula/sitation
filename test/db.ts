@@ -12,7 +12,7 @@ describe(
     it(
       "reporters()",
       async (): Promise<void> => {
-        chai.expect(Object.keys(DB.reporters()).length).to.equal(1526);
+        chai.expect(Object.keys(DB.reporters()).length).to.equal(2250);
         chai.expect(Object.keys(DB.reporters())[0]).to.equal("a.");
         chai.expect(Object.values(DB.reporters())[0]).to.equal("A.");
       },
