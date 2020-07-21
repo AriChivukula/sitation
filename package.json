@@ -17,11 +17,11 @@
     "@babel/polyfill": "7.10.4",
     "lodash": "4.17.19",
     "lodash-decorators": "6.0.1",
-    "yargs": "15.4.0"
+    "yargs": "15.4.1"
   },
   "devDependencies": {
     "@types/chai": "4.2.11",
-    "@types/mocha": "7.0.2",
+    "@types/mocha": "8.0.0",
     "@types/node": "14.0.23",
     "@types/yargs": "15.0.5",
     "gulp": "4.0.2",
