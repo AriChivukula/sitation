@@ -14,7 +14,7 @@
     "spec": ["test/*.ts"]
   },
   "dependencies": {
-    "@babel/polyfill": "7.10.4",
+    "@babel/polyfill": "7.11.5",
     "lodash": "4.17.20",
     "lodash-decorators": "6.0.1",
     "yargs": "15.4.1"
