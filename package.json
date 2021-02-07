@@ -27,7 +27,7 @@
     "gulp": "4.0.2",
     "gulp-string-replace": "1.1.2",
     "picaresque": "0.0.0",
-    "chai": "4.2.0",
+    "chai": "4.3.0",
     "mocha": "8.2.1",
     "ts-node": "9.1.1",
     "typescript": "4.1.3"
